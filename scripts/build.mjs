@@ -1,5 +1,5 @@
 // Builds the static website into dist/. No dependencies besides Node 20+.
-// Sources: content/posts/*.md (post cards), data/github.json (optional, from fetch-github-data.mjs), public/ (images, fonts).
+// Sources: content/posts/*.md (posts with card, text and comment), data/github.json (optional, from fetch-github-data.mjs), public/ (images, fonts).
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -12,7 +12,7 @@ if (!/^https:\/\/ko-fi\.com\/[A-Za-z0-9_]+$/.test(SITE.kofi)) throw new Error("S
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 
-/** Reads simple front matter (`key: value`) between `---` lines. A post card needs nothing more. */
+/** Reads simple front matter (`key: value`) between `---` lines. The text after it is returned as `body`. */
 export function frontMatter(text, file) {
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!m) throw new Error(`${file}: front matter between --- is missing.`);
@@ -21,6 +21,7 @@ export function frontMatter(text, file) {
     const kv = line.match(/^([a-z_]+):\s*(.*)$/);
     if (kv) fields[kv[1]] = kv[2].replace(/^["']|["']$/g, "").trim();
   }
+  fields.body = text.slice(m[0].length).trim();
   return fields;
 }
 
@@ -32,7 +33,7 @@ function readPosts() {
     for (const required of ["title", "date", "teaser"]) if (!post[required]) throw new Error(`${file}: field "${required}" is missing.`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) throw new Error(`${file}: date must be YYYY-MM-DD.`);
     if (post.published !== "true") continue;
-    if (!/^https:\/\/(www\.)?linkedin\.com\//.test(post.linkedin_url ?? "")) throw new Error(`${file}: published, but linkedin_url is missing or does not point to linkedin.com.`);
+    if (!/^https:\/\/(www\.linkedin\.com|linkedin\.com|lnkd\.in)\//.test(post.linkedin_url ?? "")) throw new Error(`${file}: published, but linkedin_url is missing or does not point to LinkedIn (linkedin.com or lnkd.in).`);
     posts.push(post);
   }
   return posts.sort((a, b) => b.date.localeCompare(a.date));

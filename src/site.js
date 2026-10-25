@@ -137,6 +137,22 @@
     show(0);
   });
 
+  // Menu: closes after a choice, with Escape and on a tap outside; it also closes when the window grows past the menu breakpoint.
+  const menu = document.querySelector("details.menu");
+  if (menu) {
+    const close = () => { menu.open = false; };
+    menu.addEventListener("click", (e) => { if (e.target.closest("a")) close(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu.open) { close(); menu.querySelector("summary").focus(); } });
+    document.addEventListener("click", (e) => { if (menu.open && !menu.contains(e.target)) close(); });
+    window.matchMedia("(min-width: 941px)").addEventListener?.("change", close);
+  }
+
+  // Collapsible parts ("Mehr dazu", "Weiterlesen") start closed on narrow screens only; wider they are always open.
+  const narrow = window.matchMedia("(max-width: 900px)");
+  const folds = Array.from(document.querySelectorAll("details.more"));
+  const fold = () => folds.forEach((d) => { d.open = !narrow.matches; });
+  if (folds.length) { fold(); narrow.addEventListener?.("change", fold); }
+
   // Tabs on the community page: without JavaScript all kinds are listed one below the other.
   const tablist = document.querySelector('[role="tablist"]');
   if (tablist) {

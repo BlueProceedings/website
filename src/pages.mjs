@@ -32,6 +32,8 @@ const SYMBOLS = `<svg width="0" height="0" style="position:absolute" aria-hidden
 <symbol id="i-heart" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 20.2s-7.5-4.5-7.5-10.1A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.5c0 5.6-7.5 10.1-7.5 10.1z"/></symbol>
 <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
 <symbol id="i-loop" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7M20 4v4.7h-4.7M20 12a8 8 0 0 1-13.7 5.6L4 15.3M4 20v-4.7h4.7"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
 </defs></svg>`;
 
@@ -81,7 +83,10 @@ ${SYMBOLS}
     <a class="brand" href="/">${ico("logo")}<span><b>BlueProceedings ISMS</b> <small>für Grundschutz++</small></span><span class="sr">, Startseite</span></a>
     <nav aria-label="Hauptnavigation"><ul class="nav-links">${NAV.map(([h, t]) => `<li><a href="${h}"${path === h ? ' aria-current="page"' : ""}>${t}</a></li>`).join("")}</ul></nav>
     <button class="theme" type="button" data-theme-toggle aria-label="Helle Darstellung" hidden>${ico("i-sun", "sun")}${ico("i-moon", "moon")}</button>
-    <a class="btn ghost small" href="${SITE.linkedin}" rel="noopener" aria-label="BlueProceedings auf LinkedIn folgen">${ico("i-in")}<span>Folgen</span></a>
+    <a class="btn ghost small nav-in" href="${SITE.linkedin}" rel="noopener" aria-label="BlueProceedings auf LinkedIn folgen">${ico("i-in")}<span>Folgen</span></a>
+    <details class="menu"><summary aria-label="Menü">${ico("i-menu", "m-open")}${ico("i-x", "m-close")}</summary>
+      <nav aria-label="Menü"><ul>${NAV.map(([h, t]) => `<li><a href="${h}"${path === h ? ' aria-current="page"' : ""}>${t}</a></li>`).join("")}<li><a href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn</a></li></ul></nav>
+    </details>
   </div>
 </header>
 <main id="inhalt">`;
@@ -109,7 +114,7 @@ const sectionHead = (eyebrow, h, id, lede = "", tag = "h2") => `<div class="sect
 function appKnopf(name) {
   const a = APP_ANSICHTEN[name];
   if (!a) return "";
-  return `<div class="shot-float"><button type="button" class="shot-app" hidden data-app="${esc(JSON.stringify({ src: a.src, w: a.w, h: a.h, mark: a.mark, weiter: a.weiter, ort: APP_ORT[name] ?? "" }))}">${ico("i-window")}<span>Wie sieht das in der App aus?</span></button></div>`;
+  return `<div class="shot-float"><button type="button" class="shot-app" aria-label="Wie sieht das in der App aus?" hidden data-app="${esc(JSON.stringify({ src: a.src, w: a.w, h: a.h, mark: a.mark, weiter: a.weiter, ort: APP_ORT[name] ?? "" }))}">${ico("i-window")}<span>Wie sieht das in der App aus?</span></button></div>`;
 }
 
 export function screenshot(name, { large = false, bar = "BlueProceedings ISMS · Pre-Alpha" } = {}) {
@@ -177,6 +182,83 @@ function postCard(p) {
 </article>`;
 }
 
+/** Turns plain post text into HTML: paragraphs, "–", "→" and numbered lists, hashtags; URLs become links when `links` is set. */
+function postText(text, links) {
+  const inline = (line) => {
+    const safe = esc(line);
+    return links ? safe.replace(/https:\/\/[^\s<]+/g, (u) => `<a href="${u}" rel="noopener">${u.replace(/^https:\/\//, "")}</a>`) : safe;
+  };
+  return text.split(/\n{2,}/).map((block) => {
+    const out = [];
+    let list = null;
+    for (const line of block.split("\n")) {
+      const m = line.match(/^(–|→|\d+\.)\s+(.*)$/);
+      const kind = m ? (m[1] === "–" ? "dash" : m[1] === "→" ? "arrow" : "num") : null;
+      if (kind) {
+        if (!list || list.kind !== kind) { list = { kind, items: [] }; out.push(list); }
+        list.items.push(inline(m[2]));
+      } else {
+        list = null;
+        out.push(/^#\w/.test(line) ? { tags: line.split(/\s+/) } : { line: inline(line) });
+      }
+    }
+    return out.map((o) => {
+      if (o.items) return `<${o.kind === "num" ? "ol" : "ul"} class="${o.kind}">${o.items.map((i) => `<li>${i}</li>`).join("")}</${o.kind === "num" ? "ol" : "ul"}>`;
+      if (o.tags) return `<p class="tags">${o.tags.map((t) => `<span>${esc(t)}</span>`).join(" ")}</p>`;
+      return `<p>${o.line}</p>`;
+    }).join("");
+  }).join("");
+}
+
+/** Splits the post body at "@@ name" lines into named sections. */
+function postSections(body) {
+  const sections = {};
+  for (const part of body.split(/^@@ /m).slice(1)) {
+    const [name, ...rest] = part.split("\n");
+    sections[name.trim()] = rest.join("\n").trim();
+  }
+  return sections;
+}
+
+// Shown on small screens only (CSS): the functions are explained with screenshots, which read better on a PC or tablet.
+const smallScreenNote = () => `<p class="small-note" role="note">${ico("i-window")}<span><b>Hinweis für kleine Bildschirme:</b> Die Funktionen zeigen wir mit Screenshots. Auf einem PC oder Tablet sind sie größer und besser lesbar, die Seite funktioniert dort deutlich besser.</span></p>`;
+
+// On narrow screens only the opening of a long post is shown; the rest opens with "Weiterlesen" (site.js closes it there, desktop and no-JS show everything).
+function postBody(beitrag, teaser) {
+  if (!beitrag) return `<div class="prose"><p>${esc(teaser)}</p></div>`;
+  const blocks = beitrag.split(/\n{2,}/);
+  const head = blocks.slice(0, 2).join("\n\n");
+  const rest = blocks.slice(2).join("\n\n");
+  if (!rest) return `<div class="prose">${postText(beitrag, false)}</div>`;
+  return `<div class="prose">${postText(head, false)}</div>
+<details class="more rest" open><summary>Weiterlesen</summary><div class="prose">${postText(rest, false)}</div></details>`;
+}
+
+function postStory(p) {
+  const { beitrag, kommentar } = postSections(p.body ?? "");
+  const titles = (p.slide_titles ?? "").split("|").map((t) => t.trim()).filter(Boolean);
+  const slides = p.slides ? titles.map((t, i) => `<li><img src="/images/news/${esc(p.slides)}/folie-${String(i + 1).padStart(2, "0")}.jpg" width="1080" height="1350" loading="lazy" alt="Folie ${i + 1} von ${titles.length}: ${esc(t)}"><span>${i + 1} / ${titles.length}</span></li>`).join("") : "";
+  return `<article class="story">
+<header class="story-head">
+<span class="kicker">${esc(p.series || "Beitrag")}</span>
+<h2>${esc(p.title)}</h2>
+<p class="story-meta"><time datetime="${p.date}">${formatDate(p.date)}</time> · Beitrag auf LinkedIn · ${p.slides ? `Karussell mit ${titles.length} Folien` : "Beitrag"}</p>
+<a class="btn ghost small" href="${esc(p.linkedin_url)}" rel="noopener">${ico("i-in")}Auf LinkedIn ansehen<span class="sr"> (${esc(p.title)})</span> ↗</a>
+</header>
+${slides ? `<section class="story-slides" aria-label="Karussell, ${titles.length} Folien"><ol class="slides" tabindex="0">${slides}</ol><p class="hint">Wischen oder scrollen. Alle Bilder zeigen fiktive Demodaten. <a href="/images/news/${esc(p.slides)}/BlueProceedings-ISMS-erster-Blick.pdf" rel="noopener">Karussell als PDF öffnen</a> (4 MB)</p></section>` : ""}
+<div class="story-cols">
+<section class="story-post" aria-label="Text des Beitrags">
+<h3 class="label">Der Beitrag</h3>
+${postBody(beitrag, p.teaser)}
+</section>
+${kommentar ? `<aside class="story-comment" aria-label="Erster Kommentar">
+<h3 class="label">Erster Kommentar</h3>
+<div class="prose">${postText(kommentar, true)}</div>
+</aside>` : ""}
+</div>
+</article>`;
+}
+
 function postList(posts, max) {
   const list = max ? posts.slice(0, max) : posts;
   // Without posts, the home page only needs the note in the section head and the follow button.
@@ -185,6 +267,11 @@ function postList(posts, max) {
     return `<div class="empty"><p><b>Noch keine Beiträge.</b> Die Reihe startet auf der LinkedIn-Seite von BlueProceedings. Neue Beiträge erscheinen hier, sobald sie veröffentlicht sind.</p></div>`;
   }
   return `<div class="news">${list.map(postCard).join("")}</div>`;
+}
+
+function storyList(posts) {
+  if (!posts.length) return postList(posts);
+  return posts.map(postStory).join("");
 }
 
 function downloadSection(data) {
@@ -290,6 +377,7 @@ export function homePage({ posts, data }) {
 <div class="hero-actions"><a class="btn primary" href="#funktionen">So sieht es aus</a><a class="btn ghost" href="${INTEREST_MAIL}">${ico("i-mail")}Interesse melden</a></div>
 <p class="hero-hint"><span class="hint-text">${ico("i-heart")}Unabhängig entwickelt. Hilf mit, dass es fertig wird.</span><a class="btn ghost small" href="#unterstuetzen">Projekt unterstützen</a></p>
 <ul class="hero-facts">${["Läuft bei euch: Docker, ohne Hersteller-Cloud", `Erste Version für ${SITE.firstRelease} geplant`, "Alpha-Lizenz unentgeltlich"].map((f) => `<li>${ico("i-check")}${f}</li>`).join("")}</ul>
+${smallScreenNote()}
 </div>
 ${perimeter()}
 </div>
@@ -312,7 +400,7 @@ ${chain()}
 <div class="wrap">
 ${sectionHead("", "So sieht das in der Pre-Alpha aus.", "fn-title", `${["Eine", "Zwei", "Drei", "Vier", "Fünf", "Sechs", "Sieben", "Acht", "Neun", "Zehn"][FEATURES.length - 1]} Funktionen aus neun Bereichen, so wie sie heute in BlueProceedings ISMS laufen, gezeigt mit fiktiven Demo-Daten. Auf LinkedIn werden sie nach und nach einzeln vorgestellt, mit dem Problem, das sie löst.`)}
 <div class="features">${FEATURES.map((f, i) => `<article class="feature${f.wide ? " wide" : i % 2 ? " flip" : ""}" aria-labelledby="f-${f.id}">
-<div class="feature-copy"><span class="area-badge">Bereich ${f.kicker}</span><h3 id="f-${f.id}">${f.title}</h3>${f.text.split("\n\n").map((t) => `<p>${t}</p>`).join("")}<ul class="ticks">${f.points.map((p) => `<li>${p}</li>`).join("")}</ul>${f.note ? `<p class="fn-note">${f.note}</p>` : ""}</div>
+<div class="feature-copy"><span class="area-badge">Bereich ${f.kicker}</span><h3 id="f-${f.id}">${f.title}</h3>${f.text.split("\n\n").map((t) => `<p>${t}</p>`).join("")}<details class="more" open><summary>Mehr dazu</summary><ul class="ticks">${f.points.map((p) => `<li>${p}</li>`).join("")}</ul></details>${f.note ? `<p class="fn-note">${f.note}</p>` : ""}</div>
 ${screenshotSwitch(f.image, f.imageLabels)}
 </article>`).join("")}</div>
 </div>
@@ -404,6 +492,7 @@ export function communityPage({ data }) {
 <div class="wrap">
 ${sectionHead("Community", "Gute Vorlagen entstehen in der Praxis. Teilen wir sie.", "c-title", "Was eine Institution einmal sauber modelliert hat, muss die nächste nicht neu erfinden. Die Community sammelt Vorlagen und Erfahrungen auf GitHub, prüft sie vor der Veröffentlichung nach formalen und technischen Kriterien und stellt sie unter CC BY-SA 4.0 bereit, wie den Grundschutz++-Katalog selbst.", "h1")}
 <p class="hero-facts"><span>Diskussionen jetzt offen</span><span>Einreichungen ab ${SITE.firstRelease}</span><span>CC BY-SA 4.0</span></p>
+${smallScreenNote()}
 </div>
 </section>
 
@@ -461,12 +550,12 @@ export function newsPage({ posts }) {
   }) + `
 <section class="hero slim" aria-labelledby="n-title">
 <div class="wrap">
-${sectionHead("Neuigkeiten von LinkedIn", "Eine Funktion und das Problem dahinter.", "n-title", "Alle Beiträge der BlueProceedings-Seite, neueste zuerst. Die Karten führen zum Beitrag auf LinkedIn.", "h1")}
+${sectionHead("Neuigkeiten von LinkedIn", "Eine Funktion und das Problem dahinter.", "n-title", "Alle Beiträge der BlueProceedings-Seite, neueste zuerst, im vollen Wortlaut mit den Folien und dem ersten Kommentar.", "h1")}
 </div>
 </section>
 <section class="band alt" aria-label="Beiträge">
 <div class="wrap">
-${postList(posts)}
+${storyList(posts)}
 <div class="news-foot"><a class="btn ghost" href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn folgen</a></div>
 </div>
 </section>` + pageFoot();
