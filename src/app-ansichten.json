@@ -1,0 +1,206 @@
+{
+  "staleReport": {
+    "src": "/images/app/staleReport.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1061,
+      "w": 0.7444,
+      "h": 0.692
+    },
+    "weiter": false
+  },
+  "informationDomainTemplates": {
+    "src": "/images/app/informationDomainTemplates.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1689,
+      "w": 0.7444,
+      "h": 0.7956
+    },
+    "weiter": false
+  },
+  "componentSetTemplate": {
+    "src": "/images/app/componentSetTemplate.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.3568,
+      "w": 0.3667,
+      "h": 0.6078
+    },
+    "weiter": false
+  },
+  "effectivenessCycle": {
+    "src": "/images/app/effectivenessCycle.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2764,
+      "y": 0.1067,
+      "w": 0.6611,
+      "h": 0.2017
+    },
+    "weiter": false
+  },
+  "componentTemplates": {
+    "src": "/images/app/componentTemplates.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.49,
+      "w": 0.7444,
+      "h": 0.43
+    },
+    "weiter": false
+  },
+  "blueprintOverview": {
+    "src": "/images/app/blueprintOverview.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2,
+      "y": 0.1606,
+      "w": 0.8,
+      "h": 0.8394
+    },
+    "weiter": true
+  },
+  "blueprintRules": {
+    "src": "/images/app/blueprintRules.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2,
+      "y": 0.1069,
+      "w": 0.8,
+      "h": 0.8931
+    },
+    "weiter": true
+  },
+  "reportTemplateCards": {
+    "src": "/images/app/reportTemplateCards.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.2622,
+      "w": 0.7444,
+      "h": 0.5244
+    },
+    "weiter": false
+  },
+  "exercise": {
+    "src": "/images/app/exercise.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1067,
+      "w": 0.7444,
+      "h": 0.8933
+    },
+    "weiter": true
+  },
+  "planVsActual": {
+    "src": "/images/app/planVsActual.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1061,
+      "w": 0.7444,
+      "h": 0.8939
+    },
+    "weiter": true
+  },
+  "incidentTimeline": {
+    "src": "/images/app/incidentTimeline.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1067,
+      "w": 0.7444,
+      "h": 0.8933
+    },
+    "weiter": true
+  },
+  "preparednessOverview": {
+    "src": "/images/app/preparednessOverview.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1067,
+      "w": 0.7444,
+      "h": 0.8933
+    },
+    "weiter": true
+  },
+  "impactGraph": {
+    "src": "/images/app/impactGraph.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2396,
+      "y": 0.1071,
+      "w": 0.7208,
+      "h": 0.8929
+    },
+    "weiter": true
+  },
+  "crisisRun": {
+    "src": "/images/app/crisisRun.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2424,
+      "y": 0.1067,
+      "w": 0.7153,
+      "h": 0.7154
+    },
+    "weiter": false
+  },
+  "riskPath": {
+    "src": "/images/app/riskPath.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2,
+      "y": 0.1467,
+      "w": 0.8,
+      "h": 0.8199
+    },
+    "weiter": false
+  },
+  "riskFile": {
+    "src": "/images/app/riskFile.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2278,
+      "y": 0.1066,
+      "w": 0.7444,
+      "h": 0.8934
+    },
+    "weiter": true
+  },
+  "deputyPlan": {
+    "src": "/images/app/deputyPlan.webp",
+    "w": 2160,
+    "h": 1350,
+    "mark": {
+      "x": 0.2979,
+      "y": 0.1063,
+      "w": 0.6042,
+      "h": 0.8937
+    },
+    "weiter": true
+  }
+}
