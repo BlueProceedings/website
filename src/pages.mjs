@@ -1,8 +1,11 @@
-// Page templates as functions returning HTML strings. Everything is prerendered at build time; site.js only adds interaction.
 import { SITE, github, INTEREST_MAIL, AREAS, AREA_START, TIMELINE, GAPS, IMAGES, APP_ORT, FEATURES, CHAIN, ROLES, FAQ, COMMUNITY_KINDS, SUBMISSION_STEPS, SUBMISSION_PRIVACY, LIABILITY, DISCUSSION_CATEGORIES, INDEPENDENCE, TEST_PHASE, B2B_HINWEIS, ALPHA_LIZENZ, UNTERSTUETZUNG, DATENFLUSS, MODELLHINWEIS } from "./content.mjs";
 import { LEGAL_PAGES } from "./legal.mjs";
+import { FACHSEITEN, FACHSEITEN_PFADE, THEMEN, STANDARD_300_1 } from "./fachseiten.mjs";
+import { PRODUKT_THEMEN } from "./seo-pages.mjs";
 
 import fs from "node:fs";
+import { createHash } from "node:crypto";
+const fassung = (datei) => createHash("sha256").update(fs.readFileSync(new URL(datei, import.meta.url))).digest("hex").slice(0, 10);
 const APP_ANSICHTEN = (() => { try { return JSON.parse(fs.readFileSync(new URL("./app-ansichten.json", import.meta.url), "utf8")); } catch { return {}; } })();
 
 export const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -33,21 +36,71 @@ const SYMBOLS = `<svg width="0" height="0" style="position:absolute" aria-hidden
 <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
 <symbol id="i-loop" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 12a8 8 0 0 1 13.7-5.6L20 8.7M20 4v4.7h-4.7M20 12a8 8 0 0 1-13.7 5.6L4 15.3M4 20v-4.7h4.7"/></symbol>
 <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+<symbol id="i-zoom" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M14 4h6v6M10 20H4v-6M20 4l-6.5 6.5M4 20l6.5-6.5"/></symbol>
+<symbol id="i-prev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
+<symbol id="i-next" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="m9 5 7 7-7 7"/></symbol>
 <symbol id="i-x" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
 </defs></svg>`;
 
+const NAV_GRUPPEN = [
+  {
+    label: "Funktionen",
+    klasse: "nav-panel-breit",
+    aktiv: (path) => path.startsWith("/funktionen/") || path === "/grundschutz-plus-plus/software/" || path.startsWith("/isms-software/"),
+    links: [
+      ["/funktionen/", "Alle Funktionen", "Überblick über die Arbeitsbereiche"],
+      ["/isms-software/bsi-grundschutz/", "Für BSI-Grundschutz++", "Informationssicherheit nach Standard 300-1"],
+      ["/funktionen/erhebung-und-planung/", "Schritt 1: Erhebung und Planung", "Kontext, Rollen und Risikorahmen"],
+      ["/funktionen/oscal-katalogverwaltung/", "OSCAL-Katalogverwaltung", "Kataloge importieren und fortschreiben"],
+      ["/funktionen/risikomanagement/", "Risikomanagement", "Risiken und Maßnahmen verknüpfen"],
+      ["/funktionen/nachweismanagement/", "Nachweismanagement", "Gültigkeit und Prüfung im Blick behalten"],
+      ["/funktionen/berichtswesen/", "Berichtswesen", "Änderungen in Berichten erkennen"],
+      ["/funktionen/bcm-notfallmanagement/", "BCM & Notfallmanagement", "BIA, Abhängigkeiten und Wiederanlauf"],
+      ["/funktionen/learn-while-using/", "Lern-Modus", "Fachliche Hinweise im Arbeitsablauf"],
+      ["/funktionen/weiteres/", "Weiteres", "Mehr entdecken und das Projekt unterstützen"],
+    ],
+  },
+  {
+    label: "Grundschutz++",
+    aktiv: (path) => (path.startsWith("/grundschutz-plus-plus/") && path !== "/grundschutz-plus-plus/software/") || path === "/bsi-standard-300-1/",
+    links: [
+      ["/grundschutz-plus-plus/", "Grundschutz++ im Überblick", "Methodik und Einordnung"],
+      ["/bsi-standard-300-1/", "BSI-Standard 300-1", "Standard, Mindestkriterien und Status"],
+      ["/grundschutz-plus-plus/umsetzung/", "Umsetzung", "Vom Geltungsbereich zum laufenden ISMS"],
+      ["/grundschutz-plus-plus/anwenderkatalog/", "Anwenderkatalog", "Anforderungen, Praktiken und Parameter"],
+      ["/grundschutz-plus-plus/oscal/", "OSCAL erklärt", "Maschinenlesbare Anforderungen"],
+      ["/grundschutz-plus-plus/it-grundschutz-migration/", "Umstieg", "Vom IT-Grundschutz zu Grundschutz++"],
+      ["/grundschutz-plus-plus/zeitplan/", "Zeitplan", "Veröffentlichung und Übergangsphase"],
+    ],
+  },
+];
+
 const NAV = [
-  ["/#funktionen", "Funktionen"],
   ["/community/", "Community"],
   ["/neuigkeiten/", "Neuigkeiten"],
   ["/#download", "Download"],
   ["/#fragen", "Fragen"],
 ];
 
-function pageHead({ title, description, path, robots = "index,follow", jsonld = null }) {
+const navAktiv = (path, href) => path === href;
+const navLink = (path, [href, label, beschreibung]) => `<a href="${href}"${navAktiv(path, href) ? ' aria-current="page"' : ""}><span>${label}</span>${beschreibung ? `<small>${beschreibung}</small>` : ""}</a>`;
+
+const desktopNavigation = (path) => NAV_GRUPPEN.map((gruppe) => `<li>
+  <details class="nav-group${gruppe.aktiv(path) ? " active" : ""}">
+    <summary>${gruppe.label}</summary>
+    <div class="nav-panel ${gruppe.klasse ?? ""}">${gruppe.links.map((link) => navLink(path, link)).join("")}</div>
+  </details>
+</li>`).join("") + NAV.map((link) => `<li>${navLink(path, link)}</li>`).join("");
+
+const mobileNavigation = (path) => NAV_GRUPPEN.map((gruppe) => `<li class="menu-gruppe">
+  <span>${gruppe.label}</span>
+  <ul>${gruppe.links.map((link) => `<li>${navLink(path, link)}</li>`).join("")}</ul>
+</li>`).join("") + NAV.map((link) => `<li>${navLink(path, link)}</li>`).join("");
+
+function pageHead({ title, description, path, robots = "index,follow", jsonld = null, ogType = "website" }) {
   const url = SITE.url + path;
-  return `<!doctype html>
+  return `<!DOCTYPE html>
 <html lang="de" data-theme="light">
 <head>
 <meta charset="utf-8">
@@ -59,7 +112,7 @@ function pageHead({ title, description, path, robots = "index,follow", jsonld = 
 <meta name="theme-color" content="#fffdf8">
 <link rel="canonical" href="${url}">
 <meta property="og:locale" content="de_DE">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${ogType}">
 <meta property="og:site_name" content="BlueProceedings ISMS">
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(title)}">
@@ -72,7 +125,7 @@ function pageHead({ title, description, path, robots = "index,follow", jsonld = 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preload" href="/fonts/figtree-variable.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/plex-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/styles.css?v=${fassung("./styles.css")}">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld).replace(/</g, "\\u003c")}</script>\n` : ""}<script>try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";document.documentElement.dataset.theme=t;if(t==="dark")document.querySelector('meta[name="theme-color"]').content="#050f2e"}catch(e){}</script>
 </head>
 <body>
@@ -81,11 +134,11 @@ ${SYMBOLS}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="/">${ico("logo")}<span><b>BlueProceedings ISMS</b> <small>für Grundschutz++</small></span><span class="sr">, Startseite</span></a>
-    <nav aria-label="Hauptnavigation"><ul class="nav-links">${NAV.map(([h, t]) => `<li><a href="${h}"${path === h ? ' aria-current="page"' : ""}>${t}</a></li>`).join("")}</ul></nav>
+    <nav aria-label="Hauptnavigation"><ul class="nav-links">${desktopNavigation(path)}</ul></nav>
     <button class="theme" type="button" data-theme-toggle aria-label="Helle Darstellung" hidden>${ico("i-sun", "sun")}${ico("i-moon", "moon")}</button>
     <a class="btn ghost small nav-in" href="${SITE.linkedin}" rel="noopener" aria-label="BlueProceedings auf LinkedIn folgen">${ico("i-in")}<span>Folgen</span></a>
     <details class="menu"><summary aria-label="Menü">${ico("i-menu", "m-open")}${ico("i-x", "m-close")}</summary>
-      <nav aria-label="Menü"><ul>${NAV.map(([h, t]) => `<li><a href="${h}"${path === h ? ' aria-current="page"' : ""}>${t}</a></li>`).join("")}<li><a href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn</a></li></ul></nav>
+      <nav aria-label="Menü"><ul>${mobileNavigation(path)}<li><a href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn</a></li></ul></nav>
     </details>
   </div>
 </header>
@@ -98,35 +151,32 @@ function pageFoot() {
 <footer>
   <div class="wrap">
     <span>© ${year} BlueProceedings · Bonn</span>
-    <nav aria-label="Rechtliches"><a href="/#ueber">Über</a><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/barrierefreiheit/">Barrierefreiheit</a><a href="/lizenzen/">Herkunft und Lizenzen</a><a href="${SITE.kofi}" rel="noopener">Projekt unterstützen</a></nav>
+    <nav aria-label="Fußnavigation"><a href="/grundschutz-plus-plus/">Grundschutz++</a><a href="/#ueber">Über</a><a href="/impressum/">Impressum</a><a href="/datenschutz/">Datenschutz</a><a href="/barrierefreiheit/">Barrierefreiheit</a><a href="/lizenzen/">Herkunft und Lizenzen</a><a href="${SITE.kofi}" rel="noopener">Projekt unterstützen</a></nav>
     <span>Keine eigenen Analyse- oder Marketing-Cookies, kein eigenes Besuchertracking</span>
   </div>
 </footer>
-<script src="/site.js" defer></script>
+<script src="/site.js?v=${fassung("./site.js")}" defer></script>
 </body>
 </html>`;
 }
 
-// An eyebrow appears only where it carries information (status, period), not as scaffolding above every section.
 const sectionHead = (eyebrow, h, id, lede = "", tag = "h2") => `<div class="section-head">${eyebrow ? `<span class="eyebrow">${eyebrow}</span>` : ""}<${tag} id="${id}">${h}</${tag}>${lede ? `<p class="lede">${lede}</p>` : ""}</div>`;
 
-// Floating button on a screenshot: opens the whole app view with the shown section marked (site.js builds the overlay; without JavaScript the button stays hidden).
 function appKnopf(name) {
   const a = APP_ANSICHTEN[name];
   if (!a) return "";
   return `<div class="shot-float"><button type="button" class="shot-app" aria-label="Wie sieht das in der App aus?" hidden data-app="${esc(JSON.stringify({ src: a.src, w: a.w, h: a.h, mark: a.mark, weiter: a.weiter, ort: APP_ORT[name] ?? "" }))}">${ico("i-window")}<span>Wie sieht das in der App aus?</span></button></div>`;
 }
 
-export function screenshot(name, { large = false, bar = "BlueProceedings ISMS · Pre-Alpha" } = {}) {
+export function screenshot(name, { large = false, bar = "BlueProceedings ISMS · Pre-Alpha", caption = "Fiktive Demo-Daten aus der Pre-Alpha" } = {}) {
   const b = IMAGES[name];
   return `<figure class="shot${large ? " large" : ""}">
 <div class="shot-bar"><i></i><i></i><i></i><span>${bar}</span></div>
 <div class="shot-body"><a href="${b.src}" class="shot-img"><img src="${b.src}" width="${b.w}" height="${b.h}" alt="${esc(b.alt)}" loading="lazy" decoding="async"></a>${appKnopf(name)}</div>
-<figcaption>Fiktive Demo-Daten aus der Pre-Alpha</figcaption>
+<figcaption>${caption}</figcaption>
 </figure>`;
 }
 
-// Several images of one subject: without JavaScript they are listed one below the other; site.js adds the switch and shows one at a time.
 export function screenshotSwitch(names, labels, opts = {}) {
   if (!Array.isArray(names)) return screenshot(names, opts);
   return `<div class="shot-set">
@@ -144,7 +194,7 @@ function perimeter() {
     return `<div class="node${ang > 180 ? " left" : ""}" style="left:${x}%;top:${y}%" data-i="${i}" data-ang="${ang}"${i === AREA_START ? ' aria-current="true"' : ""}><span class="dot"></span><span class="label">${a.title}</span></div>`;
   }).join("");
   const a = AREAS[AREA_START];
-  return `<div class="scope" aria-label="Was BlueProceedings ISMS abdeckt">
+  return `<div class="scope" role="group" aria-label="Was BlueProceedings ISMS abdeckt">
 <div class="scope-stage">
 <svg class="rings" viewBox="0 0 400 400" aria-hidden="true">
 <circle cx="200" cy="200" r="182" fill="none" stroke="var(--line)" stroke-width="1"/>
@@ -175,14 +225,13 @@ function postCard(p) {
 <div class="cover" aria-hidden="true">${ico("logo")}<span class="kicker">${esc(p.series || "Beitrag")}</span><b>${esc(p.title)}</b></div>
 <div class="body">
 <header><time datetime="${p.date}">${formatDate(p.date)}</time><span>BlueProceedings</span></header>
-<h3 class="sr">${esc(p.title)}</h3>
+<h2 class="sr">${esc(p.title)}</h2>
 <p>${esc(p.teaser)}</p>
-<a href="${esc(p.linkedin_url)}" rel="noopener">Auf LinkedIn lesen<span class="sr"> (${esc(p.title)})</span> ↗</a>
+<a href="${esc(p.path)}">Beitrag lesen<span class="sr"> (${esc(p.title)})</span> →</a>
 </div>
 </article>`;
 }
 
-/** Turns plain post text into HTML: paragraphs, "–", "→" and numbered lists, hashtags; URLs become links when `links` is set. */
 function postText(text, links) {
   const inline = (line) => {
     const safe = esc(line);
@@ -210,7 +259,6 @@ function postText(text, links) {
   }).join("");
 }
 
-/** Splits the post body at "@@ name" lines into named sections. */
 function postSections(body) {
   const sections = {};
   for (const part of body.split(/^@@ /m).slice(1)) {
@@ -220,10 +268,8 @@ function postSections(body) {
   return sections;
 }
 
-// Shown on small screens only (CSS): the functions are explained with screenshots, which read better on a PC or tablet.
 const smallScreenNote = () => `<p class="small-note" role="note">${ico("i-window")}<span><b>Hinweis für kleine Bildschirme:</b> Die Funktionen zeigen wir mit Screenshots. Auf einem PC oder Tablet sind sie größer und besser lesbar, die Seite funktioniert dort deutlich besser.</span></p>`;
 
-// On narrow screens only the opening of a long post is shown; the rest opens with "Weiterlesen" (site.js closes it there, desktop and no-JS show everything).
 function postBody(beitrag, teaser) {
   if (!beitrag) return `<div class="prose"><p>${esc(teaser)}</p></div>`;
   const blocks = beitrag.split(/\n{2,}/);
@@ -234,25 +280,27 @@ function postBody(beitrag, teaser) {
 <details class="more rest" open><summary>Weiterlesen</summary><div class="prose">${postText(rest, false)}</div></details>`;
 }
 
-function postStory(p) {
+function postStory(p, heading = "h2") {
   const { beitrag, kommentar } = postSections(p.body ?? "");
   const titles = (p.slide_titles ?? "").split("|").map((t) => t.trim()).filter(Boolean);
-  const slides = p.slides ? titles.map((t, i) => `<li><img src="/images/news/${esc(p.slides)}/folie-${String(i + 1).padStart(2, "0")}.jpg" width="1080" height="1350" loading="lazy" alt="Folie ${i + 1} von ${titles.length}: ${esc(t)}"><span>${i + 1} / ${titles.length}</span></li>`).join("") : "";
+  const bild = (i) => `/images/news/${esc(p.slides)}/folie-${String(i + 1).padStart(2, "0")}.jpg`;
+  const slides = p.slides ? titles.map((t, i) => `<li><a class="slide-open" href="${bild(i)}" data-titel="${esc(t)}"><img src="${bild(i)}" width="1080" height="1350" ${i === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'} alt="Folie ${i + 1} von ${titles.length}: ${esc(t)}"><span class="slide-zoom" aria-hidden="true">${ico("i-zoom")}</span><span class="sr"> (groß ansehen)</span></a><span>${i + 1} / ${titles.length}</span></li>`).join("") : "";
+  const subheading = heading === "h1" ? "h2" : "h3";
   return `<article class="story">
 <header class="story-head">
 <span class="kicker">${esc(p.series || "Beitrag")}</span>
-<h2>${esc(p.title)}</h2>
+<${heading}>${esc(p.title)}</${heading}>
 <p class="story-meta"><time datetime="${p.date}">${formatDate(p.date)}</time> · Beitrag auf LinkedIn · ${p.slides ? `Karussell mit ${titles.length} Folien` : "Beitrag"}</p>
 <a class="btn ghost small" href="${esc(p.linkedin_url)}" rel="noopener">${ico("i-in")}Auf LinkedIn ansehen<span class="sr"> (${esc(p.title)})</span> ↗</a>
 </header>
-${slides ? `<section class="story-slides" aria-label="Karussell, ${titles.length} Folien"><ol class="slides" tabindex="0">${slides}</ol><p class="hint">Wischen oder scrollen. Alle Bilder zeigen fiktive Demodaten. <a href="/images/news/${esc(p.slides)}/BlueProceedings-ISMS-erster-Blick.pdf" rel="noopener">Karussell als PDF öffnen</a> (4 MB)</p></section>` : ""}
+${slides ? `<section class="story-slides" aria-label="Karussell, ${titles.length} Folien"><ol class="slides" tabindex="0">${slides}</ol><p class="hint">Wischen oder scrollen, zum Vergrößern eine Folie antippen. Alle Bilder zeigen fiktive Demodaten. ${p.pdf ? `<a href="/images/news/${esc(p.slides)}/${esc(p.pdf)}" rel="noopener">Karussell als PDF öffnen</a>${p.pdf_size ? ` (${esc(p.pdf_size)})` : ""}` : ""}</p></section>` : ""}
 <div class="story-cols">
 <section class="story-post" aria-label="Text des Beitrags">
-<h3 class="label">Der Beitrag</h3>
+<${subheading} class="label">Der Beitrag</${subheading}>
 ${postBody(beitrag, p.teaser)}
 </section>
 ${kommentar ? `<aside class="story-comment" aria-label="Erster Kommentar">
-<h3 class="label">Erster Kommentar</h3>
+<${subheading} class="label">Erster Kommentar</${subheading}>
 <div class="prose">${postText(kommentar, true)}</div>
 </aside>` : ""}
 </div>
@@ -261,7 +309,6 @@ ${kommentar ? `<aside class="story-comment" aria-label="Erster Kommentar">
 
 function postList(posts, max) {
   const list = max ? posts.slice(0, max) : posts;
-  // Without posts, the home page only needs the note in the section head and the follow button.
   if (!list.length && max) return "";
   if (!list.length) {
     return `<div class="empty"><p><b>Noch keine Beiträge.</b> Die Reihe startet auf der LinkedIn-Seite von BlueProceedings. Neue Beiträge erscheinen hier, sobald sie veröffentlicht sind.</p></div>`;
@@ -278,7 +325,7 @@ function downloadSection(data) {
   const rel = data.release;
   const status = rel
     ? `<p class="dl-status"><b>Version ${esc(rel.tag)}</b> · veröffentlicht am ${formatDate(rel.date)}</p><a class="btn primary" href="${esc(rel.url)}" rel="noopener">${ico("i-box")}Zur Version auf GitHub</a>`
-    : `<p class="dl-status"><b>Verfügbar ab ${SITE.firstRelease}</b></p><p>Docker-Container und Installationsanleitung erscheinen mit der ersten Version. Der Termin ist eine Planung, keine Zusage. Bis dahin zeigen die Beiträge auf LinkedIn, was entsteht.</p>`;
+    : `<p class="dl-status"><b>Verfügbar ab ${SITE.firstRelease}</b></p><p>Docker-Container und Installationsanleitung erscheinen mit der ersten Version. Bis dahin zeigen die Beiträge auf LinkedIn, was entsteht.</p>`;
   return `<section class="band alt" id="download" aria-labelledby="dl-title">
 <div class="wrap">
 ${sectionHead("", "Läuft bei euch. Die Produktdaten bleiben im Standardbetrieb auf eurer Infrastruktur.", "dl-title", DATENFLUSS)}
@@ -304,11 +351,11 @@ ${sectionHead("", "Läuft bei euch. Die Produktdaten bleiben im Standardbetrieb 
 <p class="muted">${UNTERSTUETZUNG} <a href="${SITE.kofi}" rel="noopener">Projekt unterstützen (Ko-fi)</a></p>
 <p class="muted">${B2B_HINWEIS} Die Angabe wird bei der Lizenzvergabe ausdrücklich bestätigt.</p>
 </div>
-${rel ? "" : `<div class="test-phase" aria-labelledby="test-title">
+${rel ? "" : `<section class="test-phase" aria-labelledby="test-title">
 <div><h3 id="test-title">Vorher testen: Bewerbung für die Testphase ab ${TEST_PHASE.start}</h3>
 <p>Für die geplante Testphase ab dem ${TEST_PHASE.start} können sich bis zu ${TEST_PHASE.seats === 11 ? "elf" : TEST_PHASE.seats} Personen aus der ISMS-Praxis bewerben. Wir suchen Menschen, die regelmäßig ausprobieren und offen sagen, was fehlt, hakt oder unklar ist. Die Auswahl erfolgt manuell nach diesen Voraussetzungen. Eine Bewerbung begründet keinen Anspruch auf Teilnahme, Support oder eine spätere Lizenz. Getestet wird mit Übungsdaten, nicht mit dem echten ISMS. Wie wir mit Bewerbungen umgehen, steht in der <a href="/datenschutz/#alpha">Datenschutzerklärung</a>.</p></div>
 <a class="btn primary" href="${TEST_PHASE.mail}">${ico("i-mail")}Für die Testphase bewerben</a>
-</div>`}
+</section>`}
 </div>
 </section>`;
 }
@@ -357,23 +404,42 @@ ${sectionHead("", "Häufige Fragen", "faq-title", `Was hier nicht steht, beantwo
 
 const HOME_LD = [
   { "@context": "https://schema.org", "@type": "Organization", name: SITE.company, url: SITE.url, email: SITE.mail, logo: `${SITE.url}/favicon.svg`, sameAs: [SITE.linkedin, github()], address: { "@type": "PostalAddress", addressLocality: "Bonn", addressCountry: "DE" } },
-  { "@context": "https://schema.org", "@type": "SoftwareApplication", name: SITE.name, applicationCategory: "SecurityApplication", operatingSystem: "Docker", inLanguage: "de", publisher: { "@type": "Organization", name: SITE.company }, description: "ISMS-Werkzeug für die BSI-Methodik Grundschutz++, On-Premises per Docker. Erste Version für Januar 2027 geplant." },
+  { "@context": "https://schema.org", "@type": "SoftwareApplication", name: SITE.name, url: SITE.url, applicationCategory: "BusinessApplication", operatingSystem: "Self-hosted environment using Docker", inLanguage: "de", publisher: { "@type": "Organization", name: SITE.company }, description: "ISMS-Software für BSI Grundschutz++ mit OSCAL-Katalogverwaltung, Risikomanagement, Nachweisen, Berichtswesen und BCM. On-Premises per Docker; derzeit Pre-Alpha." },
   { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQ.map((q) => ({ "@type": "Question", name: q.q, acceptedAnswer: { "@type": "Answer", text: q.a } })) },
 ];
 
+const supportSection = () => `<section class="band support" id="unterstuetzen" aria-labelledby="sup-title">
+<div class="wrap support-grid">
+<div class="stack">
+<span class="eyebrow">Freiwillig, ohne Gegenleistung</span>
+<h2 id="sup-title">Hilf mit, dass <span class="nw">BlueProceedings ISMS</span> fertig wird.</h2>
+<p class="about-lead">Ein ISMS, das mitläuft, entsteht nicht nebenbei. Je mehr Zeit in dieses Projekt fließen kann, desto sorgfältiger wird das Ergebnis. Deshalb die Bitte: Wenn dir der Ansatz etwas wert ist, unterstütze das Projekt.</p>
+<p>Unterstützung ist freiwillig und nie Voraussetzung, um BlueProceedings ISMS auszuprobieren oder zu nutzen. Sie begründet keinen Anspruch auf Funktionen, Support, Verfügbarkeit oder einen Veröffentlichungstermin.</p>
+<div class="hero-actions"><a class="btn primary" href="${SITE.kofi}" rel="noopener">${ico("i-heart")}Projekt unterstützen</a></div>
+<p class="muted small">Du wechselst dabei zu Ko-fi, einem externen Anbieter. Hinweise dazu stehen in der <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
+</div>
+<ul class="support-list" aria-label="Wofür deine Unterstützung stehen kann">
+<li>${ico("i-box")}<div><b>Ein eigenständiges Produkt</b><span>Unabhängig entwickelt, nicht im Auftrag eines Arbeitgebers. Ein Werkzeug, das aus der ISMS-Praxis kommt.</span></div></li>
+<li>${ico("i-layers")}<div><b>Datenhoheit bleibt bei dir</b><span>On-Premises per Docker, ohne Hersteller-Cloud. Das ist aufwendiger zu bauen und zu prüfen als ein Dienst, den man einfach betreibt.</span></div></li>
+<li>${ico("i-loop")}<div><b>Sorgfalt statt Eile</b><span>Mehr Zeit für Tests, Dokumentation und saubere Nachweise, damit „veraltet“ auch wirklich als veraltet erscheint.</span></div></li>
+<li>${ico("i-chat")}<div><b>Raum für die Community</b><span>Vorlagen prüfen, Rückmeldungen auswerten und Erfahrungen aus der Praxis sauber einarbeiten.</span></div></li>
+</ul>
+</div>
+</section>`;
+
 export function homePage({ posts, data }) {
   return pageHead({
-    title: "BlueProceedings ISMS – ISMS-Werkzeug für Grundschutz++ | BlueProceedings",
-    description: "BlueProceedings ISMS verknüpft Anforderungen, Risiken, Verantwortlichkeiten und Nachweise nach Grundschutz++ und macht veraltete Berichtsstände sichtbar. On-Premises per Docker, ohne Hersteller-Cloud. Erste Version für Januar 2027 geplant.",
+    title: "Grundschutz++ ISMS-Software & Werkzeug | BlueProceedings",
+    description: "BlueProceedings ISMS: Software für BSI Grundschutz++ mit OSCAL, Risikomanagement, Nachweisen, Berichtswesen und BCM. On-Premises per Docker.",
     path: "/",
     jsonld: HOME_LD,
   }) + `
 <section class="hero" aria-labelledby="hero-title">
 <div class="wrap">
 <div class="hero-copy">
-<span class="eyebrow"><span>ISMS-Werkzeug für Grundschutz++ · <span class="nw">Pre-Alpha</span></span></span>
-<h1 id="hero-title">Mehr als eine Momentaufnahme.<span class="accent">Ein ISMS, das mitläuft.</span></h1>
-<p class="lede">BlueProceedings ISMS verknüpft Anforderungen, Risiken, Verantwortlichkeiten und Nachweise. Das Werkzeug macht Änderungen, Fristen und veraltete Berichtsstände in den unterstützten Arbeitsabläufen sichtbar und verteilt Aufgaben auf Fachbereiche, IT und Leitung.</p>
+<span class="eyebrow"><span>BlueProceedings ISMS · Grundschutz++ Software · <span class="nw">Pre-Alpha</span></span></span>
+<h1 id="hero-title">ISMS-Software für BSI Grundschutz++.<span class="accent">Mehr als eine Momentaufnahme.</span></h1>
+<p class="lede">BlueProceedings ISMS verbindet die Anforderungen des BSI Grundschutz++ mit Risiken, Maßnahmen, Verantwortlichkeiten und Nachweisen. Das Werkzeug nutzt den maschinenlesbaren OSCAL-Katalog und macht sichtbar, wenn sich Grundlagen verändern oder Berichte nicht mehr aktuell sind.</p>
 <div class="hero-actions"><a class="btn primary" href="#funktionen">So sieht es aus</a><a class="btn ghost" href="${INTEREST_MAIL}">${ico("i-mail")}Interesse melden</a></div>
 <p class="hero-hint"><span class="hint-text">${ico("i-heart")}Unabhängig entwickelt. Hilf mit, dass es fertig wird.</span><a class="btn ghost small" href="#unterstuetzen">Projekt unterstützen</a></p>
 <ul class="hero-facts">${["Läuft bei euch: Docker, ohne Hersteller-Cloud", `Erste Version für ${SITE.firstRelease} geplant`, "Alpha-Lizenz unentgeltlich"].map((f) => `<li>${ico("i-check")}${f}</li>`).join("")}</ul>
@@ -383,12 +449,25 @@ ${perimeter()}
 </div>
 </section>
 
+<section class="band alt" aria-labelledby="practice-title">
+<div class="wrap intro-split">
+<div>
+${sectionHead("Vom Katalog zur Aufgabe", "Grundschutz++ mit einem ISMS-Werkzeug praktisch umsetzen.", "practice-title")}
+</div>
+<div class="intro-copy">
+<p>Ein maschinenlesbarer Katalog ist der Anfang, nicht das ISMS. In BlueProceedings ISMS wird eine OSCAL-Anforderung dem Objekt zugeordnet, für das sie gilt – etwa einem Geschäftsprozess, einer Information oder einer Komponente. Eine verantwortliche Rolle bewertet die Umsetzung. Bleibt eine Lücke, entsteht daraus nachvollziehbar eine Maßnahme oder eine Risikobetrachtung.</p>
+<p>Die Maßnahme erhält Verantwortung, Frist, Abhängigkeiten und Wirksamkeitskriterien. Nachweise bleiben mit Anforderung und Maßnahme verbunden und tragen Gültigkeit und Prüfstatus. Ändert sich später ein Katalogstand, ein Objekt oder ein Risiko, zeigt die Anwendung, welche bereits freigegebenen Aussagen neu geprüft werden müssen. Die fachliche Entscheidung bleibt bei den Menschen; das Werkzeug hält Herkunft, Zusammenhang und Freigabe fest.</p>
+<div class="hero-actions"><a class="btn ghost" href="/grundschutz-plus-plus/">Was ist BSI Grundschutz++?</a><a class="btn primary" href="/grundschutz-plus-plus/software/">Grundschutz++ Software und Funktionen</a></div>
+</div>
+</div>
+</section>
+
 <section class="band" aria-labelledby="gaps-title">
 <div class="wrap">
 ${sectionHead("", "Mit der Freigabe ist ein ISMS nicht fertig.", "gaps-title", "Tabellen, Vorlagen und One-Pager halten einen Stand fest. Wer länger mit ISMS arbeitet, kennt die vier Stellen, an denen dieser Stand verloren geht.")}
 <dl class="gap-list">${GAPS.map((l) => `<div class="gap"><dt>${l.title}</dt><dd><p>${l.text}</p><span class="answer">${l.answer}</span></dd></div>`).join("")}</dl>
 <div class="gaps-shot">
-<div class="shot-lead"><h3>Veraltet statt falsch-grün.</h3><p>Ändert sich nach der Freigabe eine Grundlage, markiert BlueProceedings ISMS das Sicherheitskonzept und die übrigen Berichte als veraltet. Je Ursache steht dort, wann sie sich zuletzt geändert hat, wie oft und wer in welcher Rolle. Neu erzeugen lässt sich der Bericht mit einem Klick.</p></div>
+<div class="shot-lead"><h3>Veraltet statt falsch-grün.</h3><p>Ändert sich nach der Freigabe eine Grundlage, bleibt ein Bericht schnell stehen und sieht trotzdem aktuell aus.</p><p>BlueProceedings ISMS markiert das Sicherheitskonzept und die übrigen Berichte dann als veraltet. Je Ursache steht dort, wann sie sich zuletzt geändert hat, wie oft und wer in welcher Rolle. Neu erzeugen lässt sich der Bericht mit einem Klick.</p><p>Im Beispiel trägt der Informationsverbund Kunden- und Marktpartnerportal den Hinweis „Das Sicherheitskonzept (Bericht) ist veraltet“, letzter Stand vom 30.09.2026. Die Risiken hat die Institutionsleitung geändert, das Schutzbedarfsprofil die Informationssicherheitsbeauftragte.</p></div>
 ${screenshot("staleReport")}
 </div>
 </div>
@@ -398,7 +477,8 @@ ${chain()}
 
 <section class="band" id="funktionen" aria-labelledby="fn-title">
 <div class="wrap">
-${sectionHead("", "So sieht das in der Pre-Alpha aus.", "fn-title", `${["Eine", "Zwei", "Drei", "Vier", "Fünf", "Sechs", "Sieben", "Acht", "Neun", "Zehn"][FEATURES.length - 1]} Funktionen aus neun Bereichen, so wie sie heute in BlueProceedings ISMS laufen, gezeigt mit fiktiven Demo-Daten. Auf LinkedIn werden sie nach und nach einzeln vorgestellt, mit dem Problem, das sie löst.`)}
+${sectionHead("", "So sieht das in der Pre-Alpha aus.", "fn-title", `${["Eine", "Zwei", "Drei", "Vier", "Fünf", "Sechs", "Sieben", "Acht", "Neun", "Zehn"][FEATURES.length - 1]} Funktionen aus neun Bereichen, so wie sie heute in BlueProceedings ISMS laufen, gezeigt mit fiktiven Demo-Daten. Auf <a href="${SITE.linkedin}" rel="noopener">LinkedIn</a> und unter <a href="/neuigkeiten/">Neuigkeiten</a> werden sie nach und nach einzeln vorgestellt, mit dem Problem, das sie löst.`)}
+<ul class="kind-chips feature-links"><li><a href="/funktionen/">Alle Funktionen</a></li><li><a href="/funktionen/erhebung-und-planung/">Schritt 1: Erhebung und Planung</a></li><li><a href="/funktionen/oscal-katalogverwaltung/">OSCAL-Kataloge</a></li><li><a href="/funktionen/risikomanagement/">Risikomanagement</a></li><li><a href="/funktionen/nachweismanagement/">Nachweise</a></li><li><a href="/funktionen/berichtswesen/">Berichte</a></li><li><a href="/funktionen/bcm-notfallmanagement/">BCM &amp; Notfallmanagement</a></li><li><a href="/funktionen/learn-while-using/">Lern-Modus</a></li></ul>
 <div class="features">${FEATURES.map((f, i) => `<article class="feature${f.wide ? " wide" : i % 2 ? " flip" : ""}" aria-labelledby="f-${f.id}">
 <div class="feature-copy"><span class="area-badge">Bereich ${f.kicker}</span><h3 id="f-${f.id}">${f.title}</h3>${f.text.split("\n\n").map((t) => `<p>${t}</p>`).join("")}<details class="more" open><summary>Mehr dazu</summary><ul class="ticks">${f.points.map((p) => `<li>${p}</li>`).join("")}</ul></details>${f.note ? `<p class="fn-note">${f.note}</p>` : ""}</div>
 ${screenshotSwitch(f.image, f.imageLabels)}
@@ -412,6 +492,7 @@ ${roles()}
 <div class="wrap">
 ${sectionHead("", "Grundschutz++ kommt. BlueProceedings ISMS wächst mit.", "ms-title", "Die Entwicklung begann, als es von Grundschutz++ erst Umrisse gab. Die erste Version erscheint, wenn die Methodik zertifizierbar wird.")}
 <ol class="timeline">${TIMELINE.map((z) => `<li${z.current ? ' class="now" aria-current="step"' : ""}><time datetime="${z.date}">${z.when}</time><b>${z.title}</b><span>${z.text}</span></li>`).join("")}</ol>
+<div class="topic-teaser"><p><b>Neu bei Grundschutz++?</b> Die Methodik kurz erklärt, mit Quellen beim BSI:</p>${themenChips("")}</div>
 </div>
 </section>
 
@@ -452,24 +533,7 @@ ${postList(posts, 3)}
 </div>
 </section>
 
-<section class="band support" id="unterstuetzen" aria-labelledby="sup-title">
-<div class="wrap support-grid">
-<div class="stack">
-<span class="eyebrow">Freiwillig, ohne Gegenleistung</span>
-<h2 id="sup-title">Hilf mit, dass <span class="nw">BlueProceedings ISMS</span> fertig wird.</h2>
-<p class="about-lead">Ein ISMS, das mitläuft, entsteht nicht nebenbei. Je mehr Zeit in dieses Projekt fließen kann, desto sorgfältiger wird das Ergebnis. Deshalb die Bitte: Wenn dir der Ansatz etwas wert ist, unterstütze das Projekt.</p>
-<p>Unterstützung ist freiwillig und nie Voraussetzung, um BlueProceedings ISMS auszuprobieren oder zu nutzen. Sie begründet keinen Anspruch auf Funktionen, Support, Verfügbarkeit oder einen Veröffentlichungstermin.</p>
-<div class="hero-actions"><a class="btn primary" href="${SITE.kofi}" rel="noopener">${ico("i-heart")}Projekt unterstützen</a></div>
-<p class="muted small">Du wechselst dabei zu Ko-fi, einem externen Anbieter. Hinweise dazu stehen in der <a href="/datenschutz/">Datenschutzerklärung</a>.</p>
-</div>
-<ul class="support-list" aria-label="Wofür deine Unterstützung stehen kann">
-<li>${ico("i-box")}<div><b>Ein eigenständiges Produkt</b><span>Unabhängig entwickelt, nicht im Auftrag eines Arbeitgebers. Ein Werkzeug, das aus der ISMS-Praxis kommt.</span></div></li>
-<li>${ico("i-layers")}<div><b>Datenhoheit bleibt bei dir</b><span>On-Premises per Docker, ohne Hersteller-Cloud. Das ist aufwendiger zu bauen und zu prüfen als ein Dienst, den man einfach betreibt.</span></div></li>
-<li>${ico("i-loop")}<div><b>Sorgfalt statt Eile</b><span>Mehr Zeit für Tests, Dokumentation und saubere Nachweise, damit „veraltet“ auch wirklich als veraltet erscheint.</span></div></li>
-<li>${ico("i-chat")}<div><b>Raum für die Community</b><span>Vorlagen prüfen, Rückmeldungen auswerten und Erfahrungen aus der Praxis sauber einarbeiten.</span></div></li>
-</ul>
-</div>
-</section>
+${supportSection()}
 
 <section class="closing" aria-labelledby="cta-title">
 <div class="wrap">
@@ -484,8 +548,8 @@ ${postList(posts, 3)}
 export function communityPage({ data }) {
   const entries = data.community ?? [];
   return pageHead({
-    title: "Community – Vorlagen und Erfahrungen für Grundschutz++ | BlueProceedings ISMS",
-    description: "Blaupausen, Informationsverbund-, Komponentensatz- und Komponentenvorlagen, Berichtsvorlagen und Erfahrungen für Grundschutz++ teilen. Offen auf GitHub unter CC BY-SA 4.0.",
+    title: "Grundschutz++-Community und Vorlagen | BlueProceedings",
+    description: "Vorlagen und Erfahrungen für Grundschutz++ teilen: Blaupausen, Informationsverbünde, Komponenten und Berichte, offen auf GitHub unter CC BY-SA 4.0.",
     path: "/community/",
   }) + `
 <section class="hero slim" aria-labelledby="c-title">
@@ -499,11 +563,11 @@ ${smallScreenNote()}
 <section class="band alt" aria-labelledby="kinds-title">
 <div class="wrap">
 ${sectionHead("", `${["Eine", "Zwei", "Drei", "Vier", "Fünf", "Sechs", "Sieben", "Acht"][COMMUNITY_KINDS.length - 1]} Arten von Beiträgen.`, "kinds-title", "Vorlagen tauschst du als Datei aus, die BlueProceedings ISMS importiert; veröffentlichte Pakete sind signiert. Berichtsvorlagen und Erfahrungen werden als Dokument oder in den Diskussionen geteilt.")}
-<div class="tabs" role="tablist" aria-label="Arten von Beiträgen" hidden>${COMMUNITY_KINDS.map((a, i) => `<button class="tab" role="tab" id="tab-${a.id}" aria-controls="${a.id}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ""}>${ico(a.ico)}${a.name}</button>`).join("")}</div>
+<div class="tabs" role="tablist" aria-label="Arten von Beiträgen" hidden>${COMMUNITY_KINDS.map((a, i) => `<button type="button" class="tab" role="tab" id="tab-${a.id}" aria-controls="${a.id}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ""}>${ico(a.ico)}${a.name}</button>`).join("")}</div>
 ${COMMUNITY_KINDS.map((a) => `<div class="kind" id="${a.id}">
 <div class="kind-copy">
 <div class="kind-head"><span class="kind-ico">${ico(a.ico)}</span><div><h3>${a.name}</h3><p class="kind-summary">${a.summary}</p></div></div>
-<p>${a.how}</p>
+${a.how.split("\n\n").map((t) => `<p>${t}</p>`).join("")}
 <h4>Teilen lohnt sich zum Beispiel für</h4>
 <ul class="ticks">${a.shareFor.map((t) => `<li>${t}</li>`).join("")}</ul>
 <p class="meta"><span>Format: ${a.format}</span></p>
@@ -544,19 +608,149 @@ ${entries.length
 
 export function newsPage({ posts }) {
   return pageHead({
-    title: "Neuigkeiten – Beiträge von BlueProceedings auf LinkedIn | BlueProceedings ISMS",
-    description: "Alle Beiträge von BlueProceedings zu BlueProceedings ISMS und Grundschutz++, neueste zuerst, mit Link zu LinkedIn.",
+    title: "Neuigkeiten zu BlueProceedings ISMS und Grundschutz++",
+    description: "Neuigkeiten von BlueProceedings zu ISMS, Grundschutz++, BSI Standard 300-1, OSCAL, Risikomanagement und BCM – mit eigenem Beitrag und LinkedIn-Quelle.",
     path: "/neuigkeiten/",
   }) + `
 <section class="hero slim" aria-labelledby="n-title">
 <div class="wrap">
-${sectionHead("Neuigkeiten von LinkedIn", "Eine Funktion und das Problem dahinter.", "n-title", "Alle Beiträge der BlueProceedings-Seite, neueste zuerst, im vollen Wortlaut mit den Folien und dem ersten Kommentar.", "h1")}
+${sectionHead("Neuigkeiten von BlueProceedings", "Eine Funktion und das Problem dahinter.", "n-title", "Alle Beiträge, neueste zuerst. Jeder Beitrag hat hier eine eigene, dauerhaft verlinkbare Seite; die ursprüngliche Veröffentlichung auf LinkedIn bleibt erreichbar.", "h1")}
 </div>
 </section>
 <section class="band alt" aria-label="Beiträge">
 <div class="wrap">
-${storyList(posts)}
+${postList(posts)}
 <div class="news-foot"><a class="btn ghost" href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn folgen</a></div>
+</div>
+</section>` + pageFoot();
+}
+
+export function newsPostPage(p) {
+  const crumbs = [["/", "Startseite"], ["/neuigkeiten/", "Neuigkeiten"], [p.path, p.title]];
+  const jsonld = [
+    { "@context": "https://schema.org", "@type": "Article", headline: p.title, description: p.teaser, datePublished: p.date, dateModified: p.date, inLanguage: "de", mainEntityOfPage: SITE.url + p.path, image: `${SITE.url}/images/share.png`, author: { "@type": "Person", name: SITE.founder, url: `${SITE.url}/#ueber` }, publisher: { "@type": "Organization", name: SITE.company, url: SITE.url, logo: `${SITE.url}/favicon.svg` } },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs.map(([href, name], n) => ({ "@type": "ListItem", position: n + 1, name, item: SITE.url + href })) },
+  ];
+  return pageHead({ title: `${p.title} | BlueProceedings`, description: p.teaser, path: p.path, jsonld, ogType: "article" }) + `
+<section class="band news-detail" aria-label="Beitrag">
+<div class="wrap">
+<nav class="crumbs" aria-label="Brotkrümelnavigation"><ol>${crumbs.map(([href, name], n) => n === crumbs.length - 1 ? `<li aria-current="page">${esc(name)}</li>` : `<li><a href="${href}">${esc(name)}</a></li>`).join("")}</ol></nav>
+${postStory(p, "h1")}
+<div class="news-foot"><a class="btn ghost" href="/neuigkeiten/">Alle Neuigkeiten</a><a class="btn ghost" href="${SITE.linkedin}" rel="noopener">${ico("i-in")}BlueProceedings auf LinkedIn folgen</a></div>
+</div>
+</section>` + pageFoot();
+}
+
+const fachUrl = (path) => SITE.url + path;
+const themaTitel = (href) => FACHSEITEN[href]?.crumb ?? (href.startsWith("/community/") ? "Community" : href);
+
+function themenChips(path, gruppe = "grundschutz") {
+  const themen = gruppe === "produkt" ? PRODUKT_THEMEN : THEMEN;
+  const label = gruppe === "produkt" ? "Funktionen" : "Grundschutz++ Themen";
+  return `<nav aria-label="${label}"><ul class="kind-chips topic-chips">${themen.map(([href, text]) => `<li><a href="${href}"${href === path ? ' aria-current="page"' : ""}>${text}</a></li>`).join("")}</ul></nav>`;
+}
+
+const gapItems = (items) => `<dl class="gap-list">${items.map((l) => `<div class="gap"><dt>${l.title}</dt><dd><p>${l.text}</p>${l.answer ? `<span class="answer">${l.answer}</span>` : ""}</dd></div>`).join("")}</dl>`;
+
+function oscalFigure(s) {
+  return `<figure class="shot oscal">
+<div class="shot-bar"><i></i><i></i><i></i><span>Anwenderkatalog · OSCAL, gekürzt</span></div>
+<dl class="oscal-rows">${s.rows.map(([code, label]) => `<div><dt>${label}</dt><dd><code>${esc(code)}</code></dd></div>`).join("")}
+<div class="oscal-prose"><dt>Anforderungstext</dt><dd>${esc(s.prose)}</dd></div></dl>
+<figcaption>${s.note}</figcaption>
+</figure>`;
+}
+
+function fachSection(s, i) {
+  const id = `s${i + 1}`;
+  const head = sectionHead("", s.h, id, s.lede ?? "");
+  let body = "";
+  if (s.type === "gaps") body = gapItems(s.items);
+  else if (s.type === "pairs") body = `<dl class="roles pairs">${s.items.map((p) => `<div><dt>${p.title}<span>${p.ref}</span></dt><dd><div><span class="pair-label">Veröffentlicht</span><p>${p.bsi}</p></div><div class="pair-app"><span class="pair-label">Auslegung in BlueProceedings ISMS</span><p>${p.app}</p></div></dd></div>`).join("")}</dl>`;
+  else if (s.type === "chain") body = `<ol class="chain">${s.items.map((k) => `<li><b>${k.title}</b><span>${k.text}</span></li>`).join("")}</ol>${s.loop ? `<p class="chain-loop">${ico("i-loop")}<span>${s.loop}</span></p>` : ""}`;
+  else if (s.type === "steps") body = `<ol class="steps">${s.items.map((t, n) => `<li><span class="step-n">${n + 1}</span><b>${t.title}</b><p>${t.text}</p></li>`).join("")}</ol>`;
+  else if (s.type === "timeline") body = `<ol class="timeline vertical">${s.items.map((z) => `<li${z.now ? ' class="now" aria-current="step"' : ""}><time datetime="${z.date}">${z.when}</time><b>${z.title}</b><span>${z.text}</span></li>`).join("")}</ol>`;
+  else if (s.type === "oscal") body = oscalFigure(s);
+  else if (s.type === "faq") body = `<div class="faq">${s.items.map((item) => `<details><summary>${esc(item.q)}</summary><p>${esc(item.a)}</p></details>`).join("")}</div>`;
+  else if (s.type === "note") return `<section class="band" aria-labelledby="${id}"><div class="wrap"><div class="chain-loop">${ico("i-alert")}<div><h2 class="h3" id="${id}">${s.h}</h2><p>${s.text}</p></div></div></div></section>`;
+  else if (s.type === "feature") return `<section class="band" aria-labelledby="${id}"><div class="wrap"><div class="features"><article class="feature wide">
+<div class="feature-copy"><span class="area-badge">Aus der Pre-Alpha</span><h2 id="${id}">${s.h}</h2>${s.paragraphs.map((p) => `<p>${p}</p>`).join("")}</div>
+${screenshotSwitch(s.image, s.imageLabels)}
+</article></div></div></section>`;
+  else if (s.type === "shot") return `<section class="band${i % 2 ? " alt" : ""}" aria-labelledby="${id}"><div class="wrap gaps-shot fach-shot">
+<div class="shot-lead"><h2 id="${id}">${s.h}</h2>${s.paragraphs.map((p) => `<p>${p}</p>`).join("")}</div>
+${screenshotSwitch(s.image, s.imageLabels, { caption: "Auslegung in der Pre-Alpha mit fiktiven Daten · kann sich bis zur ersten Version ändern" })}
+</div></section>`;
+  return `<section class="band${i % 2 ? " alt" : ""}" aria-labelledby="${id}"><div class="wrap">${head}${body}</div></section>`;
+}
+
+function weitereFunktionenHinweis() {
+  return `<section class="band" aria-labelledby="weitere-funktionen-title"><div class="wrap"><div class="chain-loop">${ico("i-alert")}<div><h2 class="h3" id="weitere-funktionen-title">Das ist noch nicht alles.</h2><p>Weitere Funktionen sind bereits umgesetzt. Wir bereiten ihre Vorstellung noch vor – schau später wieder vorbei.</p></div></div></div></section>`;
+}
+
+export function weiteresPage() {
+  const path = "/funktionen/weiteres/";
+  return pageHead({ title: "Weiteres | BlueProceedings", description: "Weitere Funktionen von BlueProceedings ISMS werden bald vorgestellt. Folge der Entwicklung und unterstütze das Projekt.", path }) + `
+<section class="hero slim" aria-labelledby="weiteres-title">
+<div class="wrap">
+<nav class="crumbs" aria-label="Brotkrümelnavigation"><ol><li><a href="/">Startseite</a></li><li><a href="/funktionen/">Funktionen</a></li><li aria-current="page">Weiteres</li></ol></nav>
+${sectionHead("BlueProceedings ISMS · Pre-Alpha", "Hier entsteht noch mehr.", "weiteres-title", "Diese Seite wächst mit dem Projekt. Weitere Funktionen sind bereits umgesetzt; ihre Vorstellung bereiten wir noch vor. Schau bald wieder vorbei.", "h1")}
+<div class="hero-actions"><a class="btn primary" href="${SITE.linkedin}" rel="noopener">${ico("i-in")}Auf LinkedIn folgen</a><a class="btn ghost" href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE.url)}" rel="noopener">Seite auf LinkedIn teilen ↗</a></div>
+<p class="muted">Wenn dir der Ansatz gefällt, teile die Seite mit anderen und begleite die Entwicklung auf LinkedIn.</p>
+</div>
+</section>
+${weitereFunktionenHinweis()}
+${supportSection()}` + pageFoot();
+}
+
+export function fachseite(path) {
+  const s = FACHSEITEN[path];
+  if (!s) throw new Error(`Unbekannte Fachseite: ${path}`);
+  const hub = path === "/grundschutz-plus-plus/";
+  const productPage = s.topics === "produkt";
+  const grundschutzPage = path.startsWith("/grundschutz-plus-plus/");
+  const crumbs = s.crumbs ?? [["/", "Startseite"], ...(hub ? [] : productPage ? [["/funktionen/", "Funktionen"]] : grundschutzPage ? [["/grundschutz-plus-plus/", "Grundschutz++"]] : []), [path, s.crumb]];
+  const mail = `mailto:${SITE.mail}?subject=${encodeURIComponent(`Interesse an BlueProceedings ISMS (Seite ${s.mailTopic})`)}&body=${encodeURIComponent("Hallo,\n\nwir interessieren uns für BlueProceedings ISMS.\n\nInstitution / Branche:\nWo wir mit Grundschutz++ gerade stehen:\nWas uns heute am meisten Arbeit macht:\n\n")}`;
+  const faqItems = s.sections.filter((section) => section.type === "faq").flatMap((section) => section.items);
+  const jsonld = [
+    { "@context": "https://schema.org", "@type": productPage ? "WebPage" : "Article", headline: s.h1.replace(/\.$/, ""), description: s.description, datePublished: s.asOf, dateModified: s.asOf, inLanguage: "de", mainEntityOfPage: fachUrl(path), image: `${SITE.url}/images/share.png`, author: { "@type": "Person", name: SITE.founder, url: `${SITE.url}/#ueber` }, publisher: { "@type": "Organization", name: SITE.company, url: SITE.url, logo: `${SITE.url}/favicon.svg` } },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: crumbs.map(([href, name], n) => ({ "@type": "ListItem", position: n + 1, name, item: fachUrl(href) })) },
+    ...(faqItems.length ? [{ "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map((item) => ({ "@type": "Question", name: item.q, acceptedAnswer: { "@type": "Answer", text: item.a } })) }] : []),
+  ];
+  const reading = s.reading ?? [["Veröffentlicht", `was das BSI im ${STANDARD_300_1} und in den ergänzenden Quellen herausgegeben hat`], ["Auslegung", "wie BlueProceedings ISMS das in der Pre-Alpha umsetzt"]];
+  return pageHead({ title: `${s.title} | BlueProceedings`, description: s.description, path, jsonld, ogType: productPage ? "website" : "article" }) + `
+<section class="hero slim" aria-labelledby="f-title">
+<div class="wrap">
+<nav class="crumbs" aria-label="Brotkrümelnavigation"><ol>${crumbs.map(([href, name], n) => n === crumbs.length - 1 ? `<li aria-current="page">${name}</li>` : `<li><a href="${href}">${name}</a></li>`).join("")}</ol></nav>
+${sectionHead(`${productPage ? "Produktstand" : "Grundschutz++"} · geprüft am ${formatDate(s.asOf)}`, s.h1, "f-title", s.lede, "h1")}
+<ul class="reading-key" aria-label="So ist diese Seite aufgebaut">${reading.map(([label, text], index) => `<li${index ? ' class="pair-app"' : ""}><b>${label}:</b> ${text}</li>`).join("")}</ul>
+${themenChips(path, s.topics)}
+</div>
+</section>
+
+${s.sections.map(fachSection).join("\n")}
+${path !== "/funktionen/" && NAV_GRUPPEN[0].links.some(([href]) => href === path) ? weitereFunktionenHinweis() : ""}
+
+<section class="band alt" aria-labelledby="next-title">
+<div class="wrap download">
+<div>
+${sectionHead("", "Weiterlesen", "next-title")}
+<div class="repos">${s.next.map((href) => { const t = FACHSEITEN[href]; const kurz = t ? t.description.split(". ")[0].replace(/\.+$/, "") + "." : "Wiederverwendbare Auswahlen von Anforderungen teilen und importieren."; return `<a class="repo" href="${href}">${ico(t ? "i-file" : "i-layers")}<span><b class="repo-title">${t ? t.h1.replace(/\.$/, "") : "Blaupausen in der Community"}</b><span>${kurz}</span></span></a>`; }).join("")}</div>
+</div>
+<div class="sources">
+<h2 class="h3">Quellen</h2>
+<ul>${s.sources.map(([href, label, text]) => `<li><a href="${esc(href)}" rel="noopener">${label}</a><span>${text}</span></li>`).join("")}</ul>
+<p class="independence">Geschrieben von ${SITE.founder}, BlueProceedings, zuletzt am ${formatDate(s.asOf)} mit den Quellen abgeglichen. ${productPage ? "Die Funktionsbeschreibung gibt den Stand der Pre-Alpha wieder; methodische Aussagen sind als solche benannt und belegt." : "Was zur Methodik gesagt ist, folgt den Veröffentlichungen des BSI; was zu BlueProceedings ISMS gesagt ist, beschreibt die Pre-Alpha."}</p>
+</div>
+</div>
+</section>
+
+<section class="closing" aria-labelledby="cta-title">
+<div class="wrap">
+<div class="closing-ring" aria-hidden="true">${ico("logo")}</div>
+<h2 id="cta-title">${s.cta.h}</h2>
+<p class="lede">${s.cta.text}</p>
+<div class="hero-actions"><a class="btn primary" href="/#funktionen">So sieht es aus</a><a class="btn ghost" href="${mail}">${ico("i-mail")}Interesse melden</a></div>
 </div>
 </section>` + pageFoot();
 }
@@ -586,3 +780,4 @@ export function errorPage() {
 }
 
 export const LEGAL_PATHS = Object.keys(LEGAL_PAGES);
+export { FACHSEITEN_PFADE };

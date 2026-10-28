@@ -1,9 +1,8 @@
-// Builds the static website into dist/. No dependencies besides Node 20+.
-// Sources: content/posts/*.md (posts with card, text and comment), data/github.json (optional, from fetch-github-data.mjs), public/ (images, fonts).
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { homePage, communityPage, newsPage, legalPage, errorPage, LEGAL_PATHS } from "../src/pages.mjs";
+import { homePage, communityPage, weiteresPage, newsPage, newsPostPage, fachseite, legalPage, errorPage, FACHSEITEN_PFADE, LEGAL_PATHS } from "../src/pages.mjs";
+import { FACHSEITEN } from "../src/fachseiten.mjs";
 import { SITE } from "../src/content.mjs";
 import { PRODUKTIONSBUILD } from "../src/legal.mjs";
 
@@ -12,7 +11,6 @@ if (!/^https:\/\/ko-fi\.com\/[A-Za-z0-9_]+$/.test(SITE.kofi)) throw new Error("S
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
 
-/** Reads simple front matter (`key: value`) between `---` lines. The text after it is returned as `body`. */
 export function frontMatter(text, file) {
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   if (!m) throw new Error(`${file}: front matter between --- is missing.`);
@@ -34,6 +32,8 @@ function readPosts() {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) throw new Error(`${file}: date must be YYYY-MM-DD.`);
     if (post.published !== "true") continue;
     if (!/^https:\/\/(www\.linkedin\.com|linkedin\.com|lnkd\.in)\//.test(post.linkedin_url ?? "")) throw new Error(`${file}: published, but linkedin_url is missing or does not point to LinkedIn (linkedin.com or lnkd.in).`);
+    post.slug = file.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
+    post.path = `/neuigkeiten/${post.slug}/`;
     posts.push(post);
   }
   return posts.sort((a, b) => b.date.localeCompare(a.date));
@@ -61,14 +61,15 @@ const posts = readPosts();
 const data = readGithubData();
 write("/", homePage({ posts, data }));
 write("/community/", communityPage({ data }));
+write("/funktionen/weiteres/", weiteresPage());
 write("/neuigkeiten/", newsPage({ posts }));
+for (const post of posts) write(post.path, newsPostPage(post));
+for (const p of FACHSEITEN_PFADE) write(p, fachseite(p));
 for (const p of LEGAL_PATHS) write(p, legalPage(p));
 write("404.html", errorPage());
 
-// Guard against statements the site must not make (old product name, claims about certification or price, unsupported promises).
-// The build fails when a published page contains one of them, so an old formulation cannot slip back in unnoticed.
 const VERBOTEN = [
-  [new RegExp("risk" + "scope", "i"), "alter Produktname"], // zusammengesetzt, damit der alte Name nirgends im Repository steht
+  [new RegExp("risk" + "scope", "i"), "alter Produktname"],
   [/ohne Cookies, ohne Tracking/i, "zu weitgehende Cookie-/Tracking-Aussage"],
   [/kostenfrei|kostenlos/i, "Preisaussage statt unentgeltlicher Alpha-Lizenz"],
   [/Quelltext/i, "Quelltext wird nicht ausgeliefert (nur Docker-Container)"],
@@ -85,9 +86,22 @@ const verstoesse = htmlFiles(dist).flatMap((f) => { const s = readFileSync(f, "u
 if (verstoesse.length) throw new Error("Unzulässige Aussagen im Build:\n" + verstoesse.join("\n"));
 if (PRODUKTIONSBUILD && htmlFiles(dist).some((f) => readFileSync(f, "utf-8").includes("[Anschrift aus"))) throw new Error("Impressum enthält einen Platzhalter.");
 
-const today = new Date().toISOString().slice(0, 10);
-const pages = ["/", "/community/", "/neuigkeiten/", ...LEGAL_PATHS];
-writeFileSync(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => `  <url><loc>${SITE.url}${p}</loc><lastmod>${today}</lastmod></url>`).join("\n")}\n</urlset>\n`);
-writeFileSync(join(dist, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE.url}/sitemap.xml\n`);
+const pages = ["/", "/community/", "/funktionen/weiteres/", "/neuigkeiten/", ...posts.map((post) => post.path), ...FACHSEITEN_PFADE, ...LEGAL_PATHS];
+const newestCheck = Object.values(FACHSEITEN).map((f) => f.asOf).sort().at(-1);
+const priority = (p) => p === "/" ? "1.0" : p === "/grundschutz-plus-plus/" ? "0.9" : FACHSEITEN[p] ? "0.8" : p === "/community/" || p === "/neuigkeiten/" ? "0.6" : "0.2";
+writeFileSync(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => {
+  const lastmod = FACHSEITEN[p]?.asOf ?? posts.find((post) => post.path === p)?.date ?? (p === "/" ? newestCheck : undefined);
+  return `  <url><loc>${SITE.url}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}<priority>${priority(p)}</priority></url>`;
+}).join("\n")}\n</urlset>\n`);
+const KI_CRAWLER = [
+  "GPTBot", "OAI-SearchBot", "ChatGPT-User",
+  "ClaudeBot", "Claude-User", "Claude-SearchBot", "anthropic-ai", "Claude-Web",
+  "PerplexityBot", "Perplexity-User",
+  "Google-Extended", "Applebot-Extended", "Amazonbot",
+  "Meta-ExternalAgent", "Meta-ExternalFetcher", "FacebookBot",
+  "Bytespider", "CCBot", "cohere-ai", "cohere-training-data-crawler",
+  "DuckAssistBot", "MistralAI-User", "Diffbot", "ImagesiftBot", "Omgilibot", "YouBot", "PhindBot", "AI2Bot",
+];
+writeFileSync(join(dist, "robots.txt"), `# BlueProceedings ISMS: Crawling und KI-Suche sind erwünscht. Hinweise für Sprachmodelle: ${SITE.url}/llms.txt\n\nUser-agent: *\nAllow: /\nDisallow: /404.html\n\n${KI_CRAWLER.map((a) => `User-agent: ${a}\nAllow: /\nDisallow: /404.html\n`).join("\n")}\nSitemap: ${SITE.url}/sitemap.xml\n`);
 
 console.log(`build: ${pages.length + 1} pages, ${posts.length} published posts, ${data.discussions.length} discussions, release: ${data.release?.tag ?? "none"}`);

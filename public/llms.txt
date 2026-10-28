@@ -1,0 +1,85 @@
+# BlueProceedings ISMS
+
+> BlueProceedings ISMS ist ein in Bonn entwickeltes ISMS-Werkzeug für die BSI-Methodik Grundschutz++ (BSI-Standard 300-1). Die Anwendung verbindet Institution, Informationsverbünde, Assets, Anforderungen, Risiken, Maßnahmen, Nachweise, Freigaben, Audits und Notfallvorsorge auf einem gemeinsamen Datenstand. Sie läuft als Docker-Container auf der Infrastruktur des Betreibers; eine Hersteller-Cloud ist nicht erforderlich.
+
+BlueProceedings ISMS befindet sich in der Pre-Alpha. Eine erste Version ist für Januar 2027 geplant. Das unabhängige private Projekt unterstützt die Vorbereitung auf Grundschutz++ und macht keine Aussage über Zertifizierung oder Konformität.
+
+Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProceedings ISMS. Zeitabhängige Fachseiten nennen ihren Prüfstand und verlinken die verwendeten Primärquellen.
+
+## Wichtigste Seiten
+
+- [Startseite und Produktüberblick](https://blueproceedings.de/): Funktionen, Screenshots aus der Pre-Alpha, Zielgruppen, Zeitplan, Testphase und häufige Fragen.
+- [Grundschutz++ kurz erklärt](https://blueproceedings.de/grundschutz-plus-plus/): Methodik, fünf Prozessschritte, zentrale Begriffe, BSI-Standard 300-1 und die Grenzen sinnvoller Automatisierung.
+- [Grundschutz++ Software](https://blueproceedings.de/grundschutz-plus-plus/software/): Anforderungen an ein Werkzeug, konkreter Arbeitsablauf, Produktstand und häufige Fragen.
+- [Funktionen](https://blueproceedings.de/funktionen/): Einstiege in OSCAL-Katalogverwaltung, Risikomanagement, Nachweise, Berichte, BCM und den Lern-Modus.
+- [Neuigkeiten](https://blueproceedings.de/neuigkeiten/): Entwicklungsstand, Einblicke in die Anwendung und fachliche Beiträge.
+- [Schritt 1: Erhebung und Planung](https://blueproceedings.de/neuigkeiten/schritt-1-erhebung-und-planung/): Beitrag mit Karussell zu Prozessschritt 1 des BSI-Standards 300-1.
+- [Mehr als eine Momentaufnahme](https://blueproceedings.de/neuigkeiten/mehr-als-eine-momentaufnahme/): erster Beitrag mit Produktgedanke, Pre-Alpha-Einblick und Entwicklungsplan.
+- [Community](https://blueproceedings.de/community/): Austausch und wiederverwendbare Vorlagen für Blaupausen, Komponenten, Informationsverbünde und Berichte, offen auf GitHub unter CC BY-SA 4.0.
+
+## Fachwissen zu Grundschutz++
+
+- [BSI-Standard 300-1](https://blueproceedings.de/bsi-standard-300-1/): Methodik, Verhältnis zum Anwenderkatalog und Abgrenzung zur Software.
+- [Grundschutz++ umsetzen](https://blueproceedings.de/grundschutz-plus-plus/umsetzung/): Schritt für Schritt vom Geltungsbereich bis zur kontinuierlichen Verbesserung.
+- [Grundschutz++-Zeitplan](https://blueproceedings.de/grundschutz-plus-plus/zeitplan/): Meilensteinplan des BSI von der Pilotierung über den BSI-Standard 300-1 (it-sa, 27.10.2026) und die Zertifizierbarkeit ab 01.01.2027 bis zum Ende der Zertifizierbarkeit nach IT-Grundschutz am 30.11.2031.
+- [Von IT-Grundschutz zu Grundschutz++](https://blueproceedings.de/grundschutz-plus-plus/it-grundschutz-migration/): Was aus bestehenden Unterlagen übernommen werden kann, was neu entschieden werden muss, ein Umstieg in sieben Schritten bis zur Wirksamkeitsprüfung und warum kein pauschaler Import angeboten wird.
+- [Grundschutz++-Anwenderkatalog lesen](https://blueproceedings.de/grundschutz-plus-plus/anwenderkatalog/): Praktiken, Kennungen, Modalverben, Zielobjektkategorien, Sicherheitsniveaus, Parameter und Dokumentation an einem konkreten Beispiel.
+- [OSCAL in Grundschutz++](https://blueproceedings.de/grundschutz-plus-plus/oscal/): Katalog, Profil, Component Definition und System Security Plan sowie deren Verwendung in BlueProceedings ISMS.
+- [ISMS-Software für BSI Grundschutz++](https://blueproceedings.de/isms-software/bsi-grundschutz/): breiter Einstieg für BSI-orientiertes Informationssicherheitsmanagement und die Abgrenzung zum bisherigen IT-Grundschutz.
+
+## Produktfunktionen
+
+- [Schritt 1: Erhebung und Planung](https://blueproceedings.de/funktionen/erhebung-und-planung/): die elf Teilschritte aus Kapitel 2.1 bis 2.11 mit RACI-Matrix, Einflussfaktoren, Compliance, Geltungsbereich, Stakeholder-Gewichtung, Schutzbedarf, Leitlinie, Risikomatrix und Ausnahmen.
+- [OSCAL-Katalogverwaltung](https://blueproceedings.de/funktionen/oscal-katalogverwaltung/): Import, Profile, Versionen und bewusste Katalogmigration.
+- [ISMS-Risikomanagement](https://blueproceedings.de/funktionen/risikomanagement/): Herkunft, Bewertung, Behandlung, Restrisiko, Entscheidung und Wiedervorlage.
+- [ISMS-Nachweismanagement](https://blueproceedings.de/funktionen/nachweismanagement/): Bezug, Gültigkeit, Prüfung und Wirksamkeitsnachweis.
+- [ISMS-Berichtswesen](https://blueproceedings.de/funktionen/berichtswesen/): fester Datenstand, Veraltet-Erkennung, Prüfpaket und OSCAL-Ausgaben.
+- [BCM und Notfallmanagement](https://blueproceedings.de/funktionen/bcm-notfallmanagement/): BCM-Software, Business-Impact-Analyse, Notfallplanung, Krisenmanagement, Wiederanlauf und Notfallübungen.
+- [Learn while Using](https://blueproceedings.de/funktionen/learn-while-using/): Einrichtungsassistent, Feldhilfe und getrennter Lern-Modus.
+
+## Was die Anwendung abdeckt
+
+Die Funktionen folgen den fünf Prozessschritten der Methodik (Erhebung und Planung, Anforderungsanalyse, Realisierung, Überwachung, kontinuierliche Verbesserung). Beschrieben ist der Stand der Pre-Alpha; Planungsstände sind als solche gekennzeichnet.
+
+- Institution und Governance: Kontext, Stakeholder und ihre Erwartungen, Compliance-Vorgaben, Geltungsbereich als Ausschlussmodell, Leitlinie mit messbaren Zielen, Rollen, RACI, Vertretungen. Prüfhinweise statt Blockaden, wo die Methodik keine Sperre verlangt.
+- Struktur und Bestand: Geschäftsprozesse, Informationen, Komponenten, Dienstleister, Standorte und Schnittstellen als verknüpfte Objekte mit Abhängigkeiten, Änderungsverlauf und einem gemeinsamen Strukturmodell statt getrennter Listen.
+- Schutzbedarf und Sicherheitsniveau: institutionell definierte Schutzziele, Schadensszenarien, erklärbares Schutzbedarfsprofil mit Begründung, Erkennung von Schutzkonflikten; Schutzbedarf (je Objekt) und Sicherheitsniveau (je Anforderung) bleiben getrennt.
+- Kataloge und Anforderungen: Grundschutz++-Katalog und weitere OSCAL-Kataloge mit Version und Herkunft, Anforderungen je Objekt mit Vererbung entlang der Zielobjektkategorien, Anwendbarkeit mit Begründung, Parameterkette von der Blaupause bis zum Objekt, institutionsweites Anforderungsregister.
+- Blaupausen und Vorlagen: versionierte Blaupausen als OSCAL-Profil mit Vier-Augen-Freigabe, Vorlagen für Informationsverbünde, Komponentensätze und Komponenten, Einrichtungsassistent und Lernmodus für den Einstieg mit einem Prozess.
+- Katalogmigration: Ein neuer Katalogstand wird nie still übernommen. Die Anwendung zeigt vorab je Informationsverbund neue, geänderte und entfallene Anforderungen sowie Parameteränderungen, verlangt Begründung und Freigabe und führt danach über eine Liste der Migrationsänderungen durch die Neubewertung. Dasselbe gilt für die Migration von Blaupausen.
+- Risiken: Risikoweg von Ursache und Bewertung über Maßnahmen bis zum Restrisiko, institutionsspezifische Risikomatrix, erklärbare Prioritäten, formale Risikobetrachtungen, Ausbreitungsprüfung über Abhängigkeiten, Historie und Wiedervorlage, Risikoakzeptanz und Ausnahmen mit Freigabe.
+- Maßnahmen und Nachweise: Maßnahmen mit Verantwortlichen, Frist und Fortschritt; Nachweise mit Gültigkeit und Prüfstatus; Wirksamkeitsprüfung nach vorab festgelegten Kriterien, Abschluss erst nach Freigabe durch eine zweite Person.
+- Überwachung und Audit: Überwachungspläne, Kennzahlen mit Lebenszyklus, Compliance-Prüfläufe, Auditprogramm mit Prüfmodus und Feststellungen, Managementbewertung, Fälligkeiten und Audit-Bereitschaft. Austausch mit Prüfenden über Import der Erwartungen und Export eines Prüfpakets mit Prüfsummen, nicht über Gastkonten.
+- Sicherheitsvorfälle und Notfallvorsorge: Meldung, Triage und Klassifikation, Lage mit betroffenen Objekten, Zeitlinie und Nachbesprechung, Notfallorganisation, Business-Impact-Analyse mit Mindestbetrieb, Notfallmodell, Krisenläufe und Übungen. Notfall, Krise, Risiko und Maßnahme entstehen nie automatisch; die Anwendung ist kein SIEM und erkennt keine Ereignisse.
+- Berichte und Austausch: Sicherheitskonzept, Gesamtbericht und Basis-Sicherheitskonzept als PDF, Hinweise auf veraltete Berichtsstände mit Ursache, Konsistenzprüfungen, formale Berichtsstände, Dokumentenregister, verschlüsselte Exporte, System Security Plan und weitere OSCAL-Modelle (Katalog, Profil, Component Definition, Assessment Plan und Results, POA&M) sowie ein Offline-Assurance-Bundle.
+- Zusammenarbeit und Sicherheit: Rollen und Berechtigungen, verpflichtendes Vier-Augen-Prinzip (im Kleinunternehmen-Modus ohne Lockerung der fachlichen Bedingungen), Nachvollziehbarkeit von Person, Rolle, Zeitpunkt und Begründung, Betrieb On-Premises mit verschlüsselter Datenhaltung. E-Mail-Versand ist vorbereitet, aber noch nicht angeschlossen.
+
+## Was die Anwendung bewusst nicht tut
+
+- Sie entscheidet nicht über Geltungsbereich, Anwendbarkeit, Angemessenheit oder Wirksamkeit. Sie hält fest, wer was wann mit welcher Begründung entschieden hat.
+- Sie macht keine Aussage über Zertifizierung oder Konformität; eine Bewertung nimmt die zuständige oder prüfende Stelle vor.
+- Sie importiert keine IT-Grundschutz-Altstände pauschal. Bisherige Unterlagen gelten als Eingabe, nicht als Grundschutz++-Ergebnis; das BSI hat Migrationsleitfäden angekündigt, aber noch nicht veröffentlicht.
+- Sie erzeugt keine Ausfälle und keine Ereignisse und ersetzt kein Überwachungs- oder Erkennungssystem.
+
+## Einordnung und Zitierhinweise
+
+- BlueProceedings ISMS ist ein Produkt von BlueProceedings, einem Einzelunternehmen von Xhoan Qazimi in Bonn.
+- Das Projekt ist unabhängig und weder eine Veröffentlichung noch ein Auftrag des Bundesamts für Sicherheit in der Informationstechnik (BSI).
+- Aussagen zur offiziellen Methodik, zu Terminen und zur Zertifizierung sind den jeweils verlinkten BSI-Quellen zuzuordnen, nicht BlueProceedings. Primärquellen sind die BSI-Seite zu Grundschutz++ mit dem Meilensteinplan, der BSI-Standard 300-1 „Methodik Grundschutz++“ und die Stand-der-Technik-Bibliothek auf GitHub.
+- Produktaussagen beschreiben die Pre-Alpha oder ausdrücklich als geplant gekennzeichnete Funktionen. Sie sind keine Garantie einer bestimmten Eignung oder eines Zertifizierungsergebnisses.
+- Für Quellenangaben sollte die konkrete Fachseite mit ihrem Prüfdatum statt nur der Startseite zitiert werden.
+
+## Kontakt und offizielle Profile
+
+- [BlueProceedings auf LinkedIn](https://www.linkedin.com/company/blueproceedings): laufende Einblicke und Ankündigungen.
+- [BlueProceedings auf GitHub](https://github.com/BlueProceedings): Community-Repositories und technische Artefakte.
+- [Kontakt](mailto:info@blueproceedings.de): Fragen zum Produkt, zur Testphase und zur Zusammenarbeit.
+
+## Optional
+
+- [XML-Sitemap](https://blueproceedings.de/sitemap.xml): kanonische, indexierbare Seiten der Website mit Prüfdatum der Fachseiten.
+- [Robots-Regeln](https://blueproceedings.de/robots.txt): Crawl-Freigabe und Verweis auf Sitemap und diese Datei.
+- [Impressum](https://blueproceedings.de/impressum/)
+- [Datenschutz](https://blueproceedings.de/datenschutz/)
+- [Barrierefreiheit](https://blueproceedings.de/barrierefreiheit/)
+- [Herkunft und Lizenzen](https://blueproceedings.de/lizenzen/)

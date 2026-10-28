@@ -6,6 +6,8 @@ teaser: Warum BlueProceedings ISMS entsteht, ein erster Blick in die App in elf 
 linkedin_url: https://lnkd.in/p/e4FmF9GV
 published: true
 slides: erstbeitrag
+pdf: BlueProceedings-ISMS-erster-Blick.pdf
+pdf_size: 4 MB
 slide_titles: Grün – oder nur unwidersprochen? | Eine Tabelle hält nur fest. | Alles hängt zusammen. | Veraltet statt falsch-grün. | Wirkung zeigen. | Erledigt ist nicht wirksam. | Von der Ursache zum Restrisiko. | The ISMS must go on. | Wiederanlauf planen, bevor es ernst wird. | Ein Plan ohne Übung sagt wenig. | Der Plan.
 ---
 
@@ -37,7 +39,7 @@ Der Plan:
 → ab 11.11.2026: Testphase mit bis zu elf Personen aus der ISMS-Praxis
 → 01.01.2027: Grundschutz++ wird laut BSI zertifizierbar
 → Januar 2027: erste Version geplant, per Docker auf eigener Infrastruktur, ohne Hersteller-Cloud
-Termine sind Planungen, keine Zusagen. Heute: Pre-Alpha. Die Alpha ist unentgeltlich (für Unternehmen und öffentliche Stellen) und befristet; Bedingungen stehen vor dem Download.
+Heute: Pre-Alpha. Die Alpha ist unentgeltlich (für Unternehmen und öffentliche Stellen) und befristet; Bedingungen stehen vor dem Download.
 
 Alle Funktionen, den Plan und die Bewerbung für die Testphase findest du auf blueproceedings.de. Ab jetzt zeige ich auf der Seite von BlueProceedings regelmäßig eine Funktion samt dem Problem dahinter.
 

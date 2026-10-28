@@ -1,18 +1,13 @@
-// Legal pages (Impressum, privacy, accessibility, licences). Visible text is German.
 import { SITE } from "./content.mjs";
 
 const mail = (subject, address = SITE.mail) => `<a href="mailto:${address}${subject ? "?subject=" + encodeURIComponent(subject) : ""}">${address}</a>`;
 export const LEGAL_AS_OF = "25.10.2026";
 
-// The postal address is not kept in git: the Action passes it from the repository secret IMPRESSUM_ADDRESS (one line per row).
-// Locally a placeholder is used; on GitHub the build fails without it, so the Impressum is never published incomplete.
 const escape = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const zeilen = (name) => (process.env[name] ?? "").split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
 const addressLines = zeilen("IMPRESSUM_ADDRESS");
-// Production build = any CI environment or NODE_ENV=production, independent of the CI provider. Without a postal address it must not produce a Impressum.
 export const PRODUKTIONSBUILD = Boolean(process.env.CI || process.env.GITHUB_ACTIONS || process.env.NODE_ENV === "production");
 if (!addressLines.length && PRODUKTIONSBUILD) throw new Error("IMPRESSUM_ADDRESS is missing: set the repository secret before publishing.");
-// Optional: VAT ID, economic ID, register and number, one line per row (IMPRESSUM_ZUSATZ). Only entries that exist are published.
 const ZUSATZ = zeilen("IMPRESSUM_ZUSATZ").map(escape).join("<br>");
 const ADDRESS = addressLines.length ? addressLines.map(escape).join("<br>") : "[Anschrift aus IMPRESSUM_ADDRESS]";
 

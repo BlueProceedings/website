@@ -1,8 +1,6 @@
-// Progressive enhancement: everything is readable without JavaScript; this only adds the theme switch, the perimeter and the tabs.
 (() => {
   const root = document.documentElement;
 
-  // Theme: follows the system setting (light without one); the switch overrides it. The choice is stored only locally in the browser.
   const toggle = document.querySelector("[data-theme-toggle]");
   if (toggle) {
     const apply = (theme) => {
@@ -15,11 +13,10 @@
     toggle.addEventListener("click", () => {
       const theme = root.dataset.theme === "light" ? "dark" : "light";
       apply(theme);
-      try { localStorage.setItem("theme", theme); } catch (e) { /* without storage the choice applies to this page only */ }
+      try { localStorage.setItem("theme", theme); } catch (e) {}
     });
   }
 
-  // Perimeter: the radar sweep picks the area; there is no manual choice. It can be paused, and with reduced motion all areas are listed instead.
   const areaData = document.getElementById("areas");
   if (areaData) {
     const areas = JSON.parse(areaData.textContent);
@@ -42,7 +39,7 @@
     const sweep = document.querySelector(".sweep");
     const pause = document.querySelector(".scope-pause");
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const period = 36000; // one revolution; about four seconds per area
+    const period = 36000;
     let running = false, paused = false, angle = selected * step + 1, last = null;
     const frame = (t) => {
       if (reduced.matches) { running = false; return; }
@@ -76,14 +73,12 @@
       pause.textContent = paused ? "Fortsetzen" : "Anhalten";
       pause.setAttribute("aria-pressed", String(paused));
     });
-    // Reading is also paused while the pointer or keyboard focus is on the panel.
     panel.parentElement.addEventListener("pointerenter", () => { paused = true; });
     panel.parentElement.addEventListener("pointerleave", () => { paused = pause.getAttribute("aria-pressed") === "true"; });
     reduced.addEventListener?.("change", mode);
     mode();
   }
 
-  // "Wie sieht das in der App aus?": overlay with the whole app view; the section shown on the page is marked. The big image loads only on opening.
   const appKnoepfe = Array.from(document.querySelectorAll(".shot-app"));
   if (appKnoepfe.length && typeof HTMLDialogElement === "function") {
     let dialog;
@@ -124,7 +119,77 @@
     });
   }
 
-  // Image switch: one screenshot of a set at a time (without JavaScript all are listed).
+  document.querySelectorAll(".story-slides").forEach((reihe) => {
+    const links = Array.from(reihe.querySelectorAll(".slide-open"));
+    if (!links.length || typeof HTMLDialogElement !== "function") return;
+    const pdf = reihe.querySelector(".hint a");
+    const quelle = (link) => link.querySelector("img").getAttribute("src");
+    const svg = (id) => '<svg class="ico" aria-hidden="true"><use href="#' + id + '"/></svg>';
+    const dialog = document.createElement("dialog");
+    dialog.className = "folien-dialog";
+    dialog.setAttribute("aria-label", "Folien in voller Größe");
+    dialog.innerHTML = '<div class="folien-kopf"><p class="folien-zahl" aria-live="polite"></p><p class="folien-titel"></p>' +
+      (pdf ? '<a class="folien-pdf" href="' + pdf.getAttribute("href") + '" rel="noopener">PDF</a>' : "") +
+      '<button type="button" class="folien-knopf folien-zu" aria-label="Schließen">' + svg("i-x") + '</button></div>' +
+      '<div class="folien-buehne"><button type="button" class="folien-knopf folien-zurueck" aria-label="Vorherige Folie">' + svg("i-prev") + '</button>' +
+      '<img alt="" decoding="async" width="1080" height="1350">' +
+      '<button type="button" class="folien-knopf folien-weiter" aria-label="Nächste Folie">' + svg("i-next") + '</button></div>' +
+      '<ol class="folien-punkte">' + links.map((_, i) => '<li><button type="button" aria-label="Folie ' + (i + 1) + '"></button></li>').join("") + "</ol>";
+    document.body.appendChild(dialog);
+    const img = dialog.querySelector("img");
+    const punkte = Array.from(dialog.querySelectorAll(".folien-punkte button"));
+    let aktuell = 0;
+    let opener = null;
+    const zeigen = (i) => {
+      aktuell = (i + links.length) % links.length;
+      const link = links[aktuell];
+      img.src = quelle(link);
+      img.alt = link.querySelector("img").alt;
+      dialog.querySelector(".folien-zahl").textContent = (aktuell + 1) + " / " + links.length;
+      dialog.querySelector(".folien-titel").textContent = link.dataset.titel || "";
+      punkte.forEach((p, j) => p.setAttribute("aria-current", String(j === aktuell)));
+      [aktuell - 1, aktuell + 1].forEach((j) => { const n = links[(j + links.length) % links.length]; if (n) new Image().src = quelle(n); });
+    };
+    dialog.querySelector(".folien-zu").addEventListener("click", () => dialog.close());
+    dialog.querySelector(".folien-zurueck").addEventListener("click", () => zeigen(aktuell - 1));
+    dialog.querySelector(".folien-weiter").addEventListener("click", () => zeigen(aktuell + 1));
+    punkte.forEach((p, i) => p.addEventListener("click", () => zeigen(i)));
+    dialog.addEventListener("click", (e) => { if (e.target === dialog || e.target.classList.contains("folien-buehne")) dialog.close(); });
+    dialog.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") { e.preventDefault(); zeigen(aktuell - 1); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); zeigen(aktuell + 1); }
+      else if (e.key === "Home") { e.preventDefault(); zeigen(0); }
+      else if (e.key === "End") { e.preventDefault(); zeigen(links.length - 1); }
+    });
+    let startX = null;
+    img.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
+    img.addEventListener("touchend", (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      startX = null;
+      if (Math.abs(dx) > 40) zeigen(aktuell + (dx < 0 ? 1 : -1));
+    });
+    dialog.addEventListener("close", () => {
+      document.documentElement.classList.remove("app-dialog-offen");
+      links[aktuell].scrollIntoView({ block: "nearest", inline: "nearest" });
+      opener?.focus();
+    });
+    const oeffnen = (i, link) => {
+      opener = link;
+      zeigen(i);
+      document.documentElement.classList.add("app-dialog-offen");
+      dialog.showModal();
+      dialog.querySelector(".folien-weiter").focus();
+    };
+    links.forEach((link, i) => link.addEventListener("click", (e) => {
+      if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+      try {
+        oeffnen(i, link);
+        e.preventDefault();
+      } catch (fehler) {}
+    }));
+  });
+
   document.querySelectorAll(".shot-set").forEach((set) => {
     const buttons = Array.from(set.querySelectorAll(".shot-switch button"));
     const shots = Array.from(set.querySelectorAll(":scope > .shot"));
@@ -137,23 +202,32 @@
     show(0);
   });
 
-  // Menu: closes after a choice, with Escape and on a tap outside; it also closes when the window grows past the menu breakpoint.
   const menu = document.querySelector("details.menu");
   if (menu) {
     const close = () => { menu.open = false; };
     menu.addEventListener("click", (e) => { if (e.target.closest("a")) close(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && menu.open) { close(); menu.querySelector("summary").focus(); } });
     document.addEventListener("click", (e) => { if (menu.open && !menu.contains(e.target)) close(); });
-    window.matchMedia("(min-width: 941px)").addEventListener?.("change", close);
+    window.matchMedia("(min-width: 1181px)").addEventListener?.("change", close);
   }
 
-  // Collapsible parts ("Mehr dazu", "Weiterlesen") start closed on narrow screens only; wider they are always open.
+  const navGroups = Array.from(document.querySelectorAll("details.nav-group"));
+  if (navGroups.length) {
+    const closeGroups = (except) => navGroups.forEach((group) => { if (group !== except) group.open = false; });
+    navGroups.forEach((group) => group.addEventListener("toggle", () => { if (group.open) closeGroups(group); }));
+    document.addEventListener("keydown", (e) => {
+      if (e.key !== "Escape") return;
+      const open = navGroups.find((group) => group.open);
+      if (open) { open.open = false; open.querySelector("summary").focus(); }
+    });
+    document.addEventListener("click", (e) => { if (!e.target.closest(".nav-group")) closeGroups(); });
+  }
+
   const narrow = window.matchMedia("(max-width: 900px)");
   const folds = Array.from(document.querySelectorAll("details.more"));
   const fold = () => folds.forEach((d) => { d.open = !narrow.matches; });
   if (folds.length) { fold(); narrow.addEventListener?.("change", fold); }
 
-  // Tabs on the community page: without JavaScript all kinds are listed one below the other.
   const tablist = document.querySelector('[role="tablist"]');
   if (tablist) {
     const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
