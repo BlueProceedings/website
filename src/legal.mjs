@@ -1,7 +1,7 @@
 import { SITE } from "./content.mjs";
 
 const mail = (subject, address = SITE.mail) => `<a href="mailto:${address}${subject ? "?subject=" + encodeURIComponent(subject) : ""}">${address}</a>`;
-export const LEGAL_AS_OF = "25.10.2026";
+export const LEGAL_AS_OF = "01.11.2026";
 
 const escape = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const zeilen = (name) => (process.env[name] ?? "").split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
@@ -14,7 +14,7 @@ const ADDRESS = addressLines.length ? addressLines.map(escape).join("<br>") : "[
 export const LEGAL_PAGES = {
   "/impressum/": {
     title: "Impressum",
-    description: "Anbieterkennzeichnung von BlueProceedings, Bonn, nach § 5 DDG und § 18 Abs. 2 MStV.",
+    description: "Impressum von blueproceedings.de: Anbieterkennzeichnung von BlueProceedings, Einzelunternehmen in Bonn, nach § 5 DDG und § 18 Abs. 2 MStV.",
     html: `
 <h2>Angaben gemäß § 5 DDG</h2>
 <p>Xhoan Qazimi, handelnd unter BlueProceedings (Einzelunternehmen)<br>${ADDRESS}<br>Deutschland</p>${ZUSATZ ? `\n<p>${ZUSATZ}</p>` : ""}
@@ -29,7 +29,7 @@ export const LEGAL_PAGES = {
   },
   "/datenschutz/": {
     title: "Datenschutz",
-    description: "Datenschutzerklärung für blueproceedings.de: Hosting über GitHub Pages, keine Cookies, kein Tracking.",
+    description: "Datenschutzerklärung für blueproceedings.de: wer verantwortlich ist, Hosting über GitHub Pages, keine Cookies, kein Tracking und eure Rechte.",
     html: `
 <p class="as-of">Stand: ${LEGAL_AS_OF}</p>
 <h2>Verantwortlicher</h2>
@@ -56,7 +56,7 @@ export const LEGAL_PAGES = {
 <p>Die Verarbeitung dient der Beantwortung Ihrer Anfrage. Ist die Anfrage auf einen Vertrag gerichtet, ist Art. 6 Abs. 1 Buchstabe b DSGVO die Rechtsgrundlage, sonst Art. 6 Abs. 1 Buchstabe f DSGVO mit dem berechtigten Interesse, Anfragen sachgerecht zu beantworten. Kontakt-E-Mails werden zweimal jährlich aufgeräumt; Nachrichten, die beim Löschlauf älter als sechs Monate sind, werden gelöscht. Gesetzliche Aufbewahrungspflichten bleiben unberührt.</p>
 <p>Bitte senden Sie keine vertraulichen Schutzbedarfs-, Sicherheits- oder Kundendaten an die allgemeine Kontaktadresse.</p>
 <h2>Produktbetrieb</h2>
-<p>BlueProceedings ISMS wird ausschließlich auf der Infrastruktur der Anwender betrieben (On-Premises per Docker). Produktdaten werden weder auf dieser Website noch in einer Hersteller-Cloud verarbeitet. Die Anwendung übermittelt im Standardbetrieb keine Produktdaten an BlueProceedings; Daten verlassen sie nur durch einen von Anwendern bewusst ausgelösten Export. Ab dann verantworten die Anwender Transport, Empfänger und Aufbewahrung. Das Herunterladen des Docker-Images ist davon getrennt zu betrachten.</p>
+<p>BlueProceedings ISMS wird ausschließlich auf der Infrastruktur der Anwender betrieben (On-Premises per Docker). Produktdaten werden weder auf dieser Website noch in einer Hersteller-Cloud verarbeitet. Die Anwendung übermittelt im Standardbetrieb keine Produktdaten an BlueProceedings. Zugänge und Netzwerkfreigaben verwalten die Anwender selbst. Bei Exporten verantworten sie Transport, Empfänger und weitere Aufbewahrung. Das Herunterladen des Docker-Images ist davon getrennt zu betrachten.</p>
 <h2 id="alpha">Bewerbung für die Alpha-Testphase</h2>
 <p>Wenn Sie sich per E-Mail für die Testphase bewerben, verarbeiten wir die Angaben aus Ihrer E-Mail (Name und E-Mail-Adresse, Institution beziehungsweise Branche, Rolle, Erfahrung, technische Voraussetzungen und Ihre Bestätigung als Unternehmer oder öffentliche Stelle), um Bewerbungen zu sichten und die Teilnehmenden nach den veröffentlichten Voraussetzungen manuell auszuwählen. Rechtsgrundlage ist Art. 6 Abs. 1 Buchstabe b DSGVO (Maßnahmen auf Ihre Anfrage vor Vertragsschluss), hilfsweise Buchstabe f. Empfänger ist nur BlueProceedings; die E-Mail liegt beim Mailanbieter (siehe unten „Kontakt per E-Mail“). Bewerbungen, die nicht berücksichtigt werden, löschen wir spätestens drei Monate nach Abschluss der Auswahl. Für Teilnehmende gelten die Testvereinbarung und die Alpha-Lizenzbedingungen, die vor Beginn bereitgestellt werden; laufende Testkommunikation, Sicherheitsmeldungen und Vertragsunterlagen werden getrennt und mit eigenen Fristen aufbewahrt (gesetzliche Aufbewahrungspflichten bleiben unberührt). Bitte senden Sie keine echten Sicherheits- oder Kundendaten.</p>
 <h2>Ihre Rechte</h2>
@@ -66,7 +66,7 @@ export const LEGAL_PAGES = {
   },
   "/barrierefreiheit/": {
     title: "Barrierefreiheit",
-    description: "Erklärung zur Barrierefreiheit von blueproceedings.de: Selbstbewertung nach WCAG 2.2 Stufe AA.",
+    description: "Erklärung zur Barrierefreiheit von blueproceedings.de: Selbstbewertung nach WCAG 2.2 Stufe AA, bekannte Einschränkungen und Kontakt für Hinweise.",
     html: `
 <p class="as-of">Stand: ${LEGAL_AS_OF}</p>
 <h2>Geltungsbereich und Rechtsrahmen</h2>
@@ -93,7 +93,7 @@ export const LEGAL_PAGES = {
   },
   "/lizenzen/": {
     title: "Herkunft und Lizenzen",
-    description: "Herkunft der Inhalte, Lizenzen für Katalog, Community-Beiträge, Schriften und Bildschirmfotos.",
+    description: "Lizenzen auf blueproceedings.de: Herkunft der Inhalte und Lizenzen für den Grundschutz++-Katalog, Community-Beiträge, Schriften und Bildschirmfotos.",
     html: `
 <h2>Grundschutz++-Katalog</h2>
 <p>BlueProceedings ISMS arbeitet mit dem Grundschutz++-Katalog, den das BSI als OSCAL-Daten im Repository <a href="https://github.com/BSI-Bund/Stand-der-Technik-Bibliothek">BSI-Bund/Stand-der-Technik-Bibliothek</a> veröffentlicht. Der Katalog steht unter der Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de">CC BY-SA 4.0</a>. Ausgelieferte Kataloginhalte werden mit Quelle, Stand und Änderungskennzeichnung ausgewiesen. BlueProceedings ISMS ist ein unabhängiges Produkt von BlueProceedings und kein Angebot des BSI.</p>

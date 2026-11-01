@@ -13,6 +13,7 @@ Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProce
 - [Grundschutz++ Software](https://blueproceedings.de/grundschutz-plus-plus/software/): Anforderungen an ein Werkzeug, konkreter Arbeitsablauf, Produktstand und häufige Fragen.
 - [Funktionen](https://blueproceedings.de/funktionen/): Einstiege in OSCAL-Katalogverwaltung, Risikomanagement, Nachweise, Berichte, BCM und den Lern-Modus.
 - [Neuigkeiten](https://blueproceedings.de/neuigkeiten/): Entwicklungsstand, Einblicke in die Anwendung und fachliche Beiträge.
+- [Prozessschritt 1 im Detail](https://blueproceedings.de/neuigkeiten/prozessschritt-1-im-detail/): Beitrag mit Karussell zu allen elf Teilschritten von Prozessschritt 1 (Kap. 2.1 bis 2.11 des BSI-Standards 300-1), je Teilschritt Anforderung des Standards und Umsetzung in BlueProceedings ISMS.
 - [Schritt 1: Erhebung und Planung](https://blueproceedings.de/neuigkeiten/schritt-1-erhebung-und-planung/): Beitrag mit Karussell zu Prozessschritt 1 des BSI-Standards 300-1.
 - [Mehr als eine Momentaufnahme](https://blueproceedings.de/neuigkeiten/mehr-als-eine-momentaufnahme/): erster Beitrag mit Produktgedanke, Pre-Alpha-Einblick und Entwicklungsplan.
 - [Community](https://blueproceedings.de/community/): Austausch und wiederverwendbare Vorlagen für Blaupausen, Komponenten, Informationsverbünde und Berichte, offen auf GitHub unter CC BY-SA 4.0.
@@ -77,7 +78,7 @@ Die Funktionen folgen den fünf Prozessschritten der Methodik (Erhebung und Plan
 
 ## Optional
 
-- [XML-Sitemap](https://blueproceedings.de/sitemap.xml): kanonische, indexierbare Seiten der Website mit Prüfdatum der Fachseiten.
+- [XML-Sitemap](https://blueproceedings.de/sitemap.xml): kanonische, indexierbare Seiten der Website; ein Änderungsdatum wird nur bei bekanntem Inhaltsstand angegeben.
 - [Robots-Regeln](https://blueproceedings.de/robots.txt): Crawl-Freigabe und Verweis auf Sitemap und diese Datei.
 - [Impressum](https://blueproceedings.de/impressum/)
 - [Datenschutz](https://blueproceedings.de/datenschutz/)

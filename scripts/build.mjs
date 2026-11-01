@@ -61,7 +61,6 @@ const posts = readPosts();
 const data = readGithubData();
 write("/", homePage({ posts, data }));
 write("/community/", communityPage({ data }));
-write("/funktionen/weiteres/", weiteresPage());
 write("/neuigkeiten/", newsPage({ posts }));
 for (const post of posts) write(post.path, newsPostPage(post));
 for (const p of FACHSEITEN_PFADE) write(p, fachseite(p));
@@ -84,13 +83,23 @@ const VERBOTEN = [
 const htmlFiles = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? htmlFiles(join(dir, e.name)) : e.name.endsWith(".html") ? [join(dir, e.name)] : []);
 const verstoesse = htmlFiles(dist).flatMap((f) => { const s = readFileSync(f, "utf-8"); return VERBOTEN.filter(([re]) => re.test(s)).map(([, warum]) => `${f.slice(dist.length)}: ${warum}`); });
 if (verstoesse.length) throw new Error("Unzulässige Aussagen im Build:\n" + verstoesse.join("\n"));
+
+const BEGRIFFE = [
+  [/\bReview\w*/, "„Überprüfung“ statt „Review“"],
+  [/\bPflichten\b/, "„Compliance-Verpflichtungen“ bzw. „gesetzliche und vertragliche Verpflichtungen“ statt „Pflichten“"],
+  [/\bBeleg(e|en)?\b/, "„Nachweis“ statt „Beleg“"],
+  [/BSI Standard 300-1|(?<![-\w])Standard 300-1(?![^<]*<\/a>)/, "„BSI-Standard 300-1“ mit Bindestrich und Herausgeber"],
+];
+const sichtbarerText = (html) => html.replace(/<script[\s\S]*?<\/script>/g, " ").replace(/<style[\s\S]*?<\/style>/g, " ").replace(/<[^>]+>/g, " ");
+const begriffsfehler = htmlFiles(dist).filter((f) => !f.slice(dist.length).startsWith("/neuigkeiten/")).flatMap((f) => { const t = sichtbarerText(readFileSync(f, "utf-8")); return BEGRIFFE.filter(([re]) => re.test(t)).map(([re, warum]) => `${f.slice(dist.length)}: ${warum} („${t.match(re)[0]}“)`); });
+if (begriffsfehler.length) throw new Error("Begriffe abweichend vom BSI-Standard 300-1:\n" + begriffsfehler.join("\n"));
 if (PRODUKTIONSBUILD && htmlFiles(dist).some((f) => readFileSync(f, "utf-8").includes("[Anschrift aus"))) throw new Error("Impressum enthält einen Platzhalter.");
 
-const pages = ["/", "/community/", "/funktionen/weiteres/", "/neuigkeiten/", ...posts.map((post) => post.path), ...FACHSEITEN_PFADE, ...LEGAL_PATHS];
-const newestCheck = Object.values(FACHSEITEN).map((f) => f.asOf).sort().at(-1);
+const pages = ["/", "/community/", "/neuigkeiten/", ...posts.map((post) => post.path), ...FACHSEITEN_PFADE, ...LEGAL_PATHS];
+const startseitenStand = "2026-11-01";
 const priority = (p) => p === "/" ? "1.0" : p === "/grundschutz-plus-plus/" ? "0.9" : FACHSEITEN[p] ? "0.8" : p === "/community/" || p === "/neuigkeiten/" ? "0.6" : "0.2";
 writeFileSync(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => {
-  const lastmod = FACHSEITEN[p]?.asOf ?? posts.find((post) => post.path === p)?.date ?? (p === "/" ? newestCheck : undefined);
+  const lastmod = FACHSEITEN[p]?.modified ?? posts.find((post) => post.path === p)?.date ?? (p === "/" ? startseitenStand : undefined);
   return `  <url><loc>${SITE.url}${p}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}<priority>${priority(p)}</priority></url>`;
 }).join("\n")}\n</urlset>\n`);
 const KI_CRAWLER = [
@@ -102,6 +111,6 @@ const KI_CRAWLER = [
   "Bytespider", "CCBot", "cohere-ai", "cohere-training-data-crawler",
   "DuckAssistBot", "MistralAI-User", "Diffbot", "ImagesiftBot", "Omgilibot", "YouBot", "PhindBot", "AI2Bot",
 ];
-writeFileSync(join(dist, "robots.txt"), `# BlueProceedings ISMS: Crawling und KI-Suche sind erwünscht. Hinweise für Sprachmodelle: ${SITE.url}/llms.txt\n\nUser-agent: *\nAllow: /\nDisallow: /404.html\n\n${KI_CRAWLER.map((a) => `User-agent: ${a}\nAllow: /\nDisallow: /404.html\n`).join("\n")}\nSitemap: ${SITE.url}/sitemap.xml\n`);
+writeFileSync(join(dist, "robots.txt"), `# BlueProceedings ISMS\n\nUser-agent: *\nAllow: /\nDisallow: /404.html\n\n${KI_CRAWLER.map((a) => `User-agent: ${a}\nAllow: /\nDisallow: /404.html\n`).join("\n")}\nSitemap: ${SITE.url}/sitemap.xml\n`);
 
 console.log(`build: ${pages.length + 1} pages, ${posts.length} published posts, ${data.discussions.length} discussions, release: ${data.release?.tag ?? "none"}`);

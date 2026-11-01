@@ -30,7 +30,7 @@ Erster Blick in die App (Karussell mit elf Folien, Demodaten):
 → Veraltet statt falsch-grün: Das Sicherheitskonzept nennt die Ursache
 → Wirkung zeigen: bei einem Vorfall sehen, was mitbetroffen sein könnte
 → Risikoweg: von der Ursache bis zum Restrisiko auf einer Seite
-→ Erledigt ist nicht wirksam: Eine Maßnahme schließt erst nach geprüften Kriterien
+→ Erledigt ist nicht wirksam: Eine Maßnahme lässt sich erst nach Prüfung der Wirksamkeitskriterien abschließen
 → Lagezentrum: Plan und Ist einer Notfallübung nebeneinander, mit dem Verzug
 → The ISMS must go on: sehen, wer fehlt und wer vertritt
 
