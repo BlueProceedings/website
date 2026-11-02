@@ -1,0 +1,38 @@
+name: Cloudflare täglich neu bereitstellen
+
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: cloudflare-rebuild
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Cloudflare-Bereitstellung anfordern
+        env:
+          CLOUDFLARE_DEPLOY_HOOK: ${{ secrets.CLOUDFLARE_DEPLOY_HOOK }}
+        shell: bash
+        run: |
+          if [[ -z "$CLOUDFLARE_DEPLOY_HOOK" ]]; then
+            echo "::error::CLOUDFLARE_DEPLOY_HOOK fehlt. Den Deploy-Hook für main in den Repository-Secrets hinterlegen und den Workflow erneut starten."
+            exit 1
+          fi
+          if [[ ! "$CLOUDFLARE_DEPLOY_HOOK" =~ ^https://api\.cloudflare\.com/client/v4/pages/webhooks/deploy_hooks/[A-Za-z0-9_-]+$ ]]; then
+            echo "::error::CLOUDFLARE_DEPLOY_HOOK ist keine gültige Cloudflare-Pages-Deploy-Hook-URL. Das Repository-Secret prüfen."
+            exit 1
+          fi
+          if ! curl --fail --silent --output /dev/null \
+            --connect-timeout 10 --max-time 60 \
+            --request POST "$CLOUDFLARE_DEPLOY_HOOK"; then
+            echo "::error::Cloudflare hat die Anforderung nicht erfolgreich bestätigt. Deploy-Hook und Bereitstellungen im Cloudflare-Dashboard prüfen, bevor der Workflow erneut gestartet wird."
+            exit 1
+          fi
+          echo "Bereitstellung angefordert. Das Build-Ergebnis im Cloudflare-Dashboard prüfen."
