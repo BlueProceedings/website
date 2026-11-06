@@ -1,5 +1,6 @@
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { homePage, communityPage, weiteresPage, newsPage, newsPostPage, fachseite, legalPage, errorPage, FACHSEITEN_PFADE, LEGAL_PATHS } from "../src/pages.mjs";
 import { FACHSEITEN } from "../src/fachseiten.mjs";
@@ -81,6 +82,22 @@ const VERBOTEN = [
   [/zertifizierungsbereit(?! (macht|sein)|\?)/i, "Zertifizierungsversprechen"],
 ];
 const htmlFiles = (dir) => readdirSync(dir, { withFileTypes: true }).flatMap((e) => e.isDirectory() ? htmlFiles(join(dir, e.name)) : e.name.endsWith(".html") ? [join(dir, e.name)] : []);
+const skriptHashes = new Set();
+const stilHashes = new Set();
+const inhaltsHash = (inhalt) => `'sha256-${createHash("sha256").update(inhalt).digest("base64")}'`;
+for (const datei of htmlFiles(dist)) {
+  const html = readFileSync(datei, "utf-8");
+  for (const [, attribute, inhalt] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/g)) {
+    if (!/\bsrc\s*=/.test(attribute) && !/\btype=["']application\/(?:ld\+)?json["']/.test(attribute)) skriptHashes.add(inhaltsHash(inhalt));
+  }
+  for (const [, inhalt] of html.matchAll(/\sstyle="([^"]*)"/g)) stilHashes.add(inhaltsHash(inhalt));
+}
+const sicherheitsHeader = readFileSync(join(root, "public", "_headers"), "utf-8")
+  .replace("__SCRIPT_HASHES__", [...skriptHashes].sort().join(" "))
+  .replace("__STYLE_HASHES__", [...stilHashes].sort().join(" "));
+if (sicherheitsHeader.includes("__SCRIPT_HASHES__") || sicherheitsHeader.includes("__STYLE_HASHES__") || sicherheitsHeader.split("\n").some((zeile) => zeile.length > 2000)) throw new Error("Sicherheitsheader enthalten Platzhalter oder überschreiten die Cloudflare-Zeilenlänge.");
+writeFileSync(join(dist, "_headers"), sicherheitsHeader);
+
 const verstoesse = htmlFiles(dist).flatMap((f) => { const s = readFileSync(f, "utf-8"); return VERBOTEN.filter(([re]) => re.test(s)).map(([, warum]) => `${f.slice(dist.length)}: ${warum}`); });
 if (verstoesse.length) throw new Error("Unzulässige Aussagen im Build:\n" + verstoesse.join("\n"));
 
