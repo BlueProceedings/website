@@ -11,8 +11,10 @@ Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProce
 - [Startseite und Produktüberblick](https://blueproceedings.de/): Funktionen, Screenshots aus der Pre-Alpha, Zielgruppen, Zeitplan, Testphase und häufige Fragen.
 - [Grundschutz++ kurz erklärt](https://blueproceedings.de/grundschutz-plus-plus/): Methodik, fünf Prozessschritte, zentrale Begriffe, BSI-Standard 300-1 und die Grenzen sinnvoller Automatisierung.
 - [Grundschutz++ Software](https://blueproceedings.de/grundschutz-plus-plus/software/): Anforderungen an ein Werkzeug, konkreter Arbeitsablauf, Produktstand und häufige Fragen.
+- [Funktionen in der App](https://blueproceedings.de/funktionen/in-der-app/): acht Funktionen mit Beispiel und Bildern aus der Pre-Alpha.
 - [Funktionen](https://blueproceedings.de/funktionen/): Einstiege in OSCAL-Katalogverwaltung, Risikomanagement, Nachweise, Berichte, BCM und den Lern-Modus.
 - [Neuigkeiten](https://blueproceedings.de/neuigkeiten/): Entwicklungsstand, Einblicke in die Anwendung und fachliche Beiträge.
+- [Lern-Modus „Christmas Carol“](https://blueproceedings.de/neuigkeiten/lern-modus-christmas-carol/): Beitrag zur Weihnachtsgeschichte vom Nordpol im Lern-Modus und zur Suche nach Testenden mit eigener Testinstanz.
 - [Prozessschritt 1 im Detail](https://blueproceedings.de/neuigkeiten/prozessschritt-1-im-detail/): Beitrag mit Karussell zu allen elf Teilschritten von Prozessschritt 1 (Kap. 2.1 bis 2.11 des BSI-Standards 300-1), je Teilschritt Anforderung des Standards und Umsetzung in BlueProceedings ISMS.
 - [Schritt 1: Erhebung und Planung](https://blueproceedings.de/neuigkeiten/schritt-1-erhebung-und-planung/): Beitrag mit Karussell zu Prozessschritt 1 des BSI-Standards 300-1.
 - [Mehr als eine Momentaufnahme](https://blueproceedings.de/neuigkeiten/mehr-als-eine-momentaufnahme/): erster Beitrag mit Produktgedanke, Pre-Alpha-Einblick und Entwicklungsplan.
@@ -21,7 +23,7 @@ Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProce
 ## Fachwissen zu Grundschutz++
 
 - [BSI-Standard 300-1](https://blueproceedings.de/bsi-standard-300-1/): Methodik, Verhältnis zum Anwenderkatalog und Abgrenzung zur Software.
-- [Grundschutz++ umsetzen](https://blueproceedings.de/grundschutz-plus-plus/umsetzung/): Schritt für Schritt vom Geltungsbereich bis zur kontinuierlichen Verbesserung.
+- [Grundschutz++ umsetzen](https://blueproceedings.de/grundschutz-plus-plus/umsetzung/): Schritt für Schritt vom Anwendungsbereich bis zur kontinuierlichen Verbesserung.
 - [Grundschutz++-Zeitplan](https://blueproceedings.de/grundschutz-plus-plus/zeitplan/): Meilensteinplan des BSI von der Pilotierung über den BSI-Standard 300-1 (it-sa, 27.10.2026) und die Zertifizierbarkeit ab 01.01.2027 bis zum Ende der Zertifizierbarkeit nach IT-Grundschutz am 30.11.2031.
 - [Von IT-Grundschutz zu Grundschutz++](https://blueproceedings.de/grundschutz-plus-plus/it-grundschutz-migration/): Was aus bestehenden Unterlagen übernommen werden kann, was neu entschieden werden muss, ein Umstieg in sieben Schritten bis zur Wirksamkeitsprüfung und warum kein pauschaler Import angeboten wird.
 - [Grundschutz++-Anwenderkatalog lesen](https://blueproceedings.de/grundschutz-plus-plus/anwenderkatalog/): Praktiken, Kennungen, Modalverben, Zielobjektkategorien, Sicherheitsniveaus, Parameter und Dokumentation an einem konkreten Beispiel.
@@ -30,7 +32,7 @@ Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProce
 
 ## Produktfunktionen
 
-- [Schritt 1: Erhebung und Planung](https://blueproceedings.de/funktionen/erhebung-und-planung/): die elf Teilschritte aus Kapitel 2.1 bis 2.11 mit RACI-Matrix, Einflussfaktoren, Compliance, Geltungsbereich, Stakeholder-Gewichtung, Schutzbedarf, Leitlinie, Risikomatrix und Ausnahmen.
+- [Schritt 1: Erhebung und Planung](https://blueproceedings.de/funktionen/erhebung-und-planung/): die elf Teilschritte aus Kapitel 2.1 bis 2.11 mit RACI-Matrix, Einflussfaktoren, Compliance, Anwendungsbereich, Stakeholder-Gewichtung, Schutzbedarf, Leitlinie, Risikomatrix und Ausnahmen.
 - [OSCAL-Katalogverwaltung](https://blueproceedings.de/funktionen/oscal-katalogverwaltung/): Import, Profile, Versionen und bewusste Katalogmigration.
 - [ISMS-Risikomanagement](https://blueproceedings.de/funktionen/risikomanagement/): Herkunft, Bewertung, Behandlung, Restrisiko, Entscheidung und Wiedervorlage.
 - [ISMS-Nachweismanagement](https://blueproceedings.de/funktionen/nachweismanagement/): Bezug, Gültigkeit, Prüfung und Wirksamkeitsnachweis.
@@ -42,7 +44,7 @@ Die Website trennt Aussagen des BSI von der Auslegung und Umsetzung in BlueProce
 
 Die Funktionen folgen den fünf Prozessschritten der Methodik (Erhebung und Planung, Anforderungsanalyse, Realisierung, Überwachung, kontinuierliche Verbesserung). Beschrieben ist der Stand der Pre-Alpha; Planungsstände sind als solche gekennzeichnet.
 
-- Institution und Governance: Kontext, Stakeholder und ihre Erwartungen, Compliance-Vorgaben, Geltungsbereich als Ausschlussmodell, Leitlinie mit messbaren Zielen, Rollen, RACI, Vertretungen. Prüfhinweise statt Blockaden, wo die Methodik keine Sperre verlangt.
+- Institution und Governance: Kontext, Stakeholder und ihre Erwartungen, Compliance-Vorgaben, Anwendungsbereich als Ausschlussmodell, Leitlinie mit messbaren Zielen, Rollen, RACI, Vertretungen. Prüfhinweise statt Blockaden, wo die Methodik keine Sperre verlangt.
 - Struktur und Bestand: Geschäftsprozesse, Informationen, Komponenten, Dienstleister, Standorte und Schnittstellen als verknüpfte Objekte mit Abhängigkeiten, Änderungsverlauf und einem gemeinsamen Strukturmodell statt getrennter Listen.
 - Schutzbedarf und Sicherheitsniveau: institutionell definierte Schutzziele, Schadensszenarien, erklärbares Schutzbedarfsprofil mit Begründung, Erkennung von Schutzkonflikten; Schutzbedarf (je Objekt) und Sicherheitsniveau (je Anforderung) bleiben getrennt.
 - Kataloge und Anforderungen: Grundschutz++-Katalog und weitere OSCAL-Kataloge mit Version und Herkunft, Anforderungen je Objekt mit Vererbung entlang der Zielobjektkategorien, Anwendbarkeit mit Begründung, Parameterkette von der Blaupause bis zum Objekt, institutionsweites Anforderungsregister.
@@ -57,7 +59,7 @@ Die Funktionen folgen den fünf Prozessschritten der Methodik (Erhebung und Plan
 
 ## Was die Anwendung bewusst nicht tut
 
-- Sie entscheidet nicht über Geltungsbereich, Anwendbarkeit, Angemessenheit oder Wirksamkeit. Sie hält fest, wer was wann mit welcher Begründung entschieden hat.
+- Sie entscheidet nicht über Anwendungsbereich, Anwendbarkeit, Angemessenheit oder Wirksamkeit. Sie hält fest, wer was wann mit welcher Begründung entschieden hat.
 - Sie macht keine Aussage über Zertifizierung oder Konformität; eine Bewertung nimmt die zuständige oder prüfende Stelle vor.
 - Sie importiert keine IT-Grundschutz-Altstände pauschal. Bisherige Unterlagen gelten als Eingabe, nicht als Grundschutz++-Ergebnis; das BSI hat Migrationsleitfäden angekündigt, aber noch nicht veröffentlicht.
 - Sie erzeugt keine Ausfälle und keine Ereignisse und ersetzt kein Überwachungs- oder Erkennungssystem.

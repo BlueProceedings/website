@@ -542,7 +542,7 @@ html.app-dialog-offen { overflow: hidden; }
   .brand { min-height: 44px; }
 }
 @media (max-width: 620px) { .menu-gruppe ul { grid-template-columns: 1fr; } }
-@media (max-width: 540px) { .nav .nav-in { display: none; } }
+@media (max-width: 540px) { .nav .nav-in { padding: 8px 14px; } .brand small { display: none; } }
 
 @media (max-width: 900px) {
   .more > summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 0 18px; border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface); color: var(--ink); font: 600 0.96rem/1.2 var(--font-body); cursor: pointer; list-style: none; }
@@ -693,3 +693,44 @@ html.app-dialog-offen { overflow: hidden; }
 .page-toc a { text-underline-offset: 3px; }
 [id] { scroll-margin-top: 100px; }
 @media (max-width: 700px) { .page-toc ol { grid-template-columns: 1fr; } }
+
+.story-image{margin:0 0 var(--s-6,2rem);max-width:46rem}
+.story-image img{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+.story-image figcaption{margin-top:.5rem;font-size:.8125rem;color:var(--muted,inherit)}
+.feat-cards { list-style: none; padding: 0; margin: 0 0 28px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.feat-card a { display: grid; gap: 8px; align-content: start; height: 100%; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none; }
+.feat-card a:hover { border-color: var(--line-strong); }
+.feat-card b { font: 800 1.2rem/1.2 var(--font-display); text-wrap: balance; }
+.feat-card-text { color: var(--ink-soft); font-size: .95rem; }
+.feat-card-more { font-weight: 600; color: var(--accent-ink); }
+@media (max-width: 700px) { .feat-cards { grid-template-columns: 1fr; } }
+
+.hero-note { margin: 14px 0 0; max-width: 60ch; font-size: .95rem; color: var(--ink-soft); }
+.paths-list { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.paths-list a { display: grid; gap: 8px; align-content: start; height: 100%; padding: 20px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); color: inherit; text-decoration: none; }
+.paths-list a:hover { border-color: var(--line-strong); }
+.paths-list b { font: 800 1.1rem/1.25 var(--font-display); text-wrap: balance; }
+.paths-list span { color: var(--ink-soft); font-size: .95rem; }
+@media (max-width: 1000px) { .paths-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .paths-list { grid-template-columns: 1fr; } }
+
+/* Zweitrangige Textverweise unter einem Abschnitt, Einleitung von Beitragsseiten */
+.text-links { list-style: none; display: flex; flex-wrap: wrap; gap: 4px 22px; margin: 12px 0 0; padding: 0; }
+.text-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+.story-head .story-lede { margin: 0; max-width: 62ch; font-size: 1.15rem; line-height: 1.55; color: var(--ink-soft); }
+.btn.small { min-height: 44px; }
+footer nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.post .body > a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Lesbarkeit und Tippziele auf kleineren Bildschirmen (Audit 23.11.2026) */
+.crumbs a, .page-toc a, .sources li a { display: inline-block; padding: 12px 2px; }
+.page-toc ol { gap: 0 32px; }
+@media (max-width: 700px) {
+  main li, .reading-key, .independence, .pairs p, .pair-app p, .sources li span, .coverage-list li > span, .fn-note { font-size: 1rem; }
+  .chips li, .kind-chips li, .tag, .shot-bar span { font-size: inherit; }
+  .crumbs ol { font-size: .9rem; }
+}
+
+.shot-detail { margin-top: 8px; font-size: 1rem; color: var(--ink-soft); }
+.shot-detail summary { cursor: pointer; font-weight: 600; color: var(--accent-ink); padding: 10px 0; }
+.shot-detail p { margin: 0 0 8px; max-width: 70ch; }

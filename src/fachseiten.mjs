@@ -29,11 +29,11 @@ export const THEMEN = [
 
 export const FACHSEITEN = {
   "/grundschutz-plus-plus/": {
-    title: "Was ist Grundschutz++? Überblick und Einordnung",
-    description: "Was ist Grundschutz++? Die neue BSI-Methodik kurz eingeordnet: Unterschiede zum IT-Grundschutz, wichtige Begriffe, Zeitplan und wo ihr für Details weiterlest.",
+    title: "Grundschutz++ erklärt: Überblick",
+    description: "Was ist Grundschutz++? Die neue BSI-Methodik kurz eingeordnet: Unterschiede zum IT-Grundschutz, fünf Prozessschritte, wichtige Begriffe und Zeitplan.",
     crumb: "Grundschutz++",
     h1: "Was ist Grundschutz++? Ein Überblick.",
-    lede: "Grundschutz++ ist die neue Methodik des BSI für ein Informationssicherheitsmanagementsystem (ISMS). Sie liegt als BSI-Standard 300-1 vor und löst nach einer mehrjährigen Übergangszeit den IT-Grundschutz ab. Neu ist vor allem die Form: Das BSI veröffentlicht jede Anforderung als maschinenlesbaren Eintrag im OSCAL-Format, und der Ablauf folgt in fünf Prozessschritten dem PDCA-Zyklus. Diese Seite ordnet ein; die Methodik mit allen Kapiteln erklärt die Seite zum <a href=\"/bsi-standard-300-1/\">BSI-Standard 300-1</a>, den Einstieg die Seite <a href=\"/grundschutz-plus-plus/umsetzung/\">Grundschutz++ umsetzen</a>.",
+    lede: "Grundschutz++ ist die neue Methodik des BSI für ein Informationssicherheitsmanagementsystem (ISMS). Sie liegt als BSI-Standard 300-1 vor und löst nach einer mehrjährigen Übergangszeit den IT-Grundschutz ab. Neu ist vor allem die Form: Das BSI veröffentlicht jede Anforderung als maschinenlesbaren Eintrag im <a href=\"/grundschutz-plus-plus/oscal/\">OSCAL-Format</a>, und der Ablauf folgt in fünf Prozessschritten dem PDCA-Zyklus. Diese Seite ordnet ein. Alle Kapitel erklärt die Seite zum <a href=\"/bsi-standard-300-1/\">BSI-Standard 300-1</a>, den Einstieg die Seite <a href=\"/grundschutz-plus-plus/umsetzung/\">Grundschutz++ umsetzen</a>.",
     asOf: "2026-11-01",
     mailTopic: "Grundschutz++",
     sections: [
@@ -43,17 +43,17 @@ export const FACHSEITEN = {
         lede: "Vier Unterschiede, die im Alltag am meisten auffallen. Links steht, was das BSI veröffentlicht hat, rechts, wie wir es in BlueProceedings ISMS auslegen.",
         items: [
           { title: "Anforderungen sind Daten", ref: "BSI-Standard 300-1, Kapitel 3.4; Stand-der-Technik-Bibliothek", bsi: "Das BSI erfasst jede Anforderung als Regel in einem standardisierten Format. Der Anforderungskatalog liegt in der Stand-der-Technik-Bibliothek auf GitHub und soll sich in strukturierter Form nutzen lassen.", app: "Wir lesen den Katalog direkt ein, mit Version und Herkunft, statt Anforderungen abzutippen. Wir gehen davon aus, dass das BSI im Lauf der Zeit mehrere Katalogstände veröffentlicht. Deshalb ist die Migration auf einen neuen Stand ein eigenes Feature: Ein neuer Stand gilt erst nach einem ausdrücklichen Wechsel, nicht still im laufenden Informationsverbund." },
-          { title: "Der Geschäftsprozess steht am Anfang", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.2", bsi: "Nach dem Geltungsbereich werden die relevanten Geschäftsprozesse ermittelt und nach Kritikalität priorisiert. Im ersten Durchlauf reicht es, die Assets des wichtigsten Prozesses zu erfassen; weitere folgen in den nächsten Zyklen.", app: "Assets bauen auf den Zielobjektkategorien des Katalogs auf: Jedes Objekt wird einer oder mehreren Kategorien zugeordnet, daraus ergeben sich seine Anforderungen. Prozesse, Informationen, Komponenten, Dienstleister und Standorte sind die Objektarten, die wir dafür als eigene, verknüpfte Objekte führen; die Kategorien des Katalogs sind feiner, und weitere Objektarten sind möglich. Dieselben Objekte nutzen wir auch für Risiken, Notfallvorsorge und Berichte." },
+          { title: "Der Geschäftsprozess steht am Anfang", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.2", bsi: "Nach dem Anwendungsbereich werden die relevanten Geschäftsprozesse ermittelt und nach Kritikalität priorisiert. Im ersten Durchlauf reicht es, die Assets des wichtigsten Prozesses zu erfassen; weitere folgen in den nächsten Zyklen.", app: "Assets bauen auf den Zielobjektkategorien des Katalogs auf: Jedes Objekt wird einer oder mehreren Kategorien zugeordnet, daraus ergeben sich seine Anforderungen. Prozesse, Informationen, Komponenten, Dienstleister und Standorte sind die Objektarten, die wir dafür als eigene, verknüpfte Objekte führen; die Kategorien des Katalogs sind feiner, und weitere Objektarten sind möglich. Dieselben Objekte nutzen wir auch für Risiken, Notfallvorsorge und Berichte." },
           { title: "Ein Paket je Informationsverbund", ref: "BSI-Standard 300-1, Kapitel 3.4", bsi: "Assets werden Zielobjektkategorien zugeordnet. Zusammen mit den verbundweiten ISMS-Anforderungen, eigenen Verpflichtungen und dem Ergebnis der Risikobetrachtung entsteht das Anforderungspaket.", app: "Jede Anforderung hängt am Objekt, für das sie gilt, und zeigt, woher sie kommt. Ausschließen lässt sie sich nur mit Begründung." },
           { title: "Wirksamkeit gehört zum Ablauf", ref: "BSI-Standard 300-1, Kapitel 5 und 6", bsi: "Überwachung und kontinuierliche Verbesserung sind eigene Prozessschritte. Sie prüfen, ob die umgesetzten Anforderungen wirksam sind, und leiten Korrekturen ab.", app: "Eine Maßnahme ist bei uns erst abgeschlossen, wenn vorab festgelegte Kriterien geprüft sind, ein gültiger Nachweis vorliegt und eine zweite Person freigibt." },
         ],
       },
       {
         type: "chain",
-        h: "Fünf Prozessschritte, ein Kreislauf.",
+        h: "Der Ablauf: fünf Prozessschritte im Kreislauf.",
         lede: "So beschreibt der BSI-Standard 300-1 den Sicherheitsprozess (Kapitel 1, Abbildung 1). Alle Teilschritte mit Kapitelangaben stehen auf der Seite zum <a href=\"/bsi-standard-300-1/\">BSI-Standard 300-1</a>.",
         items: [
-          { title: "Erhebung und Planung", text: "Plan · Governance und Compliance. Kontext, interessierte Parteien, Geltungsbereich, Leitlinie, Rollen, Risikomanagement." },
+          { title: "Erhebung und Planung", text: "Plan · Governance und Compliance. Kontext, interessierte Parteien, Anwendungsbereich, Leitlinie, Rollen, Risikomanagement." },
           { title: "Anforderungsanalyse", text: "Plan · Strukturmodellierung. Informationsverbund abgrenzen, Assets erfassen und zuordnen, Anforderungspaket bilden." },
           { title: "Realisierung", text: "Do · Umsetzung. Umsetzungsstand erheben, Maßnahmen planen, Zuständigkeiten, Fristen, Ausnahmen." },
           { title: "Überwachung", text: "Check · Monitoring und Evaluation. Leistungsbewertung, Audits, Managementbewertung." },
@@ -63,7 +63,7 @@ export const FACHSEITEN = {
       },
       {
         type: "gaps",
-        h: "Fünf Begriffe, die überall vorkommen.",
+        h: "Fünf Begriffe, die ihr überall wieder trefft.",
         lede: "Die Begriffe, wie sie der BSI-Standard 300-1 verwendet.",
         items: [
           { title: "BSI-Standard 300-1", text: "Die Methodik Grundschutz++ liegt jetzt als BSI-Standard 300-1, Version 1.0, vor. Sie richtet sich zunächst an Early Adopters und wurde gemeinsam mit der Grundschutz-Community sowie ausgewählten Pilotierungsinstitutionen entwickelt." },
@@ -75,17 +75,17 @@ export const FACHSEITEN = {
       },
       {
         type: "pairs",
-        h: "Was ein Werkzeug dabei leisten kann.",
+        h: "Werkzeug: Was es automatisieren darf und was beim Menschen bleibt.",
         items: [
           { title: "Mit oder ohne Werkzeug", ref: "BSI-Standard 300-1, Kapitel 3.2 bis 3.5", bsi: "Assets, Blaupausen, Anforderungen und Parameter werden nachvollziehbar dokumentiert. Das Anforderungspaket bildet die Grundlage für die Realisierung.", app: "BlueProceedings ISMS automatisiert, was sich aus den Daten ableiten lässt: Anforderungen je Objekt, Vererbung, Fristen, Hinweise auf veraltete Berichte. Was sich nicht ableiten lässt, fragt es ab." },
           { title: "Was automatisiert werden darf", ref: "BSI-Standard 300-1, Kapitel 3 und 3.4", bsi: "Die Assets werden Zielobjektkategorien zugeordnet. Aus diesen Zuordnungen ergeben sich die zutreffenden Anforderungen; die Hierarchie der Zielobjektkategorien ist dabei zu berücksichtigen.", app: "Die Zuordnung eines Assets zu Kategorien treffen und begründen Menschen. Die Vererbung entlang der Hierarchie rechnet die Anwendung selbst." },
-          { title: "Was beim Menschen bleibt", ref: "BSI-Standard 300-1, Kapitel 2.10 und 4.1.2", bsi: "Die Institutionsleitung trägt die Verantwortung für das ISMS und gibt die wesentlichen Entscheidungen frei. MUSS-Anforderungen erlauben keine Ausnahme oder Risikoakzeptanz; eine dauerhaft nicht erfüllte SOLLTE-Anforderung erfordert eine Risikobetrachtung und die Freigabe des Restrisikos.", app: "BlueProceedings ISMS trennt diese Wege technisch: Bei MUSS sperrt es Ausnahme, Herabstufung und Risikoakzeptanz; vorübergehende MUSS- und SOLLTE-Lücken verlangen Begründung und Frist. Dauerhafte SOLLTE-Lücken werden zu Risikokandidaten; erforderliche Leitungsentscheidungen laufen als formaler Akzeptanzantrag, im regulären Betrieb mit erzwungener Vier-Augen-Trennung. Die fachliche Entscheidung bleibt bei der Institutionsleitung und den zuständigen Rollen." },
+          { title: "Was beim Menschen bleibt", ref: "BSI-Standard 300-1, Kapitel 2.10 und 4.1.2", bsi: "Die Institutionsleitung trägt die Verantwortung für das ISMS und gibt die wesentlichen Entscheidungen frei. MUSS-Anforderungen erlauben keine Ausnahme oder Risikoakzeptanz; eine dauerhaft nicht erfüllte SOLLTE-Anforderung erfordert eine Risikobetrachtung und die Freigabe des Restrisikos.", app: "BlueProceedings ISMS trennt diese Wege technisch: Bei MUSS sperrt es Ausnahme, Herabstufung und Risikoakzeptanz. Erforderliche Leitungsentscheidungen laufen als formaler Akzeptanzantrag, im regulären Betrieb mit erzwungener Vier-Augen-Trennung. Die fachliche Entscheidung bleibt bei der Institutionsleitung und den zuständigen Rollen. Die Regeln für MUSS, SOLLTE und KANN im Einzelnen stehen im <a href=\"/grundschutz-plus-plus/anwenderkatalog/\">Anwenderkatalog</a>." },
         ],
       },
       {
         type: "timeline",
         h: "Wo Grundschutz++ gerade steht.",
-        lede: `Die wichtigsten Termine aus dem Meilensteinplan des BSI. Alle Termine stehen im <a href="/grundschutz-plus-plus/zeitplan/">Zeitplan</a>.`,
+        lede: `Die wichtigsten Termine aus dem Meilensteinplan des BSI. Alle Termine und die Fragen dazu stehen im <a href="/grundschutz-plus-plus/zeitplan/">Zeitplan</a>; den Umstieg beschreibt die Seite zur <a href="/grundschutz-plus-plus/it-grundschutz-migration/">Migration</a>.`,
         items: [
           { when: "27.10.2026", date: "2026-10-27", title: "BSI-Standard 300-1", text: "Das BSI stellt den BSI-Standard 300-1 (Methodik Grundschutz++) auf der it-sa in Nürnberg vor und stellt ihn der Community zur Anwendung bereit." },
           { when: "01.01.2027", date: "2027-01-01", title: "Zertifizierbar", text: "Anträge auf eine ISO-27001-Zertifizierung auf Basis von Grundschutz++ sind möglich, ebenso auf die Zertifizierung zum GS++-Berater und GS++-Auditteamleiter." },
@@ -95,7 +95,7 @@ export const FACHSEITEN = {
       },
     ],
     cta: { h: "Grundschutz++ nicht in Tabellen nachbauen.", text: "BlueProceedings ISMS setzt die fünf Prozessschritte als verbundene Arbeitskette um. Die Startseite zeigt, wie das in der Pre-Alpha aussieht." },
-    next: ["/bsi-standard-300-1/", "/grundschutz-plus-plus/umsetzung/", "/grundschutz-plus-plus/it-grundschutz-migration/"],
+    next: ["/bsi-standard-300-1/", "/grundschutz-plus-plus/umsetzung/", "/grundschutz-plus-plus/it-grundschutz-migration/", "/isms-software/bsi-grundschutz/"],
     sources: [
       [BSI_STANDARD_300_1, `BSI: ${STANDARD_300_1}`, "Methodik und Grundlage der Kapitelangaben auf dieser Seite"],
       [BSI_GSPP, "BSI: Grundschutz++", "Überblick und Meilensteinplan (Stand Oktober 2026)"],
@@ -108,13 +108,13 @@ export const FACHSEITEN = {
     description: "Der Grundschutz++-Zeitplan des BSI: BSI-Standard 300-1, Zertifizierbarkeit ab 2027, Early-Adopter-Phase und Ende der IT-Grundschutz-Zertifizierung.",
     crumb: "Zeitplan",
     h1: "Grundschutz++: Zeitplan und Zertifizierung.",
-    lede: "Der BSI-Standard 300-1, die Methodik Grundschutz++, liegt seit Oktober 2026 vor und wurde am 27.10.2026 auf der it-sa in Nürnberg vorgestellt. Ab dem 01.01.2027 können Anträge auf eine ISO-27001-Zertifizierung auf Basis von Grundschutz++ gestellt werden. Die Zertifizierbarkeit nach IT-Grundschutz endet am 30.11.2031, fünf Jahre nach der Veröffentlichung von Grundschutz++ (nicht des IT-Grundschutzes).",
+    lede: "Der BSI-Standard 300-1, die Methodik Grundschutz++, liegt seit Oktober 2026 vor und wurde am 27.10.2026 auf der it-sa in Nürnberg vorgestellt. Ab dem 01.01.2027 können Anträge auf eine ISO-27001-Zertifizierung auf Basis von Grundschutz++ gestellt werden. Die Zertifizierbarkeit nach IT-Grundschutz endet am 30.11.2031, fünf Jahre nach der Veröffentlichung von Grundschutz++ (nicht des IT-Grundschutzes). Wie ihr den Umstieg angeht, beschreibt die Seite zur <a href=\"/grundschutz-plus-plus/it-grundschutz-migration/\">Migration</a>; eine Einordnung gibt der <a href=\"/grundschutz-plus-plus/\">Überblick zu Grundschutz++</a>.",
     asOf: "2026-11-01",
     mailTopic: "Zeitplan",
     sections: [
       {
         type: "timeline",
-        h: "Alle Meilensteine.",
+        h: "Vierzehn Meilensteine von März 2026 bis 2031.",
         lede: "So steht es im Meilensteinplan des BSI, Stand Oktober 2026. Das BSI passt den Plan laufend an; vor einer Entscheidung lohnt der Blick in die Quelle.",
         items: [
           { when: "16.03.2026", date: "2026-03-16", title: "Leitfaden erscheint", text: "Erste Fassung des Leitfadens zur Methodik Grundschutz++, erstellt von BSI und Stand-der-Technik-Community. Dieser Termin steht im Leitfaden selbst, nicht im Meilensteinplan." },
@@ -135,12 +135,12 @@ export const FACHSEITEN = {
       },
       {
         type: "pairs",
-        h: "Was das für die Vorbereitung heißt.",
-        lede: "Bis 2031 ist Zeit, aber ein Umstieg dauert länger als ein Audit-Zyklus. Links, was bisher veröffentlicht ist, rechts, wie BlueProceedings ISMS damit umgeht.",
+        h: "Was der Zeitplan für die Vorbereitung bedeutet.",
+        lede: "Bis 2031 ist Zeit, doch ein früher Einstieg verteilt den Aufwand. Links, was bisher veröffentlicht ist, rechts, wie BlueProceedings ISMS damit umgeht.",
         items: [
-          { title: "Der Katalog ändert sich", ref: "Seite Grundschutz++, Bibliothek", bsi: "Der Meilensteinplan wird laufend angepasst, und die Stand-der-Technik-Bibliothek erhält neue Stände. Bis Ende 2027 läuft die Early-Adopter-Phase für die Anwendung des BSI-Standards 300-1.", app: "Jeder Informationsverbund arbeitet auf einem festen Katalogstand. Die Anwendung steuert und unterstützt die Migration auf einen neuen Stand: Vor dem Wechsel zeigt sie je Informationsverbund, welche Anforderungen neu, geändert oder entfallen sind und welche Parameter sich ändern. Nach dem Wechsel führt eine Liste der Migrationsänderungen durch die Neubewertung, sichtbar an der Institution, am Informationsverbund und am einzelnen Objekt. Wer übernimmt, begründet den Wechsel; eine Freigabe ist nötig." },
-          { title: "Einstieg mit einem Prozess", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.2", bsi: "Im ersten Durchlauf reicht es, die Assets für den wichtigsten Geschäftsprozess zu erfassen. Weitere Prozesse können in den nächsten Zyklen oder parallel folgen.", app: "Ein Einrichtungsassistent leitet aus dem erfassten Bestand den nächsten Schritt ab, damit der erste Durchlauf überschaubar bleibt. Wer die Methodik erst lernen will, findet dazu den Lernmodus." },
-          { title: "Mappings für den Umstieg", ref: "Stand-der-Technik-Bibliothek", bsi: "Das BSI veröffentlicht ein maschinenlesbares Mapping von IT-Grundschutz 2023 auf Grundschutz++. Es beschreibt Beziehungen zwischen alten und neuen Anforderungen, aber keine automatische Erfüllung.", app: "BlueProceedings ISMS nutzt Mappings als Orientierung und bewertet Zuordnung, Umsetzungsstatus und Nachweise im neuen Anforderungspaket neu. Mehr dazu auf der Seite zum Umstieg." },
+          { title: "Der Katalog ändert sich", ref: "Seite Grundschutz++, Bibliothek", bsi: "Der Meilensteinplan wird laufend angepasst, und die Stand-der-Technik-Bibliothek erhält neue Stände. Bis Ende 2027 läuft die Early-Adopter-Phase für die Anwendung des BSI-Standards 300-1.", app: "Jeder Informationsverbund arbeitet auf einem festen Katalogstand. Die Anwendung steuert und unterstützt die Migration auf einen neuen Stand: Vor dem Wechsel zeigt sie je Informationsverbund, welche Anforderungen neu, geändert oder entfallen sind und welche Parameter sich ändern. Nach dem Wechsel führt eine Liste der Migrationsänderungen durch die Neubewertung. Wer übernimmt, begründet den Wechsel; eine Freigabe ist nötig. Mehr dazu unter <a href=\"/funktionen/oscal-katalogverwaltung/\">Katalogverwaltung</a>." },
+          { title: "Einstieg mit einem Prozess", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.2", bsi: "Im ersten Durchlauf reicht es, die Assets für den wichtigsten Geschäftsprozess zu erfassen. Weitere Prozesse können in den nächsten Zyklen oder parallel folgen.", app: "Ein Einrichtungsassistent leitet aus dem erfassten Bestand den nächsten Schritt ab, damit der erste Durchlauf überschaubar bleibt. Wer die Methodik erst lernen will, findet dazu den Lern-Modus." },
+          { title: "Mappings für den Umstieg", ref: "Stand-der-Technik-Bibliothek", bsi: "Das BSI veröffentlicht ein maschinenlesbares Mapping von IT-Grundschutz 2023 auf Grundschutz++. Es beschreibt Beziehungen zwischen alten und neuen Anforderungen, aber keine automatische Erfüllung.", app: "BlueProceedings ISMS nutzt Mappings als Orientierung und bewertet Zuordnung, Umsetzungsstatus und Nachweise im neuen Anforderungspaket neu. Mehr dazu auf der Seite zum <a href=\"/grundschutz-plus-plus/it-grundschutz-migration/\">Umstieg</a>." },
           { title: "Kennzahlen folgen 2027", ref: "Meilensteinplan", bsi: "Bis zum 31.03.2027 sollen alle Anforderungen der ISMS-Praktiken Leistungskennzahlen erhalten. Bis dahin sind Institutionen in der Leistungsbewertung frei (BSI-Standard 300-1, Kapitel 5.1).", app: "Die Pre-Alpha hat ein KPI-Register mit eingebauten, berechneten und manuell gemessenen Kennzahlen, Zielwert, Schwellen und Zeitreihe. Wie sie zu den Kennzahlen des BSI passen, prüfen wir, sobald diese veröffentlicht sind." },
         ],
       },
@@ -152,7 +152,7 @@ export const FACHSEITEN = {
           { q: "Wie lange gilt die Zertifizierung nach IT-Grundschutz noch?", a: "Die Zertifizierbarkeit nach IT-Grundschutz endet laut BSI am 30.11.2031, fünf Jahre nach der Veröffentlichung von Grundschutz++." },
           { q: "Wann wurde der BSI-Standard 300-1 veröffentlicht?", a: "Am 27.10.2026 auf der it-sa in Nürnberg, als Version 1.0 der Methodik Grundschutz++." },
           { q: "Was ist die Early-Adopter-Phase?", a: "Ein Zeitraum für die Anwendung des BSI-Standards 300-1, der laut Meilensteinplan im ersten Quartal 2027 beginnt und am 31.12.2027 endet." },
-          { q: "Muss ich jetzt schon umsteigen?", a: "Nein. Der IT-Grundschutz bleibt in der Übergangszeit anwendbar. Ein Umstieg dauert aber länger als ein Auditzyklus; ein früher Einstieg mit dem wichtigsten Geschäftsprozess verteilt den Aufwand." },
+          { q: "Muss ich jetzt schon umsteigen?", a: "Nein. Der IT-Grundschutz bleibt in der Übergangszeit anwendbar. Ein früher Einstieg mit dem wichtigsten Geschäftsprozess verteilt den Aufwand." },
         ],
       },
       {
@@ -161,7 +161,7 @@ export const FACHSEITEN = {
         text: "BlueProceedings ISMS unterstützt die Vorbereitung. Ob eine Institution zertifiziert wird, entscheidet die zuständige Stelle nach den dann geltenden Grundlagen. Die erste Version von BlueProceedings ISMS ist für Januar 2027 geplant.",
       },
     ],
-    cta: { h: "Bereit sein, wenn Grundschutz++ zertifizierbar wird.", text: "Ab dem 11.11.2026 testen bis zu elf Personen aus der ISMS-Praxis die Pre-Alpha. Die Startseite zeigt, was schon läuft." },
+    cta: { h: "Bereit sein, wenn Grundschutz++ zertifizierbar wird.", text: "Seit dem 11.11.2026 testen Personen aus der ISMS-Praxis die Pre-Alpha auf eigenen Testinstanzen. Die Startseite zeigt, was schon läuft." },
     next: ["/grundschutz-plus-plus/", "/grundschutz-plus-plus/it-grundschutz-migration/", "/grundschutz-plus-plus/anwenderkatalog/"],
     sources: [
       [BSI_GSPP, "BSI: Grundschutz++", "Meilensteinplan, Stand Oktober 2026, am 26.10.2026 geprüft"],
@@ -170,17 +170,17 @@ export const FACHSEITEN = {
   },
 
   "/grundschutz-plus-plus/it-grundschutz-migration/": {
-    title: "Grundschutz++ Migration: Umstieg vorbereiten",
+    title: "Umstieg auf Grundschutz++ vorbereiten",
     description: "Von IT-Grundschutz zu Grundschutz++: Was sich übernehmen lässt, was neu entschieden werden muss und warum BlueProceedings ISMS neu modelliert.",
     crumb: "Umstieg",
     h1: "Umstieg auf Grundschutz++: Migration vorbereiten.",
-    lede: "Für den Umstieg veröffentlicht das BSI maschinenlesbare Mappings. Sie zeigen Beziehungen zwischen alten und neuen Anforderungen, belegen aber keine Erfüllung. Grundschutz++ leitet Anforderungen über Geschäftsprozesse, Assets und Zielobjektkategorien ab, nicht über Bausteine. Für den Umstieg bedeutet das: Bisherige Unterlagen sind eine wertvolle Quelle, aber kein fertiges Grundschutz++-Ergebnis.",
+    lede: "Für den Umstieg veröffentlicht das BSI maschinenlesbare Mappings. Sie zeigen Beziehungen zwischen alten und neuen Anforderungen, belegen aber keine Erfüllung. Grundschutz++ leitet Anforderungen über Geschäftsprozesse, Assets und Zielobjektkategorien ab, nicht über Bausteine. Für den Umstieg bedeutet das: Bisherige Unterlagen sind eine wertvolle Quelle, aber kein fertiges Grundschutz++-Ergebnis. Die Termine dazu stehen im <a href=\"/grundschutz-plus-plus/zeitplan/\">Zeitplan</a>, die Methodik im <a href=\"/grundschutz-plus-plus/\">Überblick</a>.",
     asOf: "2026-11-01", modified: "2026-11-01",
     mailTopic: "Umstieg",
     sections: [
       {
         type: "text", anchor: "migration",
-        h: "Drei unterschiedliche Vorgänge beim Umstieg.",
+        h: "Beim Umstieg sind drei Vorgänge zu unterscheiden.",
         paragraphs: [
           "Beim <b>Methodikumstieg</b> prüft ihr, wie das bestehende Sicherheitskonzept zur Methodik des BSI-Standards 300-1 passt. Prozesse, Verantwortlichkeiten und vorhandene Nachweise helfen dabei. Ihre Eignung für die neuen Anforderungen wird fachlich geprüft.",
           "Die <b>Datenübernahme aus einem anderen Werkzeug</b> ist eine eigene Frage: Welche Objekte, Beziehungen, Dateien und Entscheidungsstände lassen sich übertragen? BlueProceedings ISMS bietet in der Pre-Alpha keinen pauschalen Import eines bestehenden IT-Grundschutz-Projekts. Ein Mapping ist keine Importzusage.",
@@ -202,7 +202,7 @@ export const FACHSEITEN = {
         h: "Was ihr mitnehmt und was ihr neu entscheidet.",
         lede: "Vier Unterlagen, die fast jedes ISMS hat, liefern eine Grundlage für den Umstieg. Ihre Zuordnung und Bewertung nach Grundschutz++ sind gesondert zu prüfen.",
         items: [
-          { title: "Geltungsbereich und Strukturanalyse", text: "Liefern Objektkandidaten, Verantwortliche und bekannte Abhängigkeiten. Neu zu entscheiden sind die Abgrenzung des Informationsverbunds, die Assets und ihre Zielobjektkategorien." },
+          { title: "Anwendungsbereich und Strukturanalyse", text: "Liefern Objektkandidaten, Verantwortliche und bekannte Abhängigkeiten. Neu zu entscheiden sind die Abgrenzung des Informationsverbunds, die Assets und ihre Zielobjektkategorien." },
           { title: "Umsetzungsbeschreibungen", text: "Zeigen die technische und organisatorische Ausgangslage. Neu zu entscheiden ist, welche Grundschutz++-Anforderung sie betreffen und welche Parameter gelten." },
           { title: "Nachweise", text: "Sind mögliche Nachweise. Ob sie taugen, hängt an Gegenstand, Zeitraum, Prüfumfang und Aussagekraft für die neue Anforderung." },
           { title: "Risiken und Maßnahmen", text: "Bringen bekannte Ursachen, Szenarien und Zuständigkeiten mit. Neu zu bewerten sind sie nach der aktuellen Methode und mit Bezug zu den neuen Assets." },
@@ -210,16 +210,16 @@ export const FACHSEITEN = {
       },
       {
         type: "steps",
-        h: "Ein Umstieg in sieben Schritten.",
+        h: "In sieben Schritten vom Altstand zur Wirksamkeitsprüfung.",
         lede: "Unser Vorschlag entlang der Prozessschritte des BSI-Standards 300-1. Er beginnt beim gesicherten Altstand und endet bei neu betrachteten Risiken und auf Wirksamkeit geprüften Maßnahmen.",
         items: [
-          { title: "Altstand sichern", text: "Geltungsbereich, Inventare, Umsetzungen, Risiken und Nachweise mit Datum archivieren. Sie sind Eingabe, kein Ergebnis." },
+          { title: "Altstand sichern", text: "Anwendungsbereich, Inventare, Umsetzungen, Risiken und Nachweise mit Datum archivieren. Sie sind Eingabe, kein Ergebnis." },
           { title: "Rahmen neu festlegen", text: "Kontext, Verpflichtungen, Ziele, Rollen und Risikomethodik nach Prozessschritt 1 beurteilen. Alte Freigaben gelten nicht weiter. <a href=\"/funktionen/erhebung-und-planung/\">Wie die Anwendung die elf Teilschritte abbildet</a>." },
           { title: "Wichtigsten Prozess modellieren", text: "Für den priorisierten Geschäftsprozess die Assets erfassen und Zielobjektkategorien zuordnen. Weitere Prozesse folgen." },
           { title: "Paket ableiten", text: "Aktueller Katalog, passende Blaupause und Parameter ergeben das Anforderungspaket. Mappings geben Orientierung." },
           { title: "Umsetzung neu bewerten", text: "Umsetzungen und Nachweise der neuen Anforderung zuordnen und prüfen. Lücken bleiben als offene Anforderungen sichtbar." },
           { title: "Risikoanalyse neu durchführen", text: "Risiken nach dem BSI-Standard 300-1 betrachten, mit Bezug zu Geschäftsprozessen, kritischen Assets und offenen Anforderungen. BlueProceedings ISMS führt von Risikokandidaten über Bewertung und Behandlung bis zu Restrisiko, Akzeptanz und Überprüfung. Alte Risikobewertungen sind Eingabe, kein Ergebnis." },
-          { title: "Maßnahmen bewerten", text: "Maßnahmen aus Lücken und Risiken planen und nach der Umsetzung auf Wirksamkeit prüfen (Prozessschritte 4 und 5). Erst die Wirksamkeitsprüfung zeigt, ob eine Maßnahme das Risiko wirklich senkt." },
+          { title: "Maßnahmen bewerten", text: "Maßnahmen aus Lücken und Risiken planen und nach der Umsetzung auf Wirksamkeit prüfen (Prozessschritte 4 und 5). Wie sich Nachweise dafür führen lassen, zeigt <a href=\"/funktionen/nachweismanagement/\">Nachweismanagement</a>. Erst die Wirksamkeitsprüfung zeigt, ob eine Maßnahme das Risiko wirklich senkt." },
         ],
       },
       {
@@ -238,7 +238,7 @@ export const FACHSEITEN = {
         ],
       },
     ],
-    cta: { h: "Den Umstieg einmal sauber machen.", text: "Wenn ihr gerade einen Umstieg plant, erzählt uns, wo es hakt. Rückmeldungen aus der Praxis fließen in die Planung der ersten Version ein." },
+    cta: { h: "Den Umstieg einmal sauber machen.", text: "Wenn ihr gerade einen Umstieg plant, erzählt uns, wo es hakt." },
     next: ["/grundschutz-plus-plus/umsetzung/", "/funktionen/oscal-katalogverwaltung/", "/funktionen/nachweismanagement/"],
     sources: [
       [BSI_STANDARD_300_1, `BSI: ${STANDARD_300_1}`, "Methodik, Prozessschritte 1 bis 5 und Risikobetrachtung"],
@@ -252,7 +252,7 @@ export const FACHSEITEN = {
     description: "Den Grundschutz++-Anwenderkatalog lesen: Praktik, Modalverb, Zielobjekt, Sicherheitsniveau, Parameter und Dokumentation verständlich erklärt.",
     crumb: "Anwenderkatalog",
     h1: "Den Grundschutz++-Anwenderkatalog lesen.",
-    lede: "Der Anwenderkatalog enthält die Anforderungen von Grundschutz++, gegliedert nach Praktiken. Jede Anforderung ist ein einzelner Eintrag mit festen Feldern. Wer weiß, was in welchem Feld steht, sieht auf einen Blick, was gefordert ist, wie verbindlich es ist und wofür es gilt.",
+    lede: "Der Anwenderkatalog enthält die Anforderungen von Grundschutz++, gegliedert nach Praktiken. Jede Anforderung ist ein einzelner Eintrag mit festen Feldern. Wer weiß, was in welchem Feld steht, sieht auf einen Blick, was gefordert ist, wie verbindlich es ist und wofür es gilt. Das Dateiformat erklärt die Seite zu <a href=\"/grundschutz-plus-plus/oscal/\">OSCAL</a>, den Überblick der Seite <a href=\"/grundschutz-plus-plus/\">Grundschutz++</a>.",
     asOf: "2026-11-01",
     mailTopic: "Anwenderkatalog",
     sections: [
@@ -277,12 +277,12 @@ export const FACHSEITEN = {
       },
       {
         type: "pairs",
-        h: "Sechs Fragen an jede Anforderung.",
+        h: "Fünf Fragen an jede Anforderung.",
         lede: "Links, was Anwenderkatalog und BSI-Standard 300-1 zu dem Feld sagen, rechts, wie BlueProceedings ISMS es verwendet.",
         items: [
           { title: "Was wird gefordert?", ref: "Katalog", bsi: "Handlungswort und Ergebnis sagen, was zu tun ist und was danach gelten soll. Die Erläuterung ordnet es fachlich ein.", app: "Die Anforderung steht am Objekt, mit Text, Erläuterung und der Angabe, aus welchem Katalogstand sie kommt." },
           { title: "Wie verbindlich ist sie?", ref: "Anwenderkatalog; BSI-Standard 300-1, Kapitel 4.1.2", bsi: "KANN-Anforderungen sind optional. Eine vorübergehend nicht erfüllte SOLLTE-Anforderung ist zu begründen; eine dauerhafte Nichterfüllung erfordert eine Risikobetrachtung und die Freigabe des Restrisikos. MUSS-Anforderungen erlauben keine Ausnahme oder Risikoakzeptanz.", app: "BlueProceedings ISMS setzt diese Regeln im Arbeitsablauf durch: Bei MUSS sperrt es Ausnahme, Herabstufung und Risikoakzeptanz; vorübergehende MUSS- und SOLLTE-Lücken verlangen Begründung und Frist. Dauerhafte SOLLTE-Lücken werden zu Risikokandidaten; erforderliche Leitungsentscheidungen laufen als formaler Akzeptanzantrag, im regulären Betrieb mit erzwungener Vier-Augen-Trennung." },
-          { title: "Für welches Sicherheitsniveau?", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.4.2", bsi: "Der Standard unterscheidet die Sicherheitsniveaus „normal-SdT“ und „erhöht“. Anforderungen des erhöhten Niveaus sind optionale KANN-Anforderungen und können in der Risikobetrachtung helfen, zusätzliche Maßnahmen zu bestimmen.", app: "Als zusätzliche Steuerungsfunktion versioniert BlueProceedings ISMS ein institutionsweites Mindestniveau mit Eskalationskriterien und führt es durch einen Freigabeprozess. Jeder Informationsverbund erhält sein eigenes Zielniveau: „erhöht“ verlangt eine aktuelle Schutzbedarfsfeststellung für Vertraulichkeit, Integrität und Verfügbarkeit sowie ein passendes Kriterium; eine Abstufung unter das Mindestniveau verlangt eine vollständige, akzeptierte Risikobetrachtung. Daraus leitet die Anwendung die geltenden Anforderungen ab." },
+          { title: "Für welches Sicherheitsniveau?", ref: "BSI-Standard 300-1, Kapitel 2.6 und 3.4.2", bsi: "Der Standard unterscheidet die Sicherheitsniveaus „normal-SdT“ und „erhöht“. Anforderungen des erhöhten Niveaus sind optionale KANN-Anforderungen und können in der Risikobetrachtung helfen, zusätzliche Maßnahmen zu bestimmen.", app: "BlueProceedings ISMS versioniert zusätzlich ein institutionsweites Mindestniveau mit Eskalationskriterien und Freigabe. Jeder Informationsverbund hat ein eigenes Zielniveau: „erhöht“ verlangt eine aktuelle Schutzbedarfsfeststellung für Vertraulichkeit, Integrität und Verfügbarkeit sowie ein passendes Kriterium; eine Abstufung unter das Mindestniveau verlangt eine vollständige, akzeptierte Risikobetrachtung. Daraus leitet die Anwendung die geltenden Anforderungen ab." },
           { title: "Wofür gilt sie?", ref: "BSI-Standard 300-1, Kapitel 3.4.2", bsi: "Die Zielobjektkategorie nennt die Art von Asset, hier Daten. Ein Asset kann mehreren Kategorien zugeordnet sein; Anforderungen übergeordneter Kategorien werden vererbt.", app: "Die Anwendung rechnet die Vererbung entlang der Hierarchie selbst. Die Zuordnung eines Assets zu einer Kategorie bleibt eine begründete Entscheidung." },
           { title: "Was legt die Institution fest?", ref: "Anwenderkatalog; BSI-Standard 300-1, Kapitel 3.5", bsi: "Parameter sind variabel gestaltbare Elemente einer Anforderung. Sie passen sie an den Kontext an, hier an die Frage, wer zuständig ist.", app: "Den Parameterwert führen wir getrennt vom Text der Anforderung, nachvollziehbar von der Blaupause bis zum einzelnen Objekt." },
           { title: "Was belegt die Umsetzung?", ref: "Katalog", bsi: "Das Feld Dokumentation nennt, welche Dokumentation erwartet wird, hier das Inventar der Informationen.", app: "Wir zeigen den Hinweis an, werten ihn aber nicht als Nachweis. Ein Nachweis hat bei uns Gültigkeit und Prüfstatus und wird von Menschen geprüft." },
@@ -290,7 +290,7 @@ export const FACHSEITEN = {
       },
       {
         type: "shot",
-        h: "Vom Katalog zum Anforderungspaket.",
+        h: "Von der Blaupause zum Anforderungspaket.",
         paragraphs: [
           "<b>Was veröffentlicht ist:</b> Blaupausen wählen Anforderungen für einen wiederkehrenden Kontext aus. Die Stand-der-Technik-Bibliothek veröffentlicht für Grundschutz++ Quellkataloge, ein OSCAL-Profil und den daraus aufgelösten Anwenderkatalog.",
           "<b>Wie wir es auslegen:</b> In BlueProceedings ISMS ist eine Blaupause eine versionierte Regelmenge auf einem festen Katalogstand, technisch ein OSCAL-Profil. Jeder Ausschluss braucht eine Begründung. Ein neuer Katalogstand ändert die Blaupause nicht still.",
@@ -324,13 +324,13 @@ export const FACHSEITEN = {
     description: "OSCAL in Grundschutz++ erklärt: Katalog, Profil, Component Definition und SSP sowie Import und Export mit BlueProceedings ISMS.",
     crumb: "OSCAL",
     h1: "OSCAL in Grundschutz++: was das Format leistet.",
-    lede: "OSCAL (Open Security Controls Assessment Language) ist ein offenes Datenformat des NIST für Sicherheitsanforderungen, ihre Umsetzung und ihre Prüfung. Das BSI veröffentlicht Grundschutz++ in diesem Format. Werkzeuge können die Anforderungen deshalb direkt einlesen, und Institutionen tauschen Daten aus, statt sie abzutippen.",
+    lede: "OSCAL (Open Security Controls Assessment Language) ist ein offenes Datenformat des NIST für Sicherheitsanforderungen, ihre Umsetzung und ihre Prüfung. Das BSI veröffentlicht Grundschutz++ in diesem Format. Werkzeuge können die Anforderungen deshalb direkt einlesen, und Institutionen tauschen Daten aus, statt sie abzutippen. Wie eine einzelne Anforderung im Katalog aussieht, zeigt die Seite zum <a href=\"/grundschutz-plus-plus/anwenderkatalog/\">Anwenderkatalog</a>; den Rahmen gibt der <a href=\"/grundschutz-plus-plus/\">Überblick zu Grundschutz++</a>.",
     asOf: "2026-11-01",
     mailTopic: "OSCAL",
     sections: [
       {
         type: "chain",
-        h: "Sieben Modelle, eine Kette.",
+        h: "Sieben OSCAL-Modelle bauen aufeinander auf.",
         lede: "So beschreibt das NIST die OSCAL-Modelle. Sie trennen, was gefordert ist, wie es umgesetzt wird und was eine Prüfung festgestellt hat; jedes baut auf dem vorigen auf. Das BSI veröffentlicht für Grundschutz++ vor allem die ersten beiden: Kataloge und Profile.",
         items: [
           { title: "Katalog", text: "Die Anforderungen selbst. Bei Grundschutz++ der Anwenderkatalog des BSI." },
@@ -341,11 +341,11 @@ export const FACHSEITEN = {
           { title: "Assessment Plan und Results", text: "Was geprüft werden soll und was festgestellt wurde." },
           { title: "POA&amp;M", text: "Offene Feststellungen mit Maßnahmen, Verantwortlichen und Fristen." },
         ],
-        loop: `<b>Maschinenlesbar ist nicht erfüllt.</b> Ein gültiges OSCAL-Dokument sagt nichts darüber, ob eine Anforderung richtig umgesetzt und wirksam ist. Das bleibt eine fachliche Entscheidung. Wie eine einzelne Anforderung im Katalog aussieht, zeigt die Seite zum <a href="/grundschutz-plus-plus/anwenderkatalog/">Anwenderkatalog</a>.`,
+        loop: `<b>Maschinenlesbar ist nicht erfüllt.</b> Ein gültiges OSCAL-Dokument sagt nichts darüber, ob eine Anforderung richtig umgesetzt und wirksam ist. Das bleibt eine fachliche Entscheidung. Wie ein Katalogwechsel in der Anwendung abläuft, steht unter <a href="/funktionen/oscal-katalogverwaltung/">Katalogverwaltung</a>.`,
       },
       {
         type: "pairs",
-        h: "Was das BSI liefert und wie wir damit arbeiten.",
+        h: "Was das BSI als OSCAL liefert und wie wir es nutzen.",
         lede: "Links, was veröffentlicht ist, rechts, wie BlueProceedings ISMS das Format verwendet.",
         items: [
           { title: "Einlesen", ref: "Stand-der-Technik-Bibliothek", bsi: "Das BSI stellt Anwenderkatalog und Methodik als OSCAL-Dateien in der Stand-der-Technik-Bibliothek auf GitHub bereit.", app: "Wir lesen den Grundschutz++-Katalog und weitere OSCAL-Kataloge ein, jeweils mit Version und Herkunft." },
@@ -367,7 +367,7 @@ export const FACHSEITEN = {
       },
     ],
     cta: { h: "OSCAL rein, OSCAL raus.", text: "BlueProceedings ISMS liest den Grundschutz++-Katalog ein und gibt Ergebnisse wieder im offenen Format aus. Die Startseite zeigt die Pre-Alpha." },
-    next: ["/grundschutz-plus-plus/anwenderkatalog/", "/grundschutz-plus-plus/", "/community/"],
+    next: ["/grundschutz-plus-plus/anwenderkatalog/", "/grundschutz-plus-plus/", "/community/", "/isms-software/bsi-grundschutz/"],
     sources: [
       [NIST_OSCAL, "NIST: OSCAL", "Dokumentation aller OSCAL-Modelle"],
       [BSI_OSCAL, "BSI: OSCAL", "Einordnung des Formats durch das BSI"],

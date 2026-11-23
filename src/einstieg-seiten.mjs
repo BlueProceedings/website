@@ -17,19 +17,20 @@ const bibliothekQuelle = [BSI_CONTROL_LAYER, "Stand-der-Technik-Bibliothek: Grun
 export const EINSTIEG_SEITEN = {
   "/bsi-standard-300-1/": {
     title: "BSI-Standard 300-1: Grundschutz++ erklärt",
-    description: "BSI-Standard 300-1 (BSI 300-1) erklärt: Aufbau, fünf Prozessschritte mit Kapiteln, Teilschritte 2.1 bis 2.11 und die 35 Mindestkriterien der Risikobetrachtung.",
+    description: "BSI-Standard 300-1 (BSI 300-1) erklärt: fünf Prozessschritte mit Kapiteln, Teilschritte 2.1 bis 2.11 und 35 Mindestkriterien der Risikobetrachtung.",
     crumb: "BSI-Standard 300-1",
     crumbs: [["/", "Startseite"], ["/grundschutz-plus-plus/", "Grundschutz++"], ["/bsi-standard-300-1/", "BSI-Standard 300-1"]],
     h1: "BSI-Standard 300-1 (BSI 300-1): die Methodik Grundschutz++ erklärt.",
-    lede: "Der BSI-Standard 300-1, oft kurz „BSI 300-1“ genannt, ist die Methodik Grundschutz++ des BSI. Er beschreibt in sechs Kapiteln und vier Anhängen, wie eine Institution ein ISMS in fünf Prozessschritten aufbaut, betreibt und verbessert: Erhebung und Planung, Anforderungsanalyse, Realisierung, Überwachung und kontinuierliche Verbesserung. Version 1.0 wurde am 27. Oktober 2026 vorgestellt. Diese Seite fasst den Standard mit Kapitel- und Kriteriennummern zusammen und sagt jeweils getrennt davon, wie wir ihn in BlueProceedings ISMS auslegen.",
+    lede: "Der BSI-Standard 300-1, kurz „BSI 300-1“, ist die Methodik Grundschutz++ des BSI. Er beschreibt, wie eine Institution ein ISMS in fünf Prozessschritten aufbaut, betreibt und verbessert, und enthält keine Maßnahmenliste: Die Anforderungen stehen im Anwenderkatalog. Diese Seite fasst Version 1.0 (vorgestellt am 27. Oktober 2026) mit Kapitel- und Kriteriennummern zusammen und trennt davon, wie wir den Standard in BlueProceedings ISMS auslegen.",
     asOf: GEPRUEFT, mailTopic: "BSI-Standard 300-1", topics: "grundschutz",
     sections: [
       { type: "text", h: "Methodik hier, Anforderungen dort.", paragraphs: [
-        "Wer mit IT-Grundschutz gearbeitet hat, kennt die BSI-Standards der Reihe 200 und das Kompendium mit seinen Bausteinen. Grundschutz++ trennt anders: <b>Der BSI-Standard 300-1 beschreibt das Vorgehen</b>, also was ihr in welcher Reihenfolge erhebt, entscheidet und dokumentiert. <b>Die Anforderungen selbst stehen im Anwenderkatalog</b>, den das BSI maschinenlesbar im OSCAL-Format in der Stand-der-Technik-Bibliothek veröffentlicht. Wer den Standard liest und eine Liste von Maßnahmen erwartet, sucht an der falschen Stelle.",
+        "Wer mit IT-Grundschutz gearbeitet hat, kennt die BSI-Standards der Reihe 200 und das Kompendium mit seinen Bausteinen. Grundschutz++ trennt anders: <b>Der BSI-Standard 300-1 beschreibt das Vorgehen</b>, also was ihr in welcher Reihenfolge erhebt, entscheidet und dokumentiert.",
+        "<b>Die Anforderungen selbst stehen im Anwenderkatalog</b>, den das BSI maschinenlesbar im OSCAL-Format in der Stand-der-Technik-Bibliothek veröffentlicht. Wer den Standard liest und eine Liste von Maßnahmen erwartet, sucht an der falschen Stelle.",
         "Version 1.0 richtet sich laut Einleitung in erster Linie an „Early Adopters“, also erfahrene Institutionen, die Grundschutz++ früh einführen wollen (Kapitel 1). Sie wurde mit der Grundschutz-Community entwickelt und in ausgewählten Pilotierungsinstitutionen erprobt. Der Ablauf folgt dem PDCA-Zyklus; erst die Wiederholung des Zyklus baut das ISMS schrittweise aus.",
         "Der Standard verweist selbst auf die ISO/IEC 27001: In Prozessschritt 1 werden die Aktivitäten aus deren Kapiteln 4 und 5 durchgeführt, in Prozessschritt 2 die aus Kapitel 6 und 10, und die Methodik-Anforderungen im Katalog bilden die Kapitel 4 bis 10 der Norm ab (Kapitel 2, 3 und 3.4). Laut Meilensteinplan des BSI können ab dem 1. Januar 2027 Anträge auf eine ISO-27001-Zertifizierung auf Basis von Grundschutz++ gestellt werden.",
       ] },
-      { type: "diagram", kind: "gruppen", h: "Aufbau des Standards.", label: "Nach BSI-Standard 300-1, Inhaltsverzeichnis", lede: "Sechs Kapitel und vier Anhänge. Kapitel 2 bis 6 sind die fünf Prozessschritte; die Anhänge liefern Hilfsmittel und die verbindlichen Mindestkriterien für die Risikobetrachtung.", groups: [
+      { type: "diagram", kind: "gruppen", h: "Aufbau: sechs Kapitel und vier Anhänge.", label: "Nach BSI-Standard 300-1, Inhaltsverzeichnis", lede: "Sechs Kapitel und vier Anhänge. Kapitel 2 bis 6 sind die fünf Prozessschritte; die Anhänge liefern Hilfsmittel und die verbindlichen Mindestkriterien für die Risikobetrachtung.", groups: [
         { title: "Einleitung", items: [{ n: 1, text: "Zielgruppe, Entstehung und der PDCA-Zyklus mit den fünf Prozessschritten (Abbildung 1)" }] },
         { title: "Prozessschritte", items: [
           { n: 2, text: "Erhebung und Planung, elf Teilschritte 2.1 bis 2.11" },
@@ -67,7 +68,7 @@ export const EINSTIEG_SEITEN = {
       ] },
       { type: "pairs", h: "Wie wir Prozessschritt 1 lesen.", lede: "Drei Stellen, an denen der Standard Spielraum lässt, und wie BlueProceedings ISMS ihn nutzt.", items: [
         { title: "Kontext, der sich ändert", ref: "Kapitel 2.1", bsi: "Die Faktoren werden erfasst und daraufhin geprüft, ob sie das ISMS beeinflussen. Wesentliche Aspekte sollen knapp festgehalten werden.", app: "Wir führen Faktoren mit Quelle, Annahmen und Unsicherheit in Versionen und verknüpfen sie mit den Entscheidungen, die auf ihnen beruhen. Wird eine inhaltlich geänderte Fassung freigegeben, zeigt die Anwendung, welche Entscheidungen neu zu prüfen sind. Sie ändert keine Bewertung selbst." },
-        { title: "Alles gehört dazu, außer es ist begründet", ref: "Kapitel 2.3", bsi: "Der Anwendungsbereich kann die ganze Institution oder einen Teil umfassen; ausgeschlossene Bereiche können benannt werden.", app: "Jedes erfasste Objekt liegt zunächst im Anwendungsbereich (in der Oberfläche: Geltungsbereich). Wer etwas herausnimmt, begründet es. So fällt kein System aus Versehen heraus." },
+        { title: "Alles gehört dazu, außer es ist begründet", ref: "Kapitel 2.3", bsi: "Der Anwendungsbereich kann die ganze Institution oder einen Teil umfassen; ausgeschlossene Bereiche können benannt werden.", app: "Jedes erfasste Objekt liegt zunächst im Anwendungsbereich. Wer etwas herausnimmt, begründet es. So fällt kein System aus Versehen heraus." },
         { title: "Freigaben als Entscheidung", ref: "Kapitel 2.10", bsi: "Der Leitung werden Entscheidungsvorlagen vorgelegt; sie trägt die Entscheidungen und gibt sie frei.", app: "Freigaben stehen dort, wo entschieden wird, mit Person, Rolle und Zeitpunkt. Eine Übersicht zeigt den Stand jedes Teilschritts von 2.1 bis 2.11 und führt zur Stelle, an der weitergearbeitet wird." },
       ] },
       { type: "diagram", kind: "fluss", h: "Prozessschritt 2: vom Anwendungsbereich zum Anforderungspaket.", label: "Nach BSI-Standard 300-1, Kapitel 3", lede: "Die Anforderungsanalyse übersetzt den Rahmen aus Prozessschritt 1 in konkrete Anforderungen für einen Informationsverbund.", items: [
@@ -80,7 +81,8 @@ export const EINSTIEG_SEITEN = {
       ] },
       { type: "text", h: "Drei Arten von Anforderungen.", paragraphs: [
         "Das Anforderungspaket setzt sich aus drei Arten zusammen (Kapitel 3.4): <b>Methodik-Anforderungen</b> gelten für jeden Informationsverbund und bilden die Kapitel 4 bis 10 der ISO/IEC 27001 ab; ein individuelles Vorgehen ist nicht vorgesehen. <b>Technische und organisatorische Anforderungen ohne Zielobjektkategorie</b> sind ebenfalls immer aufzunehmen. <b>Anforderungen mit Zielobjektkategorie</b> gelten, soweit Assets dieser Kategorie zugeordnet sind. Weil ein Asset auch die übergeordneten Kategorien erhält, werden deren Anforderungen vererbt; doppelte Anforderungen zählen nur einmal.",
-        "Hinzu kommen Ergänzungen: eigene Anforderungen, wenn ein Asset nicht hinreichend abgedeckt ist, und Verpflichtungen aus Compliance-Management und Stakeholder-Analyse (Kapitel 3.4.3). Parameter wie „regelmäßig“ werden bei oder nach der Erstellung des Pakets konkretisiert, sofern keine Blaupause sie festschreibt (Kapitel 3.5). Anforderungen des Sicherheitsniveaus „erhöht“ sind KANN-Anforderungen und helfen vor allem in der Risikobetrachtung (Kapitel 3.4.2).",
+        "Hinzu kommen Ergänzungen: eigene Anforderungen, wenn ein Asset nicht hinreichend abgedeckt ist, und Verpflichtungen aus Compliance-Management und Stakeholder-Analyse (Kapitel 3.4.3).",
+        "Parameter wie „regelmäßig“ werden bei oder nach der Erstellung des Pakets konkretisiert, sofern keine Blaupause sie festschreibt (Kapitel 3.5). Anforderungen des Sicherheitsniveaus „erhöht“ sind KANN-Anforderungen und helfen vor allem in der Risikobetrachtung (Kapitel 3.4.2).",
         "Auch der Detaillierungsgrad der Dokumentation richtet sich nach dem Schutzbedarf (Kapitel 3.2): Bei hohem Schutzbedarf werden Zugehörigkeit und Abhängigkeiten der Assets zum Geschäftsprozess dokumentiert, weil sich die Risikobetrachtung an diesen Zusammenhängen orientiert. Bei normalem Schutzbedarf genügen mindestens die Abhängigkeiten zwischen Anwendungen und IT-Systemen sowie zwischen IT-Systemen und Räumen.",
       ] },
       { type: "diagram", kind: "gruppen", h: "Prozessschritt 3: wenn eine Anforderung nicht erfüllt ist.", label: "Nach BSI-Standard 300-1, Kapitel 4.1", lede: "Für jede Anforderung im Paket wird der Umsetzungsstatus vollständig ermittelt: erfüllt, nicht erfüllt oder nicht anwendbar, Letzteres mit Begründung (Kapitel 4.1.1). Was bei „nicht erfüllt“ folgt, entscheidet das Modalverb (Kapitel 4.1.2).", groups: [
@@ -92,7 +94,8 @@ export const EINSTIEG_SEITEN = {
       { type: "text", h: "Vom Plan zur Fortschrittsverfolgung.", paragraphs: [
         "Aus dem Anforderungspaket entsteht ein Umsetzungsplan (Kapitel 4.3). Für jede Anforderung muss erkennbar sein, welche Maßnahmen ihr zugeordnet sind; für jede Maßnahme werden mindestens die Anforderung, das Datum der Umsetzung oder Überprüfung und die dokumentierende oder prüfende Person festgehalten. Nachweise sind der Maßnahme eindeutig zuzuordnen; bei automatisierten Prüfungen auch Werkzeug, Zeitpunkt und Ergebnis. Eine Historie der Änderungen wird empfohlen.",
         "Zuständigkeiten und Fristen gibt die Leitung frei, weil sie die Ressourcen stellt (Kapitel 4.4). Der Fortschritt wird laufend verfolgt, und wer umsetzt, soll nicht zugleich den eigenen Fortschritt überwachen (Kapitel 4.5).",
-        "Die Prozessschritte 4 und 5 schließen den Kreis. Die Leistungsbewertung gestalten die Institutionen vorerst selbst, weil einheitliche Vorgaben noch ausstehen (Kapitel 5.1); laut Meilensteinplan soll ein Konzept zur Leistungsmessung im Februar 2027 folgen. Hinzu kommen internes Auditprogramm (5.2), Managementbewertung durch die Leitung (5.3), Verfahren für Vorfälle, Schwachstellen und neue Bedrohungen (5.4) und die Validierung der Anforderungen, etwa wenn sich Bibliothek oder Blaupausen ändern (5.5). In Kapitel 6 werden Nicht-Konformitäten auf ihre Ursachen untersucht, Verbesserungen in einen Korrektur- und Verbesserungsplan übernommen und Maßnahmen anhand messbarer Kriterien auf Wirksamkeit geprüft (6.1 bis 6.4).",
+        "Die Prozessschritte 4 und 5 schließen den Kreis. Die Leistungsbewertung gestalten die Institutionen vorerst selbst, weil einheitliche Vorgaben noch ausstehen (Kapitel 5.1); laut Meilensteinplan soll ein Konzept zur Leistungsmessung im Februar 2027 folgen. Hinzu kommen internes Auditprogramm (5.2), Managementbewertung durch die Leitung (5.3), Verfahren für Vorfälle, Schwachstellen und neue Bedrohungen (5.4) und die Validierung der Anforderungen, etwa wenn sich Bibliothek oder Blaupausen ändern (5.5).",
+        "In Kapitel 6 werden Nicht-Konformitäten auf ihre Ursachen untersucht, Verbesserungen in einen Korrektur- und Verbesserungsplan übernommen und Maßnahmen anhand messbarer Kriterien auf Wirksamkeit geprüft (6.1 bis 6.4).",
       ] },
       { type: "diagram", kind: "gruppen", h: "Anhang 3: 35 Mindestkriterien für die Risikobetrachtung.", label: "Nach BSI-Standard 300-1, Anhang 3", lede: "Das Verfahren für die Risikobetrachtung dürft ihr selbst wählen, etwa angelehnt an ISO/IEC 27005 oder ISO 31000, solange es diese verbindlichen Mindestkriterien erfüllt (Kapitel 2.11). Sie machen Verfahren vergleichbar und überprüfbar. Die Nummern dienen der Referenz, nicht als Reihenfolge.", groups: [
         { title: "Initiierung", ref: "1–10", items: [
@@ -120,9 +123,9 @@ export const EINSTIEG_SEITEN = {
         { title: "BSI-Standard 300-1", ref: "Version 1.0", bsi: "Beschreibt Methodik, Prozessschritte, Entscheidungen und die Mindestkriterien der Risikobetrachtung. Er enthält keine Liste konkreter Sicherheitsanforderungen.", app: "Wir bilden daraus Abläufe, Zustände und Freigaben und nennen Kapitel oder Mindestkriterium dort, wo eine Entscheidung ansteht." },
         { title: "Anwenderkatalog", ref: "Stand-der-Technik-Bibliothek", bsi: "Enthält die Anforderungen, gegliedert in Praktiken der Kategorien Methodik, Technisch und Organisatorisch (Kapitel 3), mit Modalverb, Zielobjektkategorie, Parametern und Gefährdungen.", app: "Wir lesen den Katalog mit Version, Herkunft und Prüfsumme ein; ein neuer Stand wird bewusst übernommen, nach einem Vergleich der neuen, geänderten und entfallenen Anforderungen. Wie eine Anforderung aufgebaut ist, zeigt die Seite zum <a href=\"/grundschutz-plus-plus/anwenderkatalog/\">Anwenderkatalog</a>." },
         { title: "OSCAL", ref: "NIST", bsi: "Das offene Datenformat, in dem das BSI Katalog und Profile veröffentlicht. Es beschreibt auch Umsetzung und Prüfung.", app: "Blaupausen führen wir als OSCAL-Profile; ausgegeben werden unter anderem System Security Plan, Assessment Plan und Results sowie POA&amp;M. Mehr auf der Seite <a href=\"/grundschutz-plus-plus/oscal/\">OSCAL erklärt</a>." },
-        { title: "Werkzeug", ref: "Anhang 2", bsi: "Die Form der Dokumentation ist frei wählbar: Tabelle, Prozessverzeichnis, Wiki oder ISMS-Werkzeug. Der Standard verlangt kein Produkt.", app: "BlueProceedings ISMS unterstützt die Vorbereitung und behauptet weder Konformität noch Zertifizierung. Worauf es bei der Auswahl ankommt, steht auf der Seite <a href=\"/grundschutz-plus-plus/software/\">Grundschutz++-Software</a>." },
+        { title: "Werkzeug", ref: "Anhang 2", bsi: "Die Form der Dokumentation ist frei wählbar: Tabelle, Prozessverzeichnis, Wiki oder ISMS-Werkzeug. Der Standard verlangt kein Produkt.", app: "BlueProceedings ISMS unterstützt die Vorbereitung und behauptet weder Konformität noch Zertifizierung. Worauf es bei der Auswahl ankommt, steht auf der Seite <a href=\"/grundschutz-plus-plus/software/\">Werkzeug für den BSI-Standard 300-1</a>." },
       ] },
-      { type: "gaps", h: "Weiterlesen nach Thema.", items: [
+      { type: "gaps", h: "Vertiefen nach Thema.", items: [
         { title: "Grundschutz++ im Überblick", text: "Was sich gegenüber dem IT-Grundschutz ändert und welche Begriffe überall vorkommen: <a href=\"/grundschutz-plus-plus/\">Überblick</a>." },
         { title: "Den ersten Durchlauf planen", text: "Zehn Schritte vom Auftrag der Leitung bis zur ersten Überwachung: <a href=\"/grundschutz-plus-plus/umsetzung/\">Grundschutz++ umsetzen</a>." },
         { title: "Prozessschritt 1 in der Anwendung", text: "Alle elf Teilschritte mit Bildern aus der Pre-Alpha: <a href=\"/funktionen/erhebung-und-planung/\">Erhebung und Planung</a>." },
@@ -131,12 +134,13 @@ export const EINSTIEG_SEITEN = {
         { title: "NIS2", text: "Was das BSI-Gesetz verlangt und wie Grundschutz++ dazu steht: <a href=\"/isms-software/nis2/\">NIS2 und ISMS</a>." },
       ] },
       { type: "faq", h: "Häufige Fragen zum BSI-Standard 300-1.", items: [
+        { q: "Welches Tool unterstützt die Arbeit nach dem BSI-Standard 300-1?", a: "BlueProceedings ISMS verbindet die Prozessschritte des BSI-Standards 300-1 mit dem OSCAL-Anwenderkatalog, Anforderungen, Risiken, Maßnahmen und Nachweisen. Die Anwendung ist Pre-Alpha und unterstützt die Vorbereitung; sie ersetzt weder die Umsetzung noch eine Prüfung. Auswahlkriterien und den aktuellen Stand zeigt die Seite <a href=\"/grundschutz-plus-plus/software/\">ISMS-Tool für den BSI-Standard 300-1</a>." },
         { q: "Was ist der BSI-Standard 300-1?", a: "Der BSI-Standard 300-1 „Methodik Grundschutz++“ beschreibt, wie eine Institution ein ISMS nach Grundschutz++ in fünf Prozessschritten aufbaut, betreibt und verbessert. Die konkreten Anforderungen stehen nicht im Standard, sondern im maschinenlesbaren Anwenderkatalog des BSI." },
         { q: "Seit wann gibt es den BSI-Standard 300-1?", a: "Version 1.0 trägt in der Änderungshistorie das Datum 20.10.2026 und wurde am 27.10.2026 auf der it-sa in Nürnberg vorgestellt. Sie richtet sich zunächst an Early Adopters." },
         { q: "Ist bei normalem Schutzbedarf eine eigene Risikobetrachtung nötig?", a: "Nein. Dem Anwenderkatalog liegt eine allgemeine Risikobetrachtung des BSI zugrunde. Eine explizite Risikobetrachtung ist bei hohem Schutzbedarf, bei nicht hinreichend abgedeckten Assets und bei dauerhaft nicht erfüllten SOLLTE-Anforderungen nötig (Kapitel 2.11, Anhang 3, Kriterien 32 bis 34)." },
         { q: "Was regeln die Mindestkriterien in Anhang 3?", a: "Sie legen 35 verbindliche Kriterien für Initiierung, Identifikation, Bewertung und Behandlung von Risiken fest, etwa Risikoappetit, Mindestangaben im Risikoregister, die Autorisierung von Restrisiken durch die Leitung und die mindestens jährliche Überprüfung. Das Verfahren selbst ist frei wählbar." },
         { q: "Was gilt, wenn eine MUSS-Anforderung nicht erfüllt ist?", a: "Dann sind Maßnahmen zu ihrer Erfüllung festzulegen. Eine Ausnahmegenehmigung oder Risikoakzeptanz ist nicht möglich, und eine Risikobetrachtung ersetzt die Erfüllung nicht (Kapitel 4.1.2)." },
-        { q: "Braucht man für den BSI-Standard 300-1 eine Software?", a: "Nein. Der Standard lässt die Form der Dokumentation offen. Eine Software hilft vor allem beim Einlesen des Katalogs, bei der Vererbung über Zielobjektkategorien und dabei, Entscheidungen, Fristen und Nachweise zusammenzuhalten." },
+        { q: "Braucht man für den BSI-Standard 300-1 eine Software?", a: "Nein. Der Standard lässt die Form der Dokumentation offen. Wann sich eine Software lohnt, steht auf der Seite <a href=\"/grundschutz-plus-plus/software/\">ISMS-Tool für Grundschutz++ auswählen</a>." },
         { q: "Kann man auf Basis des BSI-Standards 300-1 zertifiziert werden?", a: "Laut Meilensteinplan des BSI können ab dem 01.01.2027 Anträge auf eine ISO-27001-Zertifizierung auf Basis von Grundschutz++ gestellt werden. Ob eine Institution zertifiziert wird, entscheidet die zuständige Stelle." },
       ] },
     ],
@@ -146,11 +150,11 @@ export const EINSTIEG_SEITEN = {
   },
 
   "/grundschutz-plus-plus/software/": {
-    title: "Grundschutz++-Software: Worauf es ankommt",
-    description: "Grundschutz++-Software auswählen: acht Kriterien aus dem BSI-Standard 300-1, Fragen an Anbieter und ehrlich, wo BlueProceedings ISMS steht und wo es Grenzen hat.",
+    title: "ISMS-Tool für Grundschutz++ auswählen",
+    description: "ISMS-Tool für Grundschutz++ auswählen: acht Kriterien aus dem BSI-Standard 300-1, Fragen an Anbieter und der Stand von BlueProceedings ISMS dazu.",
     crumb: "Software",
-    h1: "Worauf es bei Grundschutz++-Software ankommt.",
-    lede: "Der BSI-Standard 300-1 schreibt kein Werkzeug vor; Geschäftsprozesse dürfen auch in einer Tabelle oder einem Wiki dokumentiert werden (Anhang 2). Eine Software lohnt sich erst, wenn sie die Methodik richtig abbildet und euch Arbeit abnimmt, die von Hand fehleranfällig ist: Katalogstände, Vererbung, Fristen, Freigaben. Diese Seite leitet Auswahlkriterien aus dem Standard ab und sagt bei jedem, wo BlueProceedings ISMS heute steht.",
+    h1: "Ein ISMS-Tool für den BSI-Standard 300-1 auswählen.",
+    lede: "Der BSI-Standard 300-1 schreibt kein Werkzeug vor; Geschäftsprozesse dürfen auch in einer Tabelle oder einem Wiki dokumentiert werden (Anhang 2). Eine Software lohnt sich, wenn sie die Methodik richtig abbildet und Arbeit abnimmt, die von Hand fehleranfällig ist: Katalogstände, Vererbung, Fristen, Freigaben. Diese Seite leitet acht Auswahlkriterien aus dem Standard ab, nennt Fragen an jeden Anbieter und sagt bei jedem Kriterium, wo BlueProceedings ISMS heute steht.",
     asOf: GEPRUEFT, mailTopic: "Grundschutz++ Software", topics: "grundschutz",
     reading: [["Kriterium", "was der BSI-Standard 300-1 verlangt und was eine Software deshalb können sollte"], ["Stand", "wie BlueProceedings ISMS das in der Pre-Alpha umsetzt und wo die Grenzen liegen"]],
     sections: [
@@ -173,13 +177,14 @@ export const EINSTIEG_SEITEN = {
         { title: "Was ist fertig, was geplant?", text: "Grundschutz++ ist neu, und kein Werkzeug ist lange erprobt. Lasst euch zeigen, was heute läuft, und trennt es von Ankündigungen." },
       ] },
       { type: "gaps", h: "Wo BlueProceedings ISMS heute steht.", items: [
-        { title: "Pre-Alpha", text: "Ab dem 11.11.2026 testen bis zu elf Personen aus der ISMS-Praxis die Anwendung. Die erste Version ist für Januar 2027 geplant." },
+        { title: "Pre-Alpha", text: "Seit dem 11.11.2026 testen Personen aus der ISMS-Praxis die Anwendung auf eigenen Testinstanzen. Die erste Version ist für Januar 2027 geplant." },
         { title: "Prozessschritt 1", text: "Jeder Teilschritt von 2.1 bis 2.11 hat seinen Platz in der Anwendung; eine Übersicht zeigt den Stand je Teilschritt. Die Einzelheiten stehen auf der Seite <a href=\"/funktionen/erhebung-und-planung/\">Erhebung und Planung</a>." },
-        { title: "Betrieb", text: "Docker-Container auf eurer Infrastruktur, verschlüsselte Datenbank, keine Hersteller-Cloud. Die Zahl der Nutzenden ist nicht begrenzt. Mehr zu Betrieb und Rollen auf der Seite <a href=\"/isms-software/bsi-grundschutz/\">ISMS-Software für BSI und NIS2</a>." },
+        { title: "Betrieb", text: "Docker-Container auf eurer Infrastruktur, keine Hersteller-Cloud. Zielgruppe, Betrieb, Rollen und Zahl der Nutzenden beschreibt die Seite <a href=\"/isms-software/bsi-grundschutz/\">ISMS-Software für BSI und NIS2</a>." },
         { title: "Grenzen", text: "Betrieb, Sicherung und Updates liegen bei euch. E-Mail-Benachrichtigungen kommen später. Die Leistungskennzahlen, die das BSI bis März 2027 ergänzen will, sind noch nicht abgebildet. Eine Konformitäts- oder Zertifizierungsaussage trifft die Anwendung nicht." },
       ] },
-      { type: "feature", h: "Veraltet statt falsch-grün.", paragraphs: ["Ein Sicherheitskonzept hält einen Stand fest. Ändern sich danach seine Grundlagen, zeigt die Anwendung, welche Bereiche betroffen sind und wann sie geändert wurden.", "Das Beispiel zeigt einen Informationsverbund mit Demodaten. Die Verantwortlichen prüfen, was neu bewertet und berichtet werden muss."], image: "staleReport" },
+      { type: "feature", h: "Beispiel zum Kriterium Datenstand: veraltet statt falsch-grün.", paragraphs: ["Ein Sicherheitskonzept hält einen Stand fest. Ändern sich danach seine Grundlagen, zeigt die Anwendung, welche Bereiche betroffen sind und wann sie geändert wurden.", "Das Beispiel zeigt einen Informationsverbund mit Demodaten. Die Verantwortlichen prüfen, was neu bewertet und berichtet werden muss."], image: "staleReport" },
       { type: "faq", h: "Fragen zur Auswahl.", items: [
+        { q: "Was sollte ein Werkzeug für BSI 300-1 können?", a: "BSI 300-1 ist die Kurzbezeichnung für den BSI-Standard 300-1. Ein passendes ISMS-Werkzeug unterstützt die fünf Prozessschritte und hält Anforderungen, Entscheidungen, Zuständigkeiten und Nachweise zusammen. Achtet beim Vergleich von Tools besonders auf den OSCAL-Import, nachvollziehbare Katalogwechsel, Freigaben und die Überprüfung veränderter Grundlagen. Welche dieser Aufgaben BlueProceedings ISMS heute unterstützt, zeigen die Kriterien auf dieser Seite." },
         { q: "Braucht man für Grundschutz++ eine Software?", a: "Nicht zwingend. Der BSI-Standard 300-1 lässt die Form der Dokumentation offen. Mit wachsender Zahl von Assets, Katalogständen und Freigaben wird die Pflege von Hand aber fehleranfällig, besonders die Vererbung über Zielobjektkategorien." },
         { q: "Was unterscheidet Grundschutz++-Software von einem IT-Grundschutz-Tool?", a: "Grundschutz++ leitet Anforderungen über Geschäftsprozesse, Assets und Zielobjektkategorien aus einem OSCAL-Katalog ab, nicht über Bausteine. Eine passende Software bildet Anforderungspaket, Blaupausen, Parameter und Katalogstände ab." },
         { q: "Kann eine Software Grundschutz++ automatisch erfüllen?", a: "Nein. Sie kann Anforderungen ableiten, Fristen überwachen und Zusammenhänge zeigen. Umsetzung, Bewertung, Wirksamkeitsprüfung und Leitungsentscheidungen bleiben Aufgaben der Institution." },
@@ -193,8 +198,8 @@ export const EINSTIEG_SEITEN = {
   },
 
   "/grundschutz-plus-plus/umsetzung/": {
-    title: "Grundschutz++ umsetzen: Schritt für Schritt",
-    description: "Grundschutz++ umsetzen: der erste Durchlauf in zehn Schritten nach BSI-Standard 300-1, mit Kapiteln, Entscheidungen der Leitung und typischen Stolpersteinen.",
+    title: "Grundschutz++ umsetzen in zehn Schritten",
+    description: "Grundschutz++ umsetzen: der erste Durchlauf in zehn Schritten nach BSI-Standard 300-1 mit Kapiteln, Leitungsentscheidungen und typischen Stolpersteinen.",
     crumb: "Umsetzung",
     h1: "Grundschutz++ umsetzen: der erste Durchlauf, Schritt für Schritt.",
     lede: "Der häufigste Fehler beim Einstieg ist, alles auf einmal erfassen zu wollen. Der BSI-Standard 300-1 empfiehlt das Gegenteil: mit dem wichtigsten Geschäftsprozess der höchsten Schutzbedarfskategorie beginnen und die übrigen schrittweise folgen lassen (Kapitel 2.6). Diese Seite beschreibt einen ersten Durchlauf in zehn Schritten, mit den Kapiteln, auf die sich jeder stützt.",
@@ -212,7 +217,7 @@ export const EINSTIEG_SEITEN = {
         { title: "Umsetzen und planen", text: "Umsetzungsstatus je Anforderung erheben, Lücken nach Modalverb bewerten, Risiken betrachten, Maßnahmen mit Zuständigkeit und Frist planen (Kapitel 4)." },
         { title: "Überwachen und verbessern", text: "Fortschritt verfolgen, interne Audits und Managementbewertung vorbereiten, Wirksamkeit prüfen, nächsten Prozess beginnen (Kapitel 5, 6)." },
       ] },
-      { type: "gaps", anchor: "prozessschritt-1", h: "Prozessschritt 1 im Detail.", lede: "Die <a href=\"/funktionen/erhebung-und-planung/\">Funktionsseite zur Erhebung und Planung</a> zeigt die elf Teilschritte in der Anwendung. Diese Ergebnisse sollten am Ende von Prozessschritt 1 vorliegen.", items: [
+      { type: "gaps", anchor: "prozessschritt-1", h: "Am Ende von Prozessschritt 1 liegen sechs Ergebnisse vor.", lede: "Die elf Teilschritte beschreibt der <a href=\"/bsi-standard-300-1/#prozessschritt-1\">BSI-Standard 300-1</a>, die <a href=\"/funktionen/erhebung-und-planung/\">Funktionsseite zur Erhebung und Planung</a> zeigt sie in der Anwendung. Diese Ergebnisse sollten am Ende vorliegen.", items: [
         { title: "Rahmen", text: "Eine knappe Notiz zu internen und externen Einflussfaktoren und ein Verzeichnis der Compliance-Verpflichtungen mit Quelle (Kapitel 2.1, 2.2)." },
         { title: "Anwendungsbereich", text: "Ein von der Leitung festgelegter Anwendungsbereich mit Prozessen, Einheiten, Standorten, Anwendungen, IT-Systemen und berücksichtigten Dienstleistern, Ausschlüsse benannt (Kapitel 2.3)." },
         { title: "Stakeholder", text: "Interne und externe interessierte Parteien mit Erwartungen und Priorität, dazu die Entscheidung, welche als verbindliche Anforderungen ins ISMS eingehen (Kapitel 2.4)." },
@@ -249,7 +254,7 @@ export const EINSTIEG_SEITEN = {
         { title: "SOLLTE-Lücken als erledigt ansehen", text: "Eine temporäre Lücke braucht eine stichhaltige Begründung, eine dauerhafte eine Risikobetrachtung (Kapitel 4.1.2). Bei MUSS hilft beides nicht." },
         { title: "Den nächsten Zyklus vergessen", text: "Die Risikobetrachtung ist mindestens jährlich und bei wesentlichen Änderungen zu überprüfen (Anhang 3, Kriterium 35). Ein ISMS wird mit der ersten Freigabe nicht fertig." },
       ] },
-      { type: "pairs", h: "Was ein Werkzeug dabei abnehmen kann.", items: [
+      { type: "pairs", h: "Was ein Werkzeug dabei abnehmen kann.", lede: "Welche Kriterien bei der Wahl zählen, steht auf der Seite <a href=\"/grundschutz-plus-plus/software/\">ISMS-Tool für Grundschutz++ auswählen</a>.", items: [
         { title: "Reihenfolge", ref: "Kapitel 2 bis 4", bsi: "Der Standard beschreibt die Schritte, nicht, wann ihr wo weitermacht.", app: "Ein Einrichtungsassistent leitet aus dem erfassten Bestand den nächsten sinnvollen Schritt ab; der Lern-Modus erklärt Abläufe in einer getrennten Übungsumgebung." },
         { title: "Überblick über Prozessschritt 1", ref: "Kapitel 2.1 bis 2.11", bsi: "Elf Teilschritte mit Ergebnissen und Freigaben der Leitung.", app: "Eine Übersicht zeigt je Teilschritt den Stand und führt zur Stelle, an der weitergearbeitet wird. Eine Leitungsmappe zeigt je Thema, was freigegeben ist, wann und von welcher Rolle." },
         { title: "Vererbung und Paket", ref: "Kapitel 3.4", bsi: "Anforderungen ergeben sich aus der Zuordnung von Assets zu Zielobjektkategorien.", app: "Die Anwendung rechnet die Vererbung und hält Herkunft und Parameter jeder Anforderung fest. Die Zuordnung bleibt eine begründete Entscheidung." },
@@ -258,55 +263,53 @@ export const EINSTIEG_SEITEN = {
         { q: "Wie beginnt man mit Grundschutz++?", a: "Mit dem Auftrag der Leitung, dem Kontext, dem Anwendungsbereich und einem priorisierten Geschäftsprozess. Der BSI-Standard 300-1 empfiehlt, mit dem wichtigsten Prozess der höchsten Schutzbedarfskategorie zu beginnen." },
         { q: "Muss die ganze Institution sofort erfasst werden?", a: "Nein. Der Anwendungsbereich kann die ganze Institution oder einen Teil umfassen, und die Geschäftsprozesse werden nacheinander bearbeitet. Sukzessive sind aber alle Prozesse im Anwendungsbereich zu untersuchen." },
         { q: "Welche Entscheidungen trifft die Leitung?", a: "Mindestens Anwendungsbereich, Schutzbedarf, Reihenfolge der Prozesse, Ressourcen und Leitlinie (Kapitel 2.10), dazu den Rahmen der Risikobetrachtung und die Restrisiken (Anhang 3)." },
-        { q: "Was kann eine Software bei der Umsetzung abnehmen?", a: "Sie kann Kataloge einlesen, Anforderungen ableiten, Vererbung rechnen, Fristen überwachen und Zusammenhänge anzeigen. Bewertung, Umsetzung, Wirksamkeitsprüfung und Leitungsentscheidungen bleiben fachliche Aufgaben." },
+        { q: "Was kann eine Software bei der Umsetzung abnehmen?", a: "Sie kann Kataloge einlesen, Anforderungen ableiten, Vererbung rechnen, Fristen überwachen und Zusammenhänge anzeigen. Bewertung, Umsetzung, Wirksamkeitsprüfung und Leitungsentscheidungen bleiben fachliche Aufgaben. Mehr dazu auf der Seite <a href=\"/grundschutz-plus-plus/software/\">ISMS-Tool auswählen</a>." },
       ] },
     ],
     cta: { h: "Den ersten Durchlauf überschaubar halten.", text: "Der Einrichtungsassistent und der Lern-Modus führen durch die Reihenfolge, ohne fachliche Entscheidungen vorwegzunehmen." },
-    next: ["/bsi-standard-300-1/", "/funktionen/erhebung-und-planung/", "/grundschutz-plus-plus/it-grundschutz-migration/"],
+    next: ["/bsi-standard-300-1/", "/funktionen/erhebung-und-planung/", "/grundschutz-plus-plus/it-grundschutz-migration/", "/isms-software/bsi-grundschutz/"],
     sources: [standardQuelle, gsQuelle],
   },
 
   "/isms-software/bsi-grundschutz/": {
-    title: "ISMS-Software für BSI und NIS2, On-Premises",
-    description: "ISMS-Software für Grundschutz++ nach BSI-Standard 300-1: als Docker-Container auf eigener Infrastruktur, ohne Nutzerbegrenzung, mit Rollen über alle Fachbereiche.",
-    crumb: "ISMS-Software BSI",
-    h1: "ISMS-Software für BSI-Grundschutz++ und NIS2, auf eurer eigenen Infrastruktur.",
-    lede: "Ihr sucht eine ISMS-Software, die nach den Vorgaben des BSI arbeitet, NIS2 nicht aus dem Blick verliert und eure Daten im Haus lässt. BlueProceedings ISMS setzt die Methodik Grundschutz++ (BSI-Standard 300-1) um, läuft als Docker-Container On-Premises und begrenzt die Zahl der Nutzenden nicht, damit Fachbereiche selbst mitarbeiten können.",
+    title: "ISMS-Software On-Premises: Betrieb und Rollen",
+    description: "ISMS-Software für Grundschutz++ nach BSI-Standard 300-1: Docker-Container auf eigener Infrastruktur, ohne Nutzerbegrenzung, Rollen für alle Fachbereiche.",
+    crumb: "ISMS-Software On-Premises",
+    h1: "ISMS-Software auf eurer eigenen Infrastruktur: Betrieb und Rollen.",
+    lede: "Ihr sucht eine ISMS-Software, die nach den Vorgaben des BSI arbeitet, NIS2 nicht aus dem Blick verliert und eure Daten im Haus lässt. BlueProceedings ISMS setzt die Methodik Grundschutz++ (BSI-Standard 300-1) um, läuft als Docker-Container On-Premises und begrenzt die Zahl der Nutzenden nicht, damit Fachbereiche selbst mitarbeiten können. Diese Seite zeigt, für wen das passt, wie die Anwendung betrieben wird und wo die Pre-Alpha steht; worauf es bei der Auswahl ankommt, steht auf der Seite <a href=\"/grundschutz-plus-plus/software/\">ISMS-Tool für Grundschutz++ auswählen</a>.",
     asOf: GEPRUEFT, mailTopic: "ISMS Software BSI",
     reading: [["Zielgruppe und Betrieb", "für wen die Anwendung gedacht ist und wie sie betrieben wird"], ["Produktstand", "was heute in der Pre-Alpha vorhanden ist und wo ihre Grenzen liegen"]],
     sections: [
-      { type: "gaps", h: "Für wen BlueProceedings ISMS gedacht ist.", items: [
+      { type: "gaps", h: "Für wen BlueProceedings ISMS gedacht ist und für wen nicht.", items: [
         { title: "Institutionen, die Grundschutz++ einführen", text: "Behörden, Kommunen und Unternehmen, die nach dem <a href=\"/bsi-standard-300-1/\">BSI-Standard 300-1</a> arbeiten oder vom IT-Grundschutz umsteigen wollen. Version 1.0 des Standards richtet sich an Early Adopters, die Pre-Alpha ebenso." },
         { title: "NIS2-regulierte Einrichtungen", text: "Wer Risikomanagementmaßnahmen nach § 30 BSIG umsetzen und dokumentieren muss, kann sich an Grundschutz++ orientieren; das BSI nennt es als Beispiel eines anerkannten Standards. Was die Anwendung dazu beiträgt, steht auf der Seite <a href=\"/isms-software/nis2/\">NIS2 und ISMS</a>." },
         { title: "Viele Fachbereiche, ein ISB", text: "Wenn Prozesse, Systeme und Dienstleister über viele Abteilungen verteilt sind und der ISB nicht jede Angabe selbst erheben soll." },
         { title: "Noch nicht passend, wenn …", text: "ihr eine gehostete Lösung ohne eigenen Betrieb sucht oder heute ein produktiv freigegebenes Werkzeug braucht. BlueProceedings ISMS ist Pre-Alpha; die erste Version ist für Januar 2027 geplant." },
       ] },
-      { type: "gaps", h: "Betrieb On-Premises.", items: [
+      { type: "gaps", h: "Betrieb: ein Container auf eurer Infrastruktur, keine Hersteller-Cloud.", items: [
         { title: "Ein Docker-Container", text: "Die Anwendung läuft als ein Container auf eurer Infrastruktur, mit einem Volume für die verschlüsselte Datenbank." },
         { title: "Keine Hersteller-Cloud", text: "Für den Betrieb auf eurer Infrastruktur ist keine Hersteller-Cloud erforderlich. Die Anwendung übermittelt im Standardbetrieb keine Produktdaten an BlueProceedings. Zugänge, Netzwerkfreigaben und Datensicherungen verwaltet ihr selbst; berechtigte Personen können Daten exportieren." },
         { title: "Katalog im Haus", text: "Ein Stand des Anwenderkatalogs Grundschutz++ liegt bei; neue Stände und weitere OSCAL-Kataloge werden als Datei eingelesen und mit Prüfsumme geführt." },
         { title: "Nachvollziehbar", text: "Änderungen werden in einem hashverketteten Protokoll festgehalten, das sich nur um neue Einträge ergänzen lässt." },
         { title: "Offene Formate", text: "Ergebnisse lassen sich im OSCAL-Format exportieren, unter anderem System Security Plan, Assessment Plan und Results sowie POA&amp;M, dazu Berichte als HTML und PDF." },
       ] },
-      { type: "gaps", h: "Rollen über Fachbereiche hinweg.", items: [
+      { type: "gaps", h: "Rollen: jede Fachabteilung arbeitet mit.", items: [
         { title: "Nutzende ohne Begrenzung", text: "Die Zahl der Nutzenden ist nicht begrenzt. Jede Fachabteilung kann ihre Prozesse, Komponenten und Nachweise selbst pflegen." },
         { title: "Rollen mit Bezug", text: "Eine Rolle gilt für die ganze Institution oder nur für einen Informationsverbund, einen Prozess, eine Komponente, ein Risiko oder ein Audit. Eigene Rollen lassen sich anlegen." },
         { title: "Mindestbesetzung", text: "Leitung, ISB, Asset-Owner, Risikoeigentümer, Nachweisprüfer, Auditor und HR gehören zur Mindestbesetzung, deren Besetzung die Anwendung schützt." },
         { title: "RACI und Vertretung", text: "Eine RACI-Matrix für die Institution und je Informationsverbund zeigt Zuständigkeiten; der Vertretungsplan weist auf unbesetzte Rollen hin." },
         { title: "Vier Augen", text: "Freigaben verlangen im regulären Betrieb eine zweite Person. Der Kleinunternehmen-Modus lockert nur die personelle Trennung, nicht die fachlichen Bedingungen." },
       ] },
-      { type: "gaps", h: "Wer damit arbeitet.", items: [
+      { type: "gaps", h: "Wer was tut: ISB, Fachbereiche, Leitung, Prüfende.", items: [
         { title: "Informationssicherheit", text: "Der ISB behält offene Arbeit, Risiken, Fristen und den Stand der Informationsverbünde im Blick." },
         { title: "Fachbereiche und IT", text: "Verantwortliche pflegen ihre Prozesse und Objekte, bearbeiten Aufgaben und liefern Nachweise." },
         { title: "Institutionsleitung", text: "Die Leitung entscheidet über den Rahmen und erhält die Vorgänge, für die ihre Freigabe gebraucht wird." },
         { title: "Prüfende", text: "Erwartungen lassen sich importieren und Nachweise als Prüfpaket übergeben; ein Gastkonto ist nicht nötig." },
       ] },
       { type: "feature", h: "Fachbereiche arbeiten gleichzeitig.", paragraphs: ["Der ISB muss nicht jede Angabe in aufeinanderfolgenden Terminen selbst aufnehmen. Fachbereiche erfassen ihre Prozesse und Objekte, während der ISB den Stand bündelt und die Leitung die vorgesehenen Entscheidungen trifft.", "Die Darstellung vergleicht zwei mögliche Abläufe. Sie ist schematisch und keine Zeitmessung: Fachbereiche übernehmen eigene Arbeit, Rückmeldungen und Freigaben bleiben nachvollziehbar."], image: "parallelWork" },
-      { type: "gaps", h: "Was das für die tägliche Arbeit bedeutet.", items: [
-        { title: "Die Leitung setzt den Rahmen", text: "Kontext, Anwendungsbereich, Leitlinie und Risikomethodik bilden die Grundlage. Freigaben und ihre Begründungen bleiben nachvollziehbar (BSI-Standard 300-1, Kapitel 2)." },
-        { title: "Mit dem wichtigen Prozess beginnen", text: "Prozesse und ihre Assets werden schrittweise erfasst. Aus dem Katalog entsteht ein auf den Informationsverbund bezogenes Anforderungspaket (Kapitel 3)." },
-        { title: "Lücken unterschiedlich behandeln", text: "MUSS- und SOLLTE-Anforderungen folgen unterschiedlichen Wegen. Dauerhaft nicht erfüllte SOLLTE-Anforderungen führen in die Risikobetrachtung (Kapitel 4.1.2)." },
-        { title: "Überwachung und Verbesserung", text: "Nachweise, Audits, Managementbewertung und Wirksamkeitsprüfungen begleiten das ISMS über die erste Umsetzung hinaus (Kapitel 5 und 6)." },
+      { type: "gaps", h: "Der Ablauf in der Anwendung: Rahmen, Lücken, Überwachung.", lede: "Wie der BSI-Standard 300-1 die Schritte beschreibt, steht auf der <a href=\"/bsi-standard-300-1/\">Standardseite</a>; den ersten Durchlauf zeigt <a href=\"/grundschutz-plus-plus/umsetzung/\">Grundschutz++ umsetzen</a>. In der Anwendung heißt das:", items: [
+        { title: "Rahmen und Reihenfolge", text: "Die Leitung setzt Kontext, Anwendungsbereich, Leitlinie und Risikomethodik; Freigaben und ihre Begründungen bleiben nachvollziehbar (Kapitel 2). Prozesse und ihre Assets werden schrittweise erfasst, aus dem Katalog entsteht ein auf den Informationsverbund bezogenes Anforderungspaket (Kapitel 3)." },
+        { title: "Lücken und Überwachung", text: "MUSS- und SOLLTE-Anforderungen folgen unterschiedlichen Wegen; dauerhaft nicht erfüllte SOLLTE-Anforderungen führen in die Risikobetrachtung (Kapitel 4.1.2). Nachweise, Audits, Managementbewertung und Wirksamkeitsprüfungen begleiten das ISMS über die erste Umsetzung hinaus (Kapitel 5 und 6)." },
         { title: "Aufgaben und Freigaben", text: "Zuständigkeiten, Fristen und Rückmeldungen stehen am Vorgang. Die erforderliche Prüfung und Freigabe bleiben Teil des Ablaufs." },
       ] },
       { type: "gaps", h: "Wiederverwenden, statt erneut anzufangen.", items: [
@@ -320,7 +323,7 @@ export const EINSTIEG_SEITEN = {
         { q: "Wo läuft BlueProceedings ISMS?", a: "Als Docker-Container auf eurer eigenen Infrastruktur. Die Datenbank ist verschlüsselt, und es gibt keine Hersteller-Cloud." },
         { q: "Wie viele Personen können mitarbeiten?", a: "Die Zahl der Nutzenden ist nicht begrenzt. Rollen lassen sich für die Institution oder für einzelne Informationsverbünde, Prozesse, Komponenten, Risiken oder Audits vergeben." },
         { q: "Unterstützt die Anwendung NIS2?", a: "Sie unterstützt die Vorbereitung und Dokumentation vieler Risikomanagementmaßnahmen nach § 30 BSIG, etwa Risikoanalyse, Vorfallbehandlung, Notfallvorsorge und Lieferkette. Sie trifft keine Konformitätsaussage; Einzelheiten stehen auf der NIS2-Seite." },
-        { q: "Ab wann ist die Anwendung verfügbar?", a: "Die Pre-Alpha wird ab dem 11.11.2026 von bis zu elf Personen aus der ISMS-Praxis getestet. Die erste Version ist für Januar 2027 geplant." },
+        { q: "Ab wann ist die Anwendung verfügbar?", a: "Die Pre-Alpha wird seit dem 11.11.2026 von Personen aus der ISMS-Praxis auf eigenen Testinstanzen getestet. Die erste Version ist für Januar 2027 geplant." },
       ] },
       { type: "note", h: "Grundschutz++ statt automatischer Zertifizierung.", text: "BlueProceedings ISMS unterstützt die Vorbereitung auf Grundlage von Grundschutz++. Ein Werkzeug ersetzt weder die Umsetzung in der Institution noch die Beurteilung einer prüfenden Stelle. Veröffentlichte Mappings zum IT-Grundschutz dienen beim Umstieg als Orientierung, nicht als automatische Übernahme einer Erfüllung." },
     ],
@@ -340,7 +343,6 @@ export const EINSTIEG_SEITEN = {
     asOf: GEPRUEFT, mailTopic: "NIS2 ISMS",
     reading: [["Gesetz und BSI", "was das BSIG und das BSI sagen, mit Paragraf und Quelle"], ["Auslegung", "was BlueProceedings ISMS dazu in der Pre-Alpha bietet und was nicht"]],
     sections: [
-      {"type": "text", "anchor": "nis2-im-alltag", "h": "NIS2 im Arbeitsalltag des ISMS.", "paragraphs": ["Risikomanagement, Lieferkette und Betriebsfortführung greifen ineinander. Die Anwendung verbindet <a href=\"/funktionen/risikomanagement/\">Risiken und Maßnahmen</a> mit <a href=\"/funktionen/dienstleistersteuerung/\">Dienstleistern und ihren Nachweisen</a>. Das <a href=\"/funktionen/bcm-notfallmanagement/\">BCM und Notfallmanagement</a> nutzt dieselben Geschäftsprozesse und Abhängigkeiten.", "So unterstützt Software die Dokumentation und Vorbereitung. Ob eure Einrichtung betroffen ist, welche gesetzlichen Maßnahmen erforderlich sind und ob eine Meldung abzugeben ist, müsst ihr gesondert prüfen. Die Anwendung trifft keine Betroffenheitsentscheidung und gibt keine NIS2-Konformitätsaussage ab."]},
       { type: "gaps", h: "Was das BSIG von Einrichtungen erwartet.", lede: "Die Vorgaben gelten für besonders wichtige und wichtige Einrichtungen. Ob eure Institution dazugehört, ist vorab zu klären; das BSI bietet dafür eine freiwillige Betroffenheitsprüfung an.", items: [
         { title: "Risikomanagementmaßnahmen (§ 30)", text: "Geeignete, verhältnismäßige und wirksame technische und organisatorische Maßnahmen, die Störungen von Verfügbarkeit, Integrität und Vertraulichkeit vermeiden und Folgen von Vorfällen gering halten. Absatz 2 nennt mindestens zehn Bereiche. Die Umsetzung ist zu dokumentieren." },
         { title: "Meldungen (§ 32)", text: "Erhebliche Sicherheitsvorfälle gehen an die gemeinsame Meldestelle von BSI und BBK: Frühwarnung spätestens nach 24 Stunden, Meldung spätestens nach 72 Stunden, Abschlussmeldung spätestens einen Monat danach." },
@@ -373,8 +375,9 @@ export const EINSTIEG_SEITEN = {
         { title: "NIS2 gehört in Prozessschritt 1", ref: "BSI-Standard 300-1, Kapitel 2.1.1, 2.2, 3.4.3", bsi: "Der Standard nennt NIS-2 als Beispiel für rechtliche Rahmenbedingungen im Kontext. Gesetzliche Verpflichtungen werden dokumentiert und ergänzen das Anforderungspaket.", app: "NIS2 lässt sich als Kontextfaktor in der Gruppe Recht und Regulierung und als Compliance-Verpflichtung mit Kritikalität, Verantwortlichen, Inkrafttreten und Frist erfassen. Gesetzgeber und Aufsichtsbehörden sind Standardgruppen der interessierten Parteien." },
         { title: "Die Geschäftsleitung entscheidet", ref: "§ 38 BSIG; BSI-Standard 300-1, Kapitel 2.10", bsi: "Das BSIG verlangt Umsetzung und Überwachung durch die Geschäftsleitung; der BSI-Standard 300-1 legt die Verantwortung für das ISMS nicht delegierbar bei der Institutionsleitung.", app: "Eine Leitungsmappe zeigt je Thema, was die Leitung wann freigegeben hat, mit Link zum Objekt. Freigaben, Restrisiken und Managementbewertungen tragen Person, Rolle und Zeitpunkt." },
       ] },
+      {"type": "text", "anchor": "nis2-im-alltag", "h": "Im Alltag greifen Risiko, Lieferkette und Notfall ineinander.", "paragraphs": ["Risikomanagement, Lieferkette und Betriebsfortführung greifen ineinander. Die Anwendung verbindet <a href=\"/funktionen/risikomanagement/\">Risiken und Maßnahmen</a> mit <a href=\"/funktionen/dienstleistersteuerung/\">Dienstleistern und ihren Nachweisen</a>. Das <a href=\"/funktionen/bcm-notfallmanagement/\">BCM und Notfallmanagement</a> nutzt dieselben Geschäftsprozesse und Abhängigkeiten.", "So unterstützt Software die Dokumentation und Vorbereitung. Ob eure Einrichtung betroffen ist, welche gesetzlichen Maßnahmen erforderlich sind und ob eine Meldung abzugeben ist, müsst ihr gesondert prüfen. Die Anwendung trifft keine Betroffenheitsentscheidung und gibt keine NIS2-Konformitätsaussage ab."]},
       { type: "gaps", h: "Grenzen, offen gesagt.", items: [
-        { title: "Keine Betroffenheitsprüfung", text: "Ob ihr unter das BSIG fallt, klärt ihr selbst, etwa mit der freiwilligen Betroffenheitsprüfung des BSI oder mit rechtlicher Beratung." },
+        { title: "Keine Betroffenheitsprüfung", text: "Ob ihr unter das BSIG fällt, klärt ihr selbst, etwa mit der freiwilligen Betroffenheitsprüfung des BSI oder mit rechtlicher Beratung." },
         { title: "Keine Registrierung, keine Meldung aus der Anwendung", text: "Registrierung und Meldungen laufen über BSI und BBK. Die Anwendung dokumentiert Entscheidungen, sie übermittelt nichts." },
         { title: "Kein NIS2-Katalog im Lieferumfang", text: "Mitgeliefert wird ein Stand des Anwenderkatalogs Grundschutz++. Einen eigenen Katalog zu § 30 BSIG könnt ihr als OSCAL-Datei einlesen und der Compliance-Verpflichtung NIS2 zuordnen." },
         { title: "Keine Konformitätsaussage", text: "Die Anwendung unterstützt Vorbereitung und Dokumentation. Ob eure Maßnahmen § 30 BSIG genügen, beurteilt ihr mit euren Prüfenden; die Aufsicht liegt beim BSI." },

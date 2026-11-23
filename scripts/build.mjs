@@ -1,8 +1,8 @@
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
-import { homePage, communityPage, weiteresPage, newsPage, newsPostPage, fachseite, legalPage, errorPage, FACHSEITEN_PFADE, LEGAL_PATHS } from "../src/pages.mjs";
+import { homePage, communityPage, inDerAppPage, newsPage, newsPostPage, fachseite, legalPage, errorPage, FACHSEITEN_PFADE, LEGAL_PATHS } from "../src/pages.mjs";
 import { FACHSEITEN } from "../src/fachseiten.mjs";
 import { SITE } from "../src/content.mjs";
 import { PRODUKTIONSBUILD } from "../src/legal.mjs";
@@ -10,7 +10,7 @@ import { PRODUKTIONSBUILD } from "../src/legal.mjs";
 if (!/^https:\/\/ko-fi\.com\/[A-Za-z0-9_]+$/.test(SITE.kofi)) throw new Error("SITE.kofi must look like https://ko-fi.com/<name>.");
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const dist = join(root, "dist");
+const dist = process.env.BUILD_OUT ? resolve(process.env.BUILD_OUT) : join(root, "dist");
 
 export function frontMatter(text, file) {
   const m = text.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -32,7 +32,7 @@ function readPosts() {
     for (const required of ["title", "date", "teaser"]) if (!post[required]) throw new Error(`${file}: field "${required}" is missing.`);
     if (!/^\d{4}-\d{2}-\d{2}$/.test(post.date)) throw new Error(`${file}: date must be YYYY-MM-DD.`);
     if (post.published !== "true") continue;
-    if (!/^https:\/\/(www\.linkedin\.com|linkedin\.com|lnkd\.in)\//.test(post.linkedin_url ?? "")) throw new Error(`${file}: published, but linkedin_url is missing or does not point to LinkedIn (linkedin.com or lnkd.in).`);
+    if (!/^https:\/\/((www|[a-z]{2})\.linkedin\.com|linkedin\.com|lnkd\.in)\//.test(post.linkedin_url ?? "")) throw new Error(`${file}: published, but linkedin_url is missing or does not point to LinkedIn (linkedin.com or lnkd.in).`);
     post.slug = file.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
     post.path = `/neuigkeiten/${post.slug}/`;
     posts.push(post);
@@ -63,6 +63,7 @@ const data = readGithubData();
 write("/", homePage({ posts, data }));
 write("/community/", communityPage({ data }));
 write("/neuigkeiten/", newsPage({ posts }));
+write("/funktionen/in-der-app/", inDerAppPage());
 for (const post of posts) write(post.path, newsPostPage(post));
 for (const p of FACHSEITEN_PFADE) write(p, fachseite(p));
 for (const p of LEGAL_PATHS) write(p, legalPage(p));
@@ -112,8 +113,8 @@ const begriffsfehler = htmlFiles(dist).filter((f) => !f.slice(dist.length).start
 if (begriffsfehler.length) throw new Error("Begriffe abweichend vom BSI-Standard 300-1:\n" + begriffsfehler.join("\n"));
 if (PRODUKTIONSBUILD && htmlFiles(dist).some((f) => readFileSync(f, "utf-8").includes("[Anschrift aus"))) throw new Error("Impressum enthält einen Platzhalter.");
 
-const pages = ["/", "/community/", "/neuigkeiten/", ...posts.map((post) => post.path), ...FACHSEITEN_PFADE, ...LEGAL_PATHS];
-const startseitenStand = "2026-11-01";
+const pages = ["/", "/community/", "/neuigkeiten/", "/funktionen/in-der-app/", ...posts.map((post) => post.path), ...FACHSEITEN_PFADE, ...LEGAL_PATHS];
+const startseitenStand = "2026-11-23";
 const priority = (p) => p === "/" ? "1.0" : p === "/grundschutz-plus-plus/" ? "0.9" : FACHSEITEN[p] ? "0.8" : p === "/community/" || p === "/neuigkeiten/" ? "0.6" : "0.2";
 writeFileSync(join(dist, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${pages.map((p) => {
   const lastmod = FACHSEITEN[p]?.modified ?? posts.find((post) => post.path === p)?.date ?? (p === "/" ? startseitenStand : undefined);
